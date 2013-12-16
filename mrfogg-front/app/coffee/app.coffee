@@ -2,9 +2,28 @@
 mrfogg = @mrfogg
 
 modules = [
-    "mrfogg.controllers.common"
+    # Angular addons
+    "ngRoute",
+    "ngAnimate",
+    "ngSanitize",
+
+    # Mr Fogg controllers
+    "mrfogg.controllers.main",
+
+    # Greenmine Plugins
+    "gmUrls"
+    "gmFlash",
+    "gmModal",
+    "gmStorage",
+    "gmConfirm",
+    "gmOverlay",
+    "i18next",
 ]
-configCallback = ()->
+
+configCallback = ($routeProvider)->
+    $routeProvider.when('/',
+        {templateUrl: '/views/container.html', controller: "ContainerController"})
+
     console.log ("Config...")
     return
 
@@ -13,5 +32,5 @@ init = ()->
     return
 
 angular.module('mrfogg', modules)
-       .config([configCallback])
+       .config(["$routeProvider", configCallback])
        .run([init])
