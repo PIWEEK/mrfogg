@@ -9,8 +9,10 @@ import com.yammer.dropwizard.hibernate.HibernateBundle
 import com.yammer.dropwizard.migrations.MigrationsBundle
 import com.yammer.dropwizard.auth.oauth.OAuthProvider
 
+import org.mrfogg.services.AuthInMemoryService
 import org.mrfogg.resources.HelloWorldResource
-import org.mrfogg.auth.SimpleAuthenticator
+import org.mrfogg.resources.AuthResource
+import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.domains.User
 
 class IndexServiceService extends Service<IndexServiceConfiguration> {
@@ -47,7 +49,10 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
 
     @Override
     public void run(IndexServiceConfiguration configuration, Environment environment) throws ClassNotFoundException {
+        def authService = new AuthInMemoryService()
+
         environment.addResource(new HelloWorldResource())
-        environment.addResource(new OAuthProvider<User>(new SimpleAuthenticator(), "secret"))
+        environment.addResource(new AuthResource(authService:authService))
+        environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), "MR.FOGG"))
     }
 }
