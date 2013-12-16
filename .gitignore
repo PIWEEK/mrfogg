@@ -3,3 +3,4 @@ build/
 *.swp
 *.log
 **/.gradle
+mrfogg-front/node_modules
