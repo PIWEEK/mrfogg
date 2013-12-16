@@ -8,6 +8,8 @@ import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
 import com.yammer.dropwizard.migrations.MigrationsBundle
 
+import org.mrfogg.resources.HelloWorldResource
+
 class IndexServiceService extends Service<IndexServiceConfiguration> {
     public static void main(String[] args) throws Exception {
         new IndexServiceService().run(args)
@@ -41,7 +43,7 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
     }
 
     @Override
-    public void run(IndexServiceConfiguration configuration,
-                    Environment environment) throws ClassNotFoundException {
+    public void run(IndexServiceConfiguration configuration, Environment environment) throws ClassNotFoundException {
+        environment.addResource(new HelloWorldResource());
     }
 }
