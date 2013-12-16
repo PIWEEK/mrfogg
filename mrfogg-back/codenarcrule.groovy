@@ -25,6 +25,7 @@ ruleset {
     ruleset('rulesets/naming.xml') {
         'FactoryMethodName' enabled: false
         'FieldName' enabled: false
+        'VariableName' enabled: false
         'MethodName' {
             doNotApplyToClassNames = "*Spec"
         }

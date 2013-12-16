@@ -7,6 +7,8 @@ import com.yammer.dropwizard.config.Environment
 import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
 
+import org.mrfogg.domains.Greeting
+import org.mrfogg.daos.GreetingDAO
 import org.mrfogg.resources.HelloWorldResource
 
 class IndexServiceService extends Service<IndexServiceConfiguration> {
@@ -34,6 +36,10 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
 
     @Override
     public void run(IndexServiceConfiguration configuration, Environment environment) throws ClassNotFoundException {
-        environment.addResource(new HelloWorldResource())
+
+        final GreetingDAO greetingDAO = new GreetingDAO(hibernateBundle.sessionFactory)
+
+
+        environment.addResource(new HelloWorldResource(greetingDAO))
     }
 }
