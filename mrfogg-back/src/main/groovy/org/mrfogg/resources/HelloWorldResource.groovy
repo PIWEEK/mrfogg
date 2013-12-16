@@ -25,9 +25,9 @@ class HelloWorldResource {
 
     @POST
     @UnitOfWork
-    Greeting create(String greeting) {
+    Greeting create(Map params) {
         return this.dao.persist(
-            new Greeting(message: greeting)
+            new Greeting(message: params.name)
         )
     }
 
