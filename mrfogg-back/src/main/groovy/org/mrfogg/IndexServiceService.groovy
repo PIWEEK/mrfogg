@@ -44,6 +44,6 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
 
     @Override
     public void run(IndexServiceConfiguration configuration, Environment environment) throws ClassNotFoundException {
-        environment.addResource(new HelloWorldResource());
+        environment.addResource(new HelloWorldResource())
     }
 }
