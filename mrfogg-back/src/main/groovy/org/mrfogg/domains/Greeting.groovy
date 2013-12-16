@@ -14,7 +14,6 @@ class Greeting {
     @GeneratedValue
     Long id
 
-    @Column(name='message')
     String message
 
 }
