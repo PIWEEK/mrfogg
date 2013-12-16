@@ -25,6 +25,26 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
 
+    // Less tyles.
+    less: {
+      app: {
+        files: {
+          'app/style/main.css': [
+            'app/style/less/*.less'
+          ]
+        },
+        options: {
+          compress: true,
+          // LESS source maps
+          // To enable, set sourceMap to true and update sourceMapRootpath based on your install
+          sourceMap: false,
+          sourceMapFilename: 'app/styles/main.min.css.map',
+          sourceMapRootpath: 'app/styles/less'
+        }
+      }
+    },
+
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
@@ -32,12 +52,16 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:all']
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['{.tmp,<%= yeoman.app %>}/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
+      },
+      less: {
+        files: ['/app/styles/less/*.less'],
+        tasks: ['less:app']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -53,6 +77,9 @@ module.exports = function (grunt) {
         ]
       }
     },
+
+
+
 
     // The actual grunt server settings
     connect: {
@@ -135,10 +162,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
-    
-
-    
 
     // Renames files for browser caching purposes
     rev: {
@@ -365,5 +388,10 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('front', [
+    'less',
+    'watch'
   ]);
 };
