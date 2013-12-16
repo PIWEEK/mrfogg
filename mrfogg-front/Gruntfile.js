@@ -29,9 +29,7 @@ module.exports = function (grunt) {
     less: {
       app: {
         files: {
-          'app/style/main.css': [
-            'app/style/less/*.less'
-          ]
+          'app/styles/main.css': 'app/styles/less/*.less'
         },
         options: {
           compress: true,
