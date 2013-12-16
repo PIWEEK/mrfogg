@@ -6,6 +6,7 @@ import com.yammer.dropwizard.config.Bootstrap
 import com.yammer.dropwizard.config.Environment
 import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
+import com.yammer.dropwizard.migrations.MigrationsBundle
 
 import org.mrfogg.domains.Greeting
 import org.mrfogg.daos.GreetingDAO
@@ -13,7 +14,7 @@ import org.mrfogg.resources.HelloWorldResource
 
 class IndexServiceService extends Service<IndexServiceConfiguration> {
 
-    final Class[] ENTITIES = [
+    static final Class[] ENTITIES = [
         org.mrfogg.domains.Greeting
     ]
 
@@ -30,12 +31,21 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
             }
         }
 
+    MigrationsBundle<IndexServiceConfiguration> migrationsBundle =
+        new MigrationsBundle<IndexServiceConfiguration>() {
+            @Override
+            public DatabaseConfiguration getDatabaseConfiguration(IndexServiceConfiguration configuration) {
+                return configuration.databaseConfiguration
+            }
+        }
+
     AssetsBundle assetsBundle = new AssetsBundle()
 
     @Override
     public void initialize(Bootstrap<IndexServiceConfiguration> bootstrap) {
         bootstrap.with {
             name = 'IndexService'
+            addBundle migrationsBundle
             addBundle hibernateBundle
         }
     }
