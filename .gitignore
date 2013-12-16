@@ -4,3 +4,4 @@ build/
 *.log
 **/.gradle
 mrfogg-front/node_modules
+*.db
