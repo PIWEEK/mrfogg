@@ -80,7 +80,7 @@ cobertura {
 }
 
 codenarc {
-    configFile = rootProject.file('codenarcrule.groovy')
+    configFile = rootProject.file('src/test/resources/codenarcrule.groovy')
     reportFormat = System.properties['codeNarcOutput'] ?: 'html'
 }
 

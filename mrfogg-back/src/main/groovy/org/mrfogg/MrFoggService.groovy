@@ -12,29 +12,29 @@ import org.mrfogg.domains.Greeting
 import org.mrfogg.daos.GreetingDAO
 import org.mrfogg.resources.HelloWorldResource
 
-class IndexServiceService extends Service<IndexServiceConfiguration> {
+class MrFoggService extends Service<MrFoggConfiguration> {
 
     static final Class[] ENTITIES = [
         org.mrfogg.domains.Greeting
     ]
 
     public static void main(String[] args) throws Exception {
-        new IndexServiceService().run(args)
+        new MrFoggService().run(args)
     }
 
-    HibernateBundle<IndexServiceConfiguration> hibernateBundle =
+    HibernateBundle<MrFoggConfiguration> hibernateBundle =
 
-        new HibernateBundle<IndexServiceConfiguration>(ENTITIES) {
+        new HibernateBundle<MrFoggConfiguration>(ENTITIES) {
             @Override
-            public DatabaseConfiguration getDatabaseConfiguration(IndexServiceConfiguration configuration) {
+            public DatabaseConfiguration getDatabaseConfiguration(MrFoggConfiguration configuration) {
                 return configuration.databaseConfiguration
             }
         }
 
-    MigrationsBundle<IndexServiceConfiguration> migrationsBundle =
-        new MigrationsBundle<IndexServiceConfiguration>() {
+    MigrationsBundle<MrFoggConfiguration> migrationsBundle =
+        new MigrationsBundle<MrFoggConfiguration>() {
             @Override
-            public DatabaseConfiguration getDatabaseConfiguration(IndexServiceConfiguration configuration) {
+            public DatabaseConfiguration getDatabaseConfiguration(MrFoggConfiguration configuration) {
                 return configuration.databaseConfiguration
             }
         }
@@ -42,16 +42,16 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
     AssetsBundle assetsBundle = new AssetsBundle()
 
     @Override
-    public void initialize(Bootstrap<IndexServiceConfiguration> bootstrap) {
+    public void initialize(Bootstrap<MrFoggConfiguration> bootstrap) {
         bootstrap.with {
-            name = 'IndexService'
+            name = 'MrFogg'
             addBundle migrationsBundle
             addBundle hibernateBundle
         }
     }
 
     @Override
-    public void run(IndexServiceConfiguration configuration, Environment environment) throws ClassNotFoundException {
+    public void run(MrFoggConfiguration configuration, Environment environment) throws ClassNotFoundException {
 
         final GreetingDAO greetingDAO = new GreetingDAO(hibernateBundle.sessionFactory)
 
