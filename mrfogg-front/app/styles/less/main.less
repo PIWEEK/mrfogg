@@ -1,3 +1,106 @@
-#todo {
-    margin-left: 10px;
+/************ Background  *************/
+
+@-webkit-keyframes spin {
+	from { -webkit-transform: rotate(0deg); }
+	to { -webkit-transform: rotate(360deg); }
 }
+
+@-webkit-keyframes spin-back {
+	from { -webkit-transform: rotate(360deg); }
+	to { -webkit-transform: rotate(0deg); }
+}
+
+.bg-holder {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: #d6f6ff;
+    .earth-holder {
+        left: 50%;
+        position: absolute;
+        height: 0px;
+        top: 65%;
+        width: 0px;
+    }
+    #earth {
+        width: 4200px;
+        height: 4200px;
+        background-image: url("../images/world.png");
+        background-size: 100%;
+        -webkit-animation: spin 1000s linear infinite;
+        position: absolute;
+        margin-left: -2000px;
+    }
+    .cloud {
+         width: 5000px;
+        height: 5000px;
+        background-image: url("../images/cloud.svg");
+        background-size: 100%;
+        -webkit-animation: spin 250s linear infinite;
+        position: absolute;
+        margin-left: -2500px;
+    }
+    .cloud-2 {
+         width: 5000px;
+        height: 5000px;
+        background-image: url("../images/cloud2.svg");
+        background-size: 100%;
+        -webkit-animation: spin-back 400s linear infinite;
+        position: absolute;
+        margin-left: -2500px;
+    }
+}
+
+.wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    .container {
+        outline: solid 1px red;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    header {
+        display: table;
+        height: 50px;
+        h1 {
+            display: block;
+            width: 300px;
+        }
+        .travel-name {
+            display: table-cell;
+            width: 100%;
+            text-align: center;
+        }
+        .menu {
+            display: block;
+            width: 300px;
+        }
+    }
+    .left-col {
+        display: inline-block;
+        width: 280px;
+        outline: solid 1px blue;
+    }
+    .right-col {
+        display: inline-block;
+        width: 700px;
+        outline: solid 1px greem;
+
+    }
+}
+
+
+html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+/* Create the animation blocks */
+
+
+

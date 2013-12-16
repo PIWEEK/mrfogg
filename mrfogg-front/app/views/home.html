@@ -12,8 +12,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="earth.css">
+        <link rel="stylesheet" href="../styles/main.css">
         <!-- endbuild -->
 </head>
   <body ng-app="mrfogsApp">
@@ -27,19 +26,39 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view="">
+    <div class="bg-holder" ng-view="">
         <div class="earth-holder">
-            <div id="earth" class="circle">
+            <div id="earth" class="circle"></div>
+            <div class="cloud"></div>
+            <div class="cloud-2"></div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="container">
+            <header>
+                <h1>Mr. Fogg</h1>
+                <div class="travel-name">London</div>
+                <div class="menu">
+                    <div></div>
+                    <img src="#" />
+                </div>
+            </header>
+            <section class="left-col">
+                <div class="task">
+                    <h2>Task</h2>
+                    <div class="content">
+
+                    </div>
+                </div>
+            </section>
+            <div class="right-col">
+                <div class="card">
+                    <h2>Tarea tralara</h2>
+                    <h3>Alonso mamonsete</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, pariatur excepturi exercitationem enim praesentium eos explicabo cupiditate sit fugit ab. Cumque, beatae, nulla.</p>
+                </div>
             </div>
-                    <div id="cloud-holder-4" class="circle">
-            <div class="cloud" style="top: 300px; left: 320px"></div>
-            <div class="cloud" style="top: 150px; left: 0px"></div>
-             <div class="cloud" style="top: 80px; left: 100px"></div>
-             <div class="cloud" style="top: 0; left: 0px"></div>
         </div>
-
-        </div>
-
     </div>
 
 
