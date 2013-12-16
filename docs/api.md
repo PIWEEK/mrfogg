@@ -152,7 +152,7 @@ Descripcion de MR. FOGG (TODO)
 
 # Group Tasks API
 ## Task detail [/trips/{tripId}/tasks/{taskId}]
-### Update task information [POST]
+### Update task information [PUT]
 
 + Parameters
     + tripId (required, number, `1`) ... Trip id
