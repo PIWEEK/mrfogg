@@ -8,6 +8,7 @@ import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
 class IndexServiceConfiguration extends Configuration {
+
     @Valid
     @NotNull
     @JsonProperty

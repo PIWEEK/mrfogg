@@ -10,6 +10,7 @@ class HelloWorldResourceSpec extends ResourceSpec {
         def mockedDAO = Mock(GreetingDAO) {
                 1 * persist(_) >> new Greeting(message: 'it worked')
             }
+        assert mockedDAO instanceof GreetingDAO
         jersey.addResource(new HelloWorldResource(mockedDAO))
     }
 
@@ -17,7 +18,7 @@ class HelloWorldResourceSpec extends ResourceSpec {
         when: 'Invoking the resource endpoint'
             def greetings =
                 jersey.client().
-                    resource('/hello-world/').
+                    resource('/hello-world').
                     get(Greeting)
         then: 'The server response should have a Hello greeting in the beggining'
              greetings.message.startsWith('HELLO')

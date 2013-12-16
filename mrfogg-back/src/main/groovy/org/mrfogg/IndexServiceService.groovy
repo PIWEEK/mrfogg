@@ -12,12 +12,18 @@ import org.mrfogg.daos.GreetingDAO
 import org.mrfogg.resources.HelloWorldResource
 
 class IndexServiceService extends Service<IndexServiceConfiguration> {
+
+    final Class[] ENTITIES = [
+        org.mrfogg.domains.Greeting
+    ]
+
     public static void main(String[] args) throws Exception {
         new IndexServiceService().run(args)
     }
 
     HibernateBundle<IndexServiceConfiguration> hibernateBundle =
-        new HibernateBundle<IndexServiceConfiguration>([]) {
+
+        new HibernateBundle<IndexServiceConfiguration>(ENTITIES) {
             @Override
             public DatabaseConfiguration getDatabaseConfiguration(IndexServiceConfiguration configuration) {
                 return configuration.databaseConfiguration
