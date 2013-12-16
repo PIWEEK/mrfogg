@@ -1,10 +1,10 @@
 .circle {
     border-radius: 50%;
-	width: 2000px;
-	height: 2000px; 
 /* Spinning, gradient circle; CSS only! */
 }
 #earth{
+	width: 2000px;
+	height: 2000px; 
 	background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, green 0%, orange 100%, red 95%);
 	background-image: -webkit-radial-gradient(45px 45px, circle cover, green, orange);
 	background-image: radial-gradient(45px 45px 45deg, circle cover, green 0%, orange 100%, red 95%);
@@ -12,7 +12,6 @@
     -webkit-animation:spin 40s linear infinite;
     position:absolute;
     bottom: -1000px;
-    
 }
 html,body{ height:100%}
 /* Create the animation blocks */
