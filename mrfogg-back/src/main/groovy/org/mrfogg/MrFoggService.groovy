@@ -22,6 +22,7 @@ import org.mrfogg.resources.HelloWorldResource
 import org.mrfogg.services.AuthHibernateService
 import org.mrfogg.services.AuthInMemoryService
 import org.mrfogg.widget.WidgetProvider
+import org.mrfogg.filter.CorsFilter
 
 class MrFoggService extends Service<MrFoggConfiguration> {
     List widgets = []
@@ -79,6 +80,8 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
         final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
         final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
+
+        environment.addFilter(new CorsFilter(), "/*");
         environment.addResource(new HelloWorldResource(userDAO: userDAO, tripDAO: tripDAO))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
