@@ -14,8 +14,11 @@ class User {
     @GeneratedValue
     Long id
 
+
     @Column(unique = true)
-    String username
+    String email
     String password
+    String avatar
+    String token
 
 }

@@ -1,79 +1,105 @@
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
+/************ Background  *************/
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
   }
 }
-.container-narrow > hr {
-  margin: 30px 0;
+@-webkit-keyframes spin-back {
+  from {
+    -webkit-transform: rotate(360deg);
+  }
+  to {
+    -webkit-transform: rotate(0deg);
+  }
 }
-
-/* Main marketing message and sign up button */
-.jumbotron {
+.bg-holder {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background: #d6f6ff;
+}
+.bg-holder .earth-holder {
+  left: 50%;
+  position: absolute;
+  height: 0px;
+  top: 65%;
+  width: 0px;
+}
+.bg-holder #earth {
+  width: 4200px;
+  height: 4200px;
+  background-image: url("../images/world.png");
+  background-size: 100%;
+  -webkit-animation: spin 1000s linear infinite;
+  position: absolute;
+  margin-left: -2000px;
+}
+.bg-holder .cloud {
+  width: 5000px;
+  height: 5000px;
+  background-image: url("../images/cloud.svg");
+  background-size: 100%;
+  -webkit-animation: spin 250s linear infinite;
+  position: absolute;
+  margin-left: -2500px;
+}
+.bg-holder .cloud-2 {
+  width: 5000px;
+  height: 5000px;
+  background-image: url("../images/cloud2.svg");
+  background-size: 100%;
+  -webkit-animation: spin-back 400s linear infinite;
+  position: absolute;
+  margin-left: -2500px;
+}
+.wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.wrapper .container {
+  outline: solid 1px red;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.wrapper header {
+  display: table;
+  height: 50px;
+}
+.wrapper header h1 {
+  display: block;
+  width: 300px;
+}
+.wrapper header .travel-name {
+  display: table-cell;
+  width: 100%;
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
 }
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+.wrapper header .menu {
+  display: block;
+  width: 300px;
 }
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+.wrapper .left-col {
+  display: inline-block;
+  width: 280px;
+  outline: solid 1px blue;
 }
-.marketing p + h4 {
-  margin-top: 28px;
+.wrapper .right-col {
+  display: inline-block;
+  width: 700px;
+  outline: solid 1px greem;
 }
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
+/* Create the animation blocks */
