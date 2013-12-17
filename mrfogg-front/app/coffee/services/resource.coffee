@@ -23,105 +23,105 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 
         return data
 
-#    queryMany = (name, params, options, urlParams) ->
-#        defaultHttpParams = {
-#            method: "GET",
-#            headers:  headers(),
-#            url: $gmUrls.api(name, urlParams)
-#        }
-#        if not _.isEmpty(params)
-#            defaultHttpParams.params = params
-#
-#        httpParams = _.extend({}, defaultHttpParams, options)
-#        defered = $q.defer()
-#
-#        promise = $http(httpParams)
-#        promise.success (data, status) ->
-#            models = _.map data, (attrs) -> $model.make_model(name, attrs)
-#            defered.resolve(models)
-#
-#        promise.error (data, status) ->
-#            defered.reject(data, status)
-#
-#        return defered.promise
-#
-#    queryRaw = (name, id, params, options, cls) ->
-#        defaultHttpParams = {method: "GET", headers:  headers()}
-#
-#        if id
-#            defaultHttpParams.url = "#{$gmUrls.api(name)}/#{id}"
-#        else
-#            defaultHttpParams.url = "#{$gmUrls.api(name)}"
-#
-#        if not _.isEmpty(params)
-#            defaultHttpParams.params = params
-#
-#        httpParams =  _.extend({}, defaultHttpParams, options)
-#
-#        defered = $q.defer()
-#
-#        promise = $http(httpParams)
-#        promise.success (data, status) ->
-#            defered.resolve(data, cls)
-#
-#        promise.error (data, status) ->
-#            defered.reject()
-#
-#        return defered.promise
-#
-#    queryOne = (name, id, params, options, cls) ->
-#        defaultHttpParams = {method: "GET", headers:  headers()}
-#
-#        if id
-#            defaultHttpParams.url = "#{$gmUrls.api(name)}/#{id}"
-#        else
-#            defaultHttpParams.url = "#{$gmUrls.api(name)}"
-#
-#        if not _.isEmpty(params)
-#            defaultHttpParams.params = params
-#
-#        httpParams =  _.extend({}, defaultHttpParams, options)
-#
-#        defered = $q.defer()
-#
-#        promise = $http(httpParams)
-#        promise.success (data, status) ->
-#            defered.resolve($model.make_model(name, data, cls))
-#
-#        promise.error (data, status) ->
-#            defered.reject()
-#
-#        return defered.promise
-#
-#    queryManyPaginated = (name, params, options, cls, urlParams) ->
-#        defaultHttpParams = {
-#            method: "GET",
-#            headers: headers(false),
-#            url: $gmUrls.api(name, urlParams)
-#        }
-#        if not _.isEmpty(params)
-#            defaultHttpParams.params = params
-#
-#        httpParams =  _.extend({}, defaultHttpParams, options)
-#        defered = $q.defer()
-#
-#        promise = $http(httpParams)
-#        promise.success (data, status, headersFn) ->
-#            currentHeaders = headersFn()
-#
-#            result = {}
-#            result.models = _.map(data, (attrs) -> $model.make_model(name, attrs, cls))
-#            result.count = parseInt(currentHeaders["x-pagination-count"], 10)
-#            result.current = parseInt(currentHeaders["x-pagination-current"] or 1, 10)
-#            result.paginatedBy = parseInt(currentHeaders["x-paginated-by"], 10)
-#
-#            defered.resolve(result)
-#
-#        promise.error (data, status) ->
-#            defered.reject()
-#
-#        return defered.promise
-#
+    queryMany = (name, params, options, urlParams) ->
+        defaultHttpParams = {
+            method: "GET",
+            headers:  headers(),
+            url: $gmUrls.api(name, urlParams)
+        }
+        if not _.isEmpty(params)
+            defaultHttpParams.params = params
+
+        httpParams = _.extend({}, defaultHttpParams, options)
+        defered = $q.defer()
+
+        promise = $http(httpParams)
+        promise.success (data, status) ->
+            models = _.map data, (attrs) -> $model.make_model(name, attrs)
+            defered.resolve(models)
+
+        promise.error (data, status) ->
+            defered.reject(data, status)
+
+        return defered.promise
+
+    queryRaw = (name, id, params, options, cls) ->
+        defaultHttpParams = {method: "GET", headers:  headers()}
+
+        if id
+            defaultHttpParams.url = "#{$gmUrls.api(name)}/#{id}"
+        else
+            defaultHttpParams.url = "#{$gmUrls.api(name)}"
+
+        if not _.isEmpty(params)
+            defaultHttpParams.params = params
+
+        httpParams =  _.extend({}, defaultHttpParams, options)
+
+        defered = $q.defer()
+
+        promise = $http(httpParams)
+        promise.success (data, status) ->
+            defered.resolve(data, cls)
+
+        promise.error (data, status) ->
+            defered.reject()
+
+        return defered.promise
+
+    queryOne = (name, id, params, options, cls) ->
+        defaultHttpParams = {method: "GET", headers:  headers()}
+
+        if id
+            defaultHttpParams.url = "#{$gmUrls.api(name)}/#{id}"
+        else
+            defaultHttpParams.url = "#{$gmUrls.api(name)}"
+
+        if not _.isEmpty(params)
+            defaultHttpParams.params = params
+
+        httpParams =  _.extend({}, defaultHttpParams, options)
+
+        defered = $q.defer()
+
+        promise = $http(httpParams)
+        promise.success (data, status) ->
+            defered.resolve($model.make_model(name, data, cls))
+
+        promise.error (data, status) ->
+            defered.reject()
+
+        return defered.promise
+
+    queryManyPaginated = (name, params, options, cls, urlParams) ->
+        defaultHttpParams = {
+            method: "GET",
+            headers: headers(false),
+            url: $gmUrls.api(name, urlParams)
+        }
+        if not _.isEmpty(params)
+            defaultHttpParams.params = params
+
+        httpParams =  _.extend({}, defaultHttpParams, options)
+        defered = $q.defer()
+
+        promise = $http(httpParams)
+        promise.success (data, status, headersFn) ->
+            currentHeaders = headersFn()
+
+            result = {}
+            result.models = _.map(data, (attrs) -> $model.make_model(name, attrs, cls))
+            result.count = parseInt(currentHeaders["x-pagination-count"], 10)
+            result.current = parseInt(currentHeaders["x-pagination-current"] or 1, 10)
+            result.paginatedBy = parseInt(currentHeaders["x-paginated-by"], 10)
+
+            defered.resolve(result)
+
+        promise.error (data, status) ->
+            defered.reject()
+
+        return defered.promise
+
 #    # Resource Methods
 #    service.register = (formdata) ->
 #        defered = $q.defer()
@@ -139,8 +139,8 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 #        promise.error(onError)
 #
 #        return defered.promise
-#
-#    # Login request
+
+    # Login request
     service.login = (email, password) ->
         defered = $q.defer()
 
@@ -164,43 +164,43 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         return defered.promise
 
 
-#    # Get a site
-#    service.getUser = -> queryOne('user')
-#
-#    # Get users list
-#    service.getUsers = -> queryMany('users')
-#
-#    # Create a trip
-#    service.createTrip = (data) ->
-#        return $model.create("trips", data)
-#
-#    # Get a trip list
-#    service.getTrips = -> queryMany('trips')
-#
-#    # Get a trip
-#    service.getTrip = (projectId) ->
-#        return queryOne("trips", tripId)
-#
-#    # Get a trip tasks
-#    service.getTripTasks = (tripId) ->
-#        return queryOne("trips", "#{tripId}/tasks")
-#
-#    # Get a task
-#    service.getTripTasks = (tripId, taskId) ->
-#        return queryOne("tasks", "#{tripId}/tasks/#{taskId}")
-#
-#    # Get the cards for a task
-#    service.getTaskCards = (taskId, cardId) ->
-#        return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
-#    
-#    ## Create a new card inside the task?
-#    #service.postTaskCards = (tripId, taskId) ->
-#    #    return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
-#    
-#
-#    
-#
-#
+    # Get a user info
+    service.getUser = -> queryOne('users')
+
+    # Get users list
+    service.getUsers = -> queryMany('users')
+
+    # Create a trip
+    service.createTrip = (data) ->
+        return $model.create("trips", data)
+
+    # Get a trip list
+    service.getTrips = -> queryMany('trips')
+
+    # Get a trip
+    service.getTrip = (tripId) ->
+        return queryOne("trips", tripId)
+
+    # Get a trip tasks
+    service.getTripTasks = (tripId) ->
+        return queryOne("trips", "#{tripId}/tasks")
+
+    # Get a task
+    service.getTripTasks = (tripId, taskId) ->
+        return queryOne("tasks", "#{tripId}/tasks/#{taskId}")
+
+    # Get the cards for a task
+    service.getTaskCards = (taskId, cardId) ->
+        return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
+    
+    ## Create a new card inside the task?
+    #service.postTaskCards = (tripId, taskId) ->
+    #    return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
+    
+
+    
+
+
 ##    service.createTask = (form) ->
 ##        return $model.create("tasks", form)
 ##

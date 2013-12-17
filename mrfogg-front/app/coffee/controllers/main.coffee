@@ -5,6 +5,16 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
+UsersController = ($scope, $rootScope) ->
+    $rootScope.pageTitle = 'Users'
+    $scope.userList = resource.getUsers()
+    return
+
+TripsController = ($scope, $rootScope) ->
+    $rootScope.pageTitle = 'Trips'
+    $scope.tripList = resource.getTrips()
+    return
+
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
     $rootScope.pageTitle = 'Login'
     $rootScope.pageSection = 'login'
@@ -35,6 +45,8 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
+module.controller("UsersController", ["$scope", "$rootScope", UsersController])
+module.controller("TripsController", ["$scope", "$rootScope", TripsController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location",
                   "$routeParams", "resource", "$gmAuth",
                   MrLoginController])

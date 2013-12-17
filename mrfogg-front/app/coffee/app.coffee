@@ -31,10 +31,14 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide,
         {templateUrl: '/views/container.html', controller: "ContainerController"})
     $routeProvider.when('/login',
         {templateUrl: '/views/login.html', controller:"MrLoginController"})
-
+    $routeProvider.when('/users',
+        {templateUrl: '/views/userlist.html', controller:"UsersController"})
 
     apiUrls = {
         "login": "/login"
+        "logout": "/logout"
+        "users": "/users"
+        "trips": "/trips"
         }
     $gmUrlsProvider.setUrls("api", apiUrls)
     console.log ("Config...")
