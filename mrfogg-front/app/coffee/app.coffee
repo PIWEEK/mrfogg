@@ -10,6 +10,11 @@ modules = [
     # Mr Fogg controllers
     "mrfogg.controllers.main",
 
+    # Services
+    "mrfogg.services.resource",
+    "mrfogg.services.common",
+    "mrfogg.services.model",
+
     # Greenmine Plugins
     "gmUrls"
     "gmFlash",
@@ -20,19 +25,35 @@ modules = [
     "i18next"
 ]
 
-configCallback = ($routeProvider)->
+configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide,
+                  $compileProvider, $gmUrlsProvider)->
     $routeProvider.when('/',
         {templateUrl: '/views/container.html', controller: "ContainerController"})
     $routeProvider.when('/login',
         {templateUrl: '/views/login.html', controller:"MrLoginController"})
 
+
+    apiUrls = {
+        "login": "/login"
+        }
+    $gmUrlsProvider.setUrls("api", apiUrls)
     console.log ("Config...")
     return
 
-init = ()->
+init = ($rootScope, $gmStorage, $gmAuth, $gmUrls, config)->
     console.log ("Initializing...")
+    $rootScope.auth = $gmAuth.getUser()
+    $gmUrls.setHost("api", config.host,config.scheme)
     return
 
 angular.module('mrfogg', modules)
-       .config(["$routeProvider", configCallback])
-       .run([init])
+       .config(['$routeProvider', '$locationProvider', '$httpProvider', '$provide', '$compileProvider', '$gmUrlsProvider', configCallback])
+       .run(["$rootScope","$gmStorage", "$gmAuth", "$gmUrls", 'config', init])
+
+angular.module('mrfogg.config', []).value('config', {
+#    host: "144.76.249.158:8080"
+    host: "mrfogg.apiary.io"
+    scheme: "http"
+    defaultLanguage: "en"
+    debug: false
+})

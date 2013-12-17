@@ -8,6 +8,9 @@ import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
 import com.yammer.dropwizard.migrations.MigrationsBundle
 import com.yammer.dropwizard.auth.oauth.OAuthProvider
+import com.yammer.dropwizard.cli.Cli
+import com.yammer.dropwizard.cli.ServerCommand
+import com.yammer.dropwizard.config.Bootstrap
 
 import org.mrfogg.domains.User
 import org.mrfogg.daos.UserDAO
@@ -16,8 +19,10 @@ import org.mrfogg.resources.HelloWorldResource
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.domains.User
+import org.mrfogg.widget.WidgetProvider
 
 class MrFoggService extends Service<MrFoggConfiguration> {
+    List widgets = []
 
     static final Class[] ENTITIES = [
         org.mrfogg.domains.User
@@ -25,6 +30,14 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
     public static void main(String[] args) throws Exception {
         new MrFoggService().run(args)
+    }
+
+    public MrFoggService() {
+        def loader = ServiceLoader.load(WidgetProvider.class)
+        loader.each {
+            println ">> $it"
+            widgets << it
+        }
     }
 
     HibernateBundle<MrFoggConfiguration> hibernateBundle =
@@ -53,6 +66,7 @@ class MrFoggService extends Service<MrFoggConfiguration> {
             addBundle migrationsBundle
             addBundle hibernateBundle
         }
+        widgets*.initialize(bootstrap)
     }
 
     @Override
@@ -63,5 +77,8 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         environment.addResource(new HelloWorldResource(userDao))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
+
+        // Plugins:
+        widgets*.run(configuration, environment)
     }
 }
