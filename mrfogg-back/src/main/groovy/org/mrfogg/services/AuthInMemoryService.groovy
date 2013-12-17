@@ -1,6 +1,7 @@
 package org.mrfogg.services
 
 import org.mrfogg.domains.User
+import com.yammer.dropwizard.auth.AuthenticationException
 
 class AuthInMemoryService {
     static users = [:]
@@ -9,7 +10,7 @@ class AuthInMemoryService {
         def result = users[token]
 
         if (!result) {
-            throw new Exception("The user is not authenticated")
+            throw new AuthenticationException('The user is not authenticated')
         }
         return result
     }
@@ -19,7 +20,7 @@ class AuthInMemoryService {
         if (authUser) {
             return authUser.key
         }
-        def token = "" + UUID.randomUUID()
+        def token = "${UUID.randomUUID()}"
         user.token = token
         users[token] = user
         return token
@@ -27,7 +28,7 @@ class AuthInMemoryService {
 
     public removeAuth(User user) {
         if (!users[user.token]) {
-            throw new Exception("user not found")
+            throw new AuthenticationException('user not found')
         }
         users.remove(user.token)
     }

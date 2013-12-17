@@ -36,10 +36,13 @@ repositories {
     mavenCentral()
     // Spock snapshots are available from the Sonatype OSS snapshot repository
     maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "http://repo.springsource.org/repo" } // for springloaded
 }
 
 dependencies {
     groovy "org.codehaus.groovy:groovy-all:${groovyVersion}"
+
+    compile "org.springsource.springloaded:springloaded-core:1.1.4"
 
     compile "com.yammer.dropwizard:dropwizard-core:${dropwizardVersion}"
     compile "com.yammer.dropwizard:dropwizard-testing:${dropwizardVersion}"
@@ -70,6 +73,8 @@ jar {
         attributes 'Implementation-Title': project.name
         attributes 'Implementation-Version': project.version
         attributes 'Implementation-Vendor-Id': project.group
+        attributes 'Premain-Class': 'org.springsource.loaded.agent.SpringLoadedAgent'
+        attributes 'Can-Redefine-Classes': true
     }
 }
 
@@ -80,7 +85,7 @@ cobertura {
 }
 
 codenarc {
-    configFile = rootProject.file('codenarcrule.groovy')
+    configFile = rootProject.file('src/test/resources/codenarcrule.groovy')
     reportFormat = System.properties['codeNarcOutput'] ?: 'html'
 }
 
@@ -92,10 +97,13 @@ shadow {
 task run(dependsOn: 'shadow', group: 'dropwizard',  description: "Run service using dev configuration") << {
     // Grab any dw. properties that are specified on the command line and pass to the Java process (i.e. dw.http.port=8080)
     def props = project.ext.properties.findAll { it.key.startsWith('dw') }
+
+    // Add spring loaded agent
     javaexec {
         main = '-jar'
         args = ["${shadow.shadowJar.getPath()}", 'server', 'dev_config.yml']
         systemProperties = props
+        jvmArgs = ["-javaagent:${shadow.shadowJar.getPath()}", "-noverify"]
     }
 }
 
