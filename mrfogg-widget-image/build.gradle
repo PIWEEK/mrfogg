@@ -64,7 +64,6 @@ dependencies {
     compile "org.slf4j:log4j-over-slf4j:1.7.2"
 
     compile project(":mrfogg-common")
-    compile project(":mrfogg-widget-image")
 }
 
 jar {

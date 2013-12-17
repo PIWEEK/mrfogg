@@ -39,7 +39,7 @@ class HelloWorldResource {
     @GET
     @Timed
     User sayHello(@QueryParam('name') Optional<String> name) {
-        return new User(username: "HELLO ${name} WORLD")
+        return new User(email: "${name}@world.com")
     }
 
     @GET

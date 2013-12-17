@@ -8,10 +8,8 @@ import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
 class MrFoggConfiguration extends Configuration {
-
     @Valid
     @NotNull
     @JsonProperty
     DatabaseConfiguration databaseConfiguration = new DatabaseConfiguration()
-
 }
