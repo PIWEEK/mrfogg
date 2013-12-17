@@ -9,14 +9,18 @@ import org.mrfogg.domains.User
 
 @Log4j
 class TokenAuthenticator implements Authenticator<String, User> {
+
     def authService
 
     @Override
     public Optional<User> authenticate(String token) throws AuthenticationException {
+
         try {
+
             return Optional.of(authService.getAuthenticatedUser(token))
-        } catch (Exception e) {
-            println e.message
+
+        } catch (e) {
+            log.error e.message
             return Optional.absent()
         }
     }

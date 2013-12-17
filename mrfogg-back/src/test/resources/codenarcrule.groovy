@@ -25,6 +25,10 @@ ruleset {
     ruleset('rulesets/naming.xml') {
         'FactoryMethodName' enabled: false
         'FieldName' enabled: false
+        'VariableName' enabled: false
+        'MethodName' {
+            doNotApplyToClassNames = "*Spec"
+        }
     }
     ruleset('rulesets/security.xml')
     ruleset('rulesets/size.xml')
