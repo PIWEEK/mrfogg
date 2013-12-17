@@ -1,12 +1,29 @@
+@import "color.less";
+@import "font.less";
+@import "animation.less";
+/*@import "tooltip.less";*/
+@import "shortcut.less";
+/*@import "responsive.less";*/
+
+
 html,body{
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-    font-family: Concert, Arial;
     font-size: 100%;
+    font-family: base;
 }
-
+* {
+    vertical-align: top;
+}
+a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+        opacity: 0.5;
+    }
+}
 h1 {
     color: white;
     font-size: 4.0em;
@@ -25,11 +42,6 @@ p {
 }
 
 
-@import "color.less";
-@import "animation.less";
-/*@import "tooltip.less";*/
-/*@import "shortcut.less";*/
-/*@import "responsive.less";*/
 
 /************ Background *************/
 
@@ -94,22 +106,96 @@ p {
         background: @basecolor;
         display: table;
         padding: 10px;
-        height: 50px;
         h1 {
-            background: url();
-            display: block;
+            background: url("../images/mainlogo.png") no-repeat;
+            display: inline-block;
             height: 40px;
+            line-height: 0;
             text-indent: -9999px;
-            width: 180px;
+            width: 158px;
+            margin: 0;
         }
-        .travel-name {
+        .trips-holder {
             display: table-cell;
             text-align: center;
             width: 100%;
         }
+        .trips {
+            .rounded-corners(6px);
+            background: @lightbase;
+            color: white;
+            font-size: 1.8em;
+            display: inline-block;
+            position: relative;
+            padding: 3px 6px;
+            z-index: 100;
+            max-width: 300px;
+            width: 100%;
+            a {
+                max-width: 280px;
+                padding-right: 20px;
+                overflow: hidden;
+                height: 34px;
+                text-overflow: ellipsis;
+                position: relative;
+                white-space: nowrap;
+            }
+            i {
+                position: absolute;
+                font-size: 20px;
+                right: 0;
+                top: 8px;
+            }
+            .trip-list {
+                background: @darkbase;
+                display: none;
+                position: absolute;
+                left: 0px;
+                margin: 0;
+                top: 40px;
+                padding: 0;
+                width: 100%;
+                z-index: 90;
+                .rounded-corners(0 0 6px 6px);
+                a {
+                    padding: 10px 5px;
+                    display: block;
+                    font-size: 0.7em;
+                    height: auto;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                    list-style: none;
+                    text-align: left;
+                    max-width:190%;
+                    &:hover {
+                        background: @lightblue;
+                        opacity: 1;
+                        color: @darkbase;
+                    }
+
+                }
+            }
+            &:hover {
+            .rounded-corners(6px 6px 0 0);
+                .trip-list {
+                    display: block;
+
+                    &:hover {
+                        display: block;
+                    }
+                }
+            }
+        }
+        .trip-name {
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+            text-transform: uppercase;
+        }
         .menu {
-            display: block;
-            width: 300px;
+            display: inline-block;
+            vertical-align: top;
+            width: 150px;
         }
     }
     .left-col {

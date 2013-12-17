@@ -1,0 +1,23 @@
+.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.select(@select: none) {
+    -webkit-user-select: @select; /* Chrome/Safari */
+    -moz-user-select: @select; /* Firefox */
+    -ms-user-select: @select;
+}
+
+.clearfix(@content: " "){
+    &:after {
+      content: @content;
+      visibility: hidden;
+      display: block;
+      height: 0;
+      clear: both;
+   }
+}
