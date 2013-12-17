@@ -3,82 +3,35 @@ html,body{
     width: 100%;
     margin: 0;
     padding: 0;
+    font-family: Concert, Arial;
+    font-size: 100%;
 }
 
-@-webkit-keyframes swing {
-  20% {
-    -webkit-transform: rotate(5deg);
-    transform: rotate(5deg);
-  }
-
-  40% {
-    -webkit-transform: rotate(-5deg);
-    transform: rotate(-5deg);
-  }
-
-  60% {
-    -webkit-transform: rotate(2deg);
-    transform: rotate(2deg);
-  }
-
-  80% {
-    -webkit-transform: rotate(-2deg);
-    transform: rotate(-2deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
+h1 {
+    color: white;
+    font-size: 4.0em;
 }
 
-@keyframes swing {
-  20% {
-    -webkit-transform: rotate(5deg);
-    transform: rotate(5deg);
-  }
-
-  40% {
-    -webkit-transform: rotate(-5deg);
-    transform: rotate(-5deg);
-  }
-
-  60% {
-    -webkit-transform: rotate(2deg);
-    transform: rotate(2deg);
-  }
-
-  80% {
-    -webkit-transform: rotate(-2deg);
-    transform: rotate(-2deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
+h2 {
+    color: white;
+    font-size: 3.0em;
 }
-
-.swing {
-    -webkit-transform-origin: center;
-      -ms-transform-origin: center;
-      transform-origin: center;
-     -webkit-animation: swing 25s linear infinite;
+h3 {
+    color: white;
+    font-size: 2.2em;
+}
+p {
+    line-height: 1.5;
 }
 
 
+@import "color.less";
+@import "animation.less";
+/*@import "tooltip.less";*/
+/*@import "shortcut.less";*/
+/*@import "responsive.less";*/
 
 /************ Background *************/
-
-@-webkit-keyframes spin {
-	from { -webkit-transform: rotate(0deg); }
-	to { -webkit-transform: rotate(360deg); }
-}
-
-@-webkit-keyframes spin-back {
-	from { -webkit-transform: rotate(360deg); }
-	to { -webkit-transform: rotate(0deg); }
-}
 
 .bg-holder {
     height: 100%;
@@ -126,11 +79,11 @@ html,body{
 
 
 .wrapper {
-    position: absolute;
     height: 100%;
-    width: 100%;
-    top: 0;
     left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
     .container {
         max-width: 1000px;
         height: 100%;
@@ -138,16 +91,21 @@ html,body{
         overflow: hidden;
     }
     header {
+        background: @basecolor;
         display: table;
+        padding: 10px;
         height: 50px;
         h1 {
+            background: url();
             display: block;
-            width: 300px;
+            height: 40px;
+            text-indent: -9999px;
+            width: 180px;
         }
         .travel-name {
             display: table-cell;
-            width: 100%;
             text-align: center;
+            width: 100%;
         }
         .menu {
             display: block;
@@ -158,11 +116,12 @@ html,body{
         display: inline-block;
         width: 280px;
         outline: solid 1px blue;
+        vertical-align: top;
     }
     .right-col {
         display: inline-block;
+        outline: solid 1px green;
         width: 700px;
-        outline: solid 1px greem;
 
     }
 }
@@ -176,9 +135,11 @@ html,body{
     .parachute {
         background: url(../images/login.png);
         height: 360px;
-        width: 300px;
+        width: 476px;
         position: absolute;
         top: -340px;
+        left: 50%;
+        margin-left: -238px;
     }
     .form {
         background: white;
