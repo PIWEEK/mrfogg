@@ -20,6 +20,17 @@ UsersController = ($scope, $rootScope, resource) ->
 
     return
 
+UserController = ($scope, $rootScope, $routeParams, resource) ->
+    $rootScope.pageTitle = 'My profile'
+    $rootScope.userid = parseInt($routeParams.uid, 10)
+
+    resource.getUser($scope.userid, params).then (result) ->
+            $scope.trips = result.trips
+            $scope.tripcount = result.tripcount
+            $scope.paginatedBy = result.paginatedBy
+
+    return
+
 TripsController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
     $scope.tripList = resource.getTrips()
