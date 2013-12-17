@@ -1,0 +1,5 @@
+rootProject.name = 'mrfogg'
+
+include 'mrfogg-common'
+include 'mrfogg-back'
+include 'mrfogg-widget-image'

@@ -1,14 +1,22 @@
 <div class="header">
 </div>
 
-<div class="login form">
-    <form ng-submit="submit()">
-        <label for="inputUsername">Username</label>
-        <input type="text" class="input-small" placeholder="user" id="inputUsername">
-        <label for="inputPassword">Password</label>
-        <input type="text" class="input-small" placeholder="password" id="inputPassword">
-        <button class="loginbtn btn" type="submit">Login</button>
-    </form>
+<div class="login swing">
+    <div class="parachute ">
+    </div>
+    <div class="form">
+        <form ng-submit="submit()">
+            <fieldset>
+                <input type="text" class="input-small" placeholder="Username" id="inputUsername">
+            </fieldset>
+            <fieldset>
+                <input type="password" class="input-small" placeholder="Password" id="inputPassword">
+            </fieldset>
+            <fieldset>
+                <button class="loginbtn btn" type="submit">Login</button>
+            </fieldset>
+        </form>
+    </div>
 </div>
 
 <div class="footer">
