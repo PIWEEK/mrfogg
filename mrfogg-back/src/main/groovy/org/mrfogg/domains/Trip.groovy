@@ -9,18 +9,17 @@ import javax.persistence.ManyToMany
 import javax.persistence.FetchType
 
 @Entity
-@Table(name = 'user')
-class User {
+@Table(name = 'trip')
+class Trip {
 
     @Id
     @GeneratedValue
     Long id
 
     @Column(unique = true)
-    String email
-    String password
-    String token
-    @ManyToMany(targetEntity = Trip, fetch = FetchType.EAGER)
-    List<Trip> trips
+    String name
+    String description
+    @ManyToMany(targetEntity = User, fetch = FetchType.EAGER)
+    User users
 
 }
