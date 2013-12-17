@@ -13,6 +13,9 @@ databaseConfiguration:
   # the JDBC URL
   url: jdbc:h2:contact_db
 
+  properties:
+    hibernate.hbm2ddl.auto: create-drop
+
 # HTTP-specific options.
 http:
 

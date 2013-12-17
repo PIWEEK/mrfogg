@@ -7,9 +7,11 @@ import com.yammer.dropwizard.db.DatabaseConfiguration
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
-class IndexServiceConfiguration extends Configuration {
+class MrFoggConfiguration extends Configuration {
+
     @Valid
     @NotNull
     @JsonProperty
     DatabaseConfiguration databaseConfiguration = new DatabaseConfiguration()
+
 }
