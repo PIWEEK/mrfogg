@@ -1,7 +1,7 @@
 package org.mrfogg.resources
 
-import org.mrfogg.domains.Greeting
-import org.mrfogg.daos.GreetingDAO
+import org.mrfogg.domains.User
+import org.mrfogg.daos.UserDAO
 import com.google.common.base.Optional
 import com.yammer.metrics.annotation.Timed
 import com.yammer.dropwizard.hibernate.UnitOfWork
@@ -17,24 +17,24 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 class HelloWorldResource {
 
-    GreetingDAO dao
+    UserDAO dao
 
-    HelloWorldResource(GreetingDAO dao) {
+    HelloWorldResource(UserDAO dao) {
         this.dao = dao
     }
 
     @POST
     @UnitOfWork
-    Greeting create(Map params) {
+    User create(Map params) {
         return this.dao.persist(
-            new Greeting(message: params.name)
+            new User(params)
         )
     }
 
     @GET
     @Timed
-    Greeting sayHello(@QueryParam('name') Optional<String> name) {
-        return new Greeting(message: "HELLO ${name} WORLD")
+    User sayHello(@QueryParam('name') Optional<String> name) {
+        return new User(username: "HELLO ${name} WORLD")
     }
 
 }

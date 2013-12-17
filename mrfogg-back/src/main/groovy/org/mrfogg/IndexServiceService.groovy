@@ -8,14 +8,14 @@ import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
 import com.yammer.dropwizard.migrations.MigrationsBundle
 
-import org.mrfogg.domains.Greeting
-import org.mrfogg.daos.GreetingDAO
+import org.mrfogg.domains.User
+import org.mrfogg.daos.UserDAO
 import org.mrfogg.resources.HelloWorldResource
 
 class IndexServiceService extends Service<IndexServiceConfiguration> {
 
     static final Class[] ENTITIES = [
-        org.mrfogg.domains.Greeting
+        org.mrfogg.domains.User
     ]
 
     public static void main(String[] args) throws Exception {
@@ -53,9 +53,9 @@ class IndexServiceService extends Service<IndexServiceConfiguration> {
     @Override
     public void run(IndexServiceConfiguration configuration, Environment environment) throws ClassNotFoundException {
 
-        final GreetingDAO greetingDAO = new GreetingDAO(hibernateBundle.sessionFactory)
+        final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
 
 
-        environment.addResource(new HelloWorldResource(greetingDAO))
+        environment.addResource(new HelloWorldResource(userDAO))
     }
 }
