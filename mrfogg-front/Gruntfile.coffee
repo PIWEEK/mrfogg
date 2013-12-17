@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
     externalSources = [
         'app/js/jquery.js',
+        'app/js/lodash.js',
         'app/js/angular.js',
         'app/js/angular-route.js',
         'app/js/angular-sanitize.js',
