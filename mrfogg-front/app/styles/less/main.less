@@ -1,4 +1,74 @@
-/************ Background  *************/
+html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@-webkit-keyframes swing {
+  20% {
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+
+  40% {
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+
+  60% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+
+  80% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swing {
+  20% {
+    -webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+  }
+
+  40% {
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+  }
+
+  60% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg);
+  }
+
+  80% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+.swing {
+    -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+      transform-origin: center;
+     -webkit-animation: swing 25s linear infinite;
+}
+
+
+
+/************ Background *************/
 
 @-webkit-keyframes spin {
 	from { -webkit-transform: rotate(0deg); }
@@ -13,7 +83,7 @@
 .bg-holder {
     height: 100%;
     overflow: hidden;
-    position: relative;
+    position:  fixed;
     width: 100%;
     background: #d6f6ff;
     .earth-holder {
@@ -30,12 +100,12 @@
         background-size: 100%;
         -webkit-animation: spin 1000s linear infinite;
         position: absolute;
-        margin-left: -2000px;
+        margin-left: -2100px;
     }
     .cloud {
          width: 5000px;
         height: 5000px;
-        background-image: url("../images/cloud.svg");
+        background-image: url("../images/cloud.png");
         background-size: 100%;
         -webkit-animation: spin 250s linear infinite;
         position: absolute;
@@ -44,13 +114,16 @@
     .cloud-2 {
          width: 5000px;
         height: 5000px;
-        background-image: url("../images/cloud2.svg");
+        background-image: url("../images/cloud2.png");
         background-size: 100%;
         -webkit-animation: spin-back 400s linear infinite;
         position: absolute;
         margin-left: -2500px;
     }
 }
+
+/************ Dashboard *************/
+
 
 .wrapper {
     position: absolute;
@@ -59,9 +132,10 @@
     top: 0;
     left: 0;
     .container {
-        outline: solid 1px red;
         max-width: 1000px;
+        height: 100%;
         margin: 0 auto;
+        overflow: hidden;
     }
     header {
         display: table;
@@ -93,13 +167,56 @@
     }
 }
 
+/************ Login *************/
 
-html,body{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+.login {
+    margin: auto;
+    width: 300px;
+    margin-top: 40%;
+    .parachute {
+        background: url(../images/login.png);
+        height: 360px;
+        width: 300px;
+        position: absolute;
+        top: -340px;
+    }
+    .form {
+        background: white;
+        height: 180px;
+        padding: 20px;
+        width: 260px;
+        fieldset {
+            border: 0;
+            input {
+                border: 0;
+                color: #186e8a;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                padding: 10px 15px;
+                background: #e0eef3;
+                width: 100%;
+                &::-webkit-input-placeholder { /* WebKit browsers */
+                    color: #5fa0b5;
+                }
+                &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color: #5fa0b5;
+                }
+                &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color: #5fa0b5;
+                }
+                &:focus {
+                    background: #ecf4f6;
+                    outline: none;
+                }
+            }
+            button {
+                border: 0;
+            }
+        }
+    }
 }
+
 /* Create the animation blocks */
 
 
