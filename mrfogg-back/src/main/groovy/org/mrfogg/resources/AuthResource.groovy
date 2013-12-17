@@ -1,6 +1,7 @@
 package org.mrfogg.resources
 
 import com.yammer.dropwizard.auth.Auth
+import com.yammer.dropwizard.hibernate.UnitOfWork
 
 import javax.ws.rs.POST
 import javax.ws.rs.Path
@@ -19,6 +20,7 @@ class AuthResource {
 
     @POST
     @Path('/login')
+    @UnitOfWork
     def login(Map input) {
         def user = new User(email:input.email, password:input.password, avatar: '')
         def token = authService.authenticateUser(user)
@@ -27,6 +29,7 @@ class AuthResource {
 
     @POST
     @Path('/logout')
+    @UnitOfWork
     Response logout(@Auth User user) {
         authService.removeAuth(user)
         return Response.noContent().build()

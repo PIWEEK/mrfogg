@@ -45,6 +45,7 @@ class HelloWorldResource {
     @GET
     @Path('/protected')
     @Timed
+    @UnitOfWork
     String protectedMethod(@Auth User user) {
         log.debug "Usuario: $user"
         return "HELLO ${user.email} WORLD"

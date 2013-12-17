@@ -11,7 +11,7 @@ import com.yammer.dropwizard.auth.oauth.OAuthProvider
 
 import org.mrfogg.domains.User
 import org.mrfogg.daos.UserDAO
-import org.mrfogg.services.AuthInMemoryService
+import org.mrfogg.services.AuthHibernateService
 import org.mrfogg.resources.HelloWorldResource
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.auth.TokenAuthenticator
@@ -57,10 +57,10 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
     @Override
     public void run(MrFoggConfiguration configuration, Environment environment) throws ClassNotFoundException {
-        def authService = new AuthInMemoryService()
+        def userDao = new UserDAO(hibernateBundle.sessionFactory)
+        def authService = new AuthHibernateService(userDao:userDao)
 
-        final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
-        environment.addResource(new HelloWorldResource(userDAO))
+        environment.addResource(new HelloWorldResource(userDao))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
     }
