@@ -5,12 +5,22 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
-UsersController = ($scope, $rootScope) ->
+UsersController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Users'
-    $scope.userList = resource.getUsers()
+
+    onSuccess = (data) ->
+        $scope.userlist = data
+
+    onError = (data) ->
+        $scope.error = true
+        $scope.errorMessage = data.detail
+
+    promise = resource.getUsers()
+    promise = promise.then(onSuccess, onError)
+
     return
 
-TripsController = ($scope, $rootScope) ->
+TripsController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
     $scope.tripList = resource.getTrips()
     return
@@ -45,8 +55,8 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
-module.controller("UsersController", ["$scope", "$rootScope", UsersController])
-module.controller("TripsController", ["$scope", "$rootScope", TripsController])
+module.controller("UsersController", ["$scope", "$rootScope", "resource", UsersController])
+module.controller("TripsController", ["$scope", "$rootScope", "resource", TripsController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location",
                   "$routeParams", "resource", "$gmAuth",
                   MrLoginController])
