@@ -106,8 +106,16 @@ task run(dependsOn: 'shadow', group: 'dropwizard',  description: "Run service us
         main = '-jar'
         args = ["${shadow.shadowJar.getPath()}", 'server', 'dev_config.yml']
         systemProperties = props
-        jvmArgs = ["-javaagent:${shadow.shadowJar.getPath()}", "-noverify"]
     }
+}
+
+task runDev(dependsOn:'shadow', group: 'dropwizard', description:'Run service with reloading enabled', type: JavaExec) {
+
+    main = mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    args = ['server', 'dev_config.yml']
+    jvmArgs = ["-javaagent:${shadow.shadowJar.getPath()}", "-noverify"]
+
 }
 
 task migrate(dependsOn: 'shadow', group: 'dropwizard', description: "Run migrations using the dev configuration") << {
