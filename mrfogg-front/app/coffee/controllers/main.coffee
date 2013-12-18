@@ -5,6 +5,14 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
+TaskListController = ($scope, $rootScope, $routeParams, resource) ->
+    $rootScope.pageTitle = 'Tasks'
+    $rootScope.tripid = parseInt($routeParams.tripid, 10)
+    #localstorage
+    resource.getTasks($rootScope.tripid).then (result) ->
+        $scope.tasklist = result
+    return
+
 UserListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Users'
 
@@ -35,14 +43,10 @@ TripListController = ($scope, $rootScope, resource) ->
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
-        $scope.mytrips = _.remove($scope.triplist, (trip) ->
+        $scope.mytrips = _.remove($scope.triplist, (trip) -> 
             return trip.id == tripId
-        )
+        ) 
         $scope.mytrip = $scope.mytrips[0]
-
-    $scope.changeTrip = (tripId)->
-        alert("cambio #{tripId}")
-
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
@@ -117,6 +121,7 @@ module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "re
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
+module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", "resource", TaskListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 
