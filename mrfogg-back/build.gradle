@@ -88,7 +88,7 @@ cobertura {
 }
 
 codenarc {
-    configFile = rootProject.file('src/test/resources/codenarcrule.groovy')
+    configFile = rootProject.file("${projectDir}/src/test/resources/codenarcrule.groovy")
     reportFormat = System.properties['codeNarcOutput'] ?: 'html'
 }
 
@@ -109,7 +109,7 @@ task run(dependsOn: 'shadow', group: 'dropwizard',  description: "Run service us
     }
 }
 
-task migrate(dependsOn: 'shadow', group: 'dropwizard', description: "Run migrations using the dev configuration") << {
+task migrate(dependsOn: 'codenarc,shadow', group: 'dropwizard', description: "Run migrations using the dev configuration") << {
     javaexec {
         main = '-jar'
         args = ["${shadow.shadowJar.getPath()}", 'db', 'migrate', 'dev_config.yml']
