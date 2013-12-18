@@ -55,7 +55,7 @@ class HelloWorldResource {
     @UnitOfWork
     @Path('/test')
     Map test() {
-        User user = this.userDAO.persist(new User(email: 'aaa', password: 'aaa'))
+        User user = this.userDAO.persist(new User(email: 'mgdelacroix@gmail.com', password: 'aaa'))
         Trip trip = this.tripDAO.persist(new Trip(name: 'London', description: 'hola mundo'))
 
         if(user.trips) {

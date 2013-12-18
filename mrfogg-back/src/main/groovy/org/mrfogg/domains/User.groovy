@@ -36,11 +36,12 @@ class User {
      */
     String getAvatarURL() {
         String url = 'http://www.gravatar.com/avatar/'
-        return md5Hex(
+        String hashedEmail = md5Hex(
             this.email.trim()
                       .toLowerCase()
                       .getBytes("UTF-8")
         )
+        return url + hashedEmail
     }
 
 }
