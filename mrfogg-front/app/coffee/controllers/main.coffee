@@ -30,18 +30,19 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
     return
 
-TripsController = ($scope, $rootScope, resource) ->
-    return
-
 TripListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
-        $scope.mytrips = _.remove($scope.triplist, (trip) ->
+        $scope.mytrips = _.remove($scope.triplist, (trip) -> 
             return trip.id == tripId
-        )
+        ) 
         $scope.mytrip = $scope.mytrips[0]
+
+    $scope.changeTrip = (tripId)->
+        alert("cambio #{tripId}")
+
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
@@ -71,12 +72,11 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
-
 TooltipController = ($scope)->
     $scope.showTooltip = ()=>
        $(".icon-menu").siblings(".tooltip").toggle();
 
-CardsController = ($scope, $rootScope, resource)->
+CardsController = ($scope, $rootScope, resource, $routeParams)->
     onSuccess = (data) ->
         console.log("SUCCESS", data)
         $scope.loadedCards = data._attrs
@@ -86,7 +86,10 @@ CardsController = ($scope, $rootScope, resource)->
         $rootScope.error = true
         $rootScope.errorMessage = data.detail
 
-    resource.getTaskCards(1, 1).then(onSuccess, onError)
+    tripId = $routeParams.tripId
+    taskId = $routeParams.taskId
+
+    resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
     return
 
 CommentController = ($scope)->
@@ -99,19 +102,16 @@ CommentController = ($scope)->
         $scope.comments.push comment
         $scope.inputComment = ""
 
+    return
 
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
+module.controller("TooltipController", ["$scope", TooltipController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
-<<<<<<< HEAD
-module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
-module.controller("TooltipController", ["$scope", TooltipController])
-=======
-module.controller("TripsController", ["$scope", "$rootScope", "resource", TripsController])
-module.controller("CardsController", ["$scope", "$rootScope", "resource", CardsController])
+module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", CommentController])
 
->>>>>>> 1eb18bbe43590c215ecba7915f9006f79a982efc
