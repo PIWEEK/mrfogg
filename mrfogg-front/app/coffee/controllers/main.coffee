@@ -20,10 +20,10 @@ UserListController = ($scope, $rootScope, resource) ->
 
     return
 
-UserController = ($scope, $rootScope, $routeParams, resource, $gmStorage) ->
+UserController = ($scope, $rootScope, $routeParams, resource) ->
     $rootScope.pageTitle = 'My profile'
     $rootScope.userid = parseInt($routeParams.uid, 10)
-    $rootScope.userid = $gmStorage.get('uid') if not $rootScope.userid
+    $rootScope.userid = "me" if not $rootScope.userid
 
     resource.getUser($rootScope.userid).then (result) ->
         $scope.user = result
@@ -32,7 +32,12 @@ UserController = ($scope, $rootScope, $routeParams, resource, $gmStorage) ->
 
 TripListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
-    $scope.tripList = resource.getTrips()
+    resource.getTrips($rootScope.userid).then (result) ->
+        $scope.triplist = result
+        tripId = 1
+        $scope.mytrip = _.remove($scope.triplist, (trip) -> 
+            return trip.id == tripId
+        ) 
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
@@ -68,4 +73,4 @@ module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
-module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", "$gmStorage", UserController])
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])

@@ -2,19 +2,19 @@
 <div class="content">
     <h1>Mr. Fogg</h1>
     <div class="trips-holder">
-        <div class="trips">
-            <a href="#/" class="trip-name">{{ tripName }}  das das das das das das das<i class="icon-unfold-2"></i></a>
-            <ul class="trip-list" ng-controller="TripsController">
+        <div class="trips" ng-controller="TripsController">
+            <a href="#/" class="trip-name">{{ mytrip.name }}  das das das das das das das<i class="icon-unfold-2"></i></a>
+            <ul class="trip-list">
                 <li ng-repeat="trip in triplist">
-                    <a ng-href="/trip/{{ trip.id }}">
-                    {{ user.email }}
+                    <a ng-href="/trips/{{ trip.id }}">
+                    {{ trip.name }}
                     </a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="menu" ng-controller="UserController">
-        <img ng-src="http://<www class='gravat'></www>ar.com/avatar/{{ user.avatar }}">
+        <img ng-src="{{ user.avatar }}">
         <div class="menu-button">
             <a class="icon-menu">
             </a>
