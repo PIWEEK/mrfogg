@@ -49,6 +49,7 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
     $scope.submit = ->
         email = $scope.form.email
         password = $scope.form.password
+        console.log($scope.form)
 
         $scope.loading = true
 
