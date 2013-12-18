@@ -3,7 +3,7 @@
     <h1>Mr. Fogg</h1>
     <div class="trips-holder">
         <div class="trips" ng-controller="TripListController">
-            <a href="#/" class="trip-name">{{ mytrip.name }}  das das das das das das das<i class="icon-unfold-2"></i></a>
+            <a href="#/" class="trip-name">{{ mytrip.name }}<i class="icon-unfold-2"></i></a>
             <ul class="trip-list">
                 <li ng-repeat="trip in triplist">
                     <a ng-href="/trips/{{ trip.id }}">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="menu" ng-controller="UserController">
-        <img ng-src="{{ user.avatar }}?s=34">
+        <img class="user" ng-src="{{ user.avatar }}?s=34">
         <div class="menu-button">
             <a class="icon-menu">
             </a>
