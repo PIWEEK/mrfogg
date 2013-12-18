@@ -30,4 +30,17 @@ class User {
     @ManyToMany(targetEntity = Trip)
     List<Trip> trips
 
+    /**
+     * Obtains the Gravatar url for the user avatar
+     * This url is obtained from a HASH of the email trimmed and in lowercase
+     */
+    String getAvatarURL() {
+        String url = 'http://www.gravatar.com/avatar/'
+        return md5Hex(
+            this.email.trim()
+                      .toLowerCase()
+                      .getBytes("UTF-8")
+        )
+    }
+
 }
