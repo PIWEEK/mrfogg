@@ -20,14 +20,13 @@ UsersController = ($scope, $rootScope, resource) ->
 
     return
 
-UserController = ($scope, $rootScope, $routeParams, resource) ->
+UserController = ($scope, $rootScope, $routeParams, resource, $gmStorage) ->
     $rootScope.pageTitle = 'My profile'
     $rootScope.userid = parseInt($routeParams.uid, 10)
+    $rootScope.userid = $gmStorage.get('uid') if not $rootScope.userid
 
-    resource.getUser($scope.userid, params).then (result) ->
-            $scope.trips = result.trips
-            $scope.tripcount = result.tripcount
-            $scope.paginatedBy = result.paginatedBy
+    resource.getUser($rootScope.userid).then (result) ->
+        $scope.user = result
 
     return
 
@@ -71,3 +70,4 @@ module.controller("TripsController", ["$scope", "$rootScope", "resource", TripsC
 module.controller("MrLoginController", ["$scope","$rootScope", "$location",
                   "$routeParams", "resource", "$gmAuth",
                   MrLoginController])
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", "$gmStorage",UserController])
