@@ -1,7 +1,5 @@
 package org.mrfogg.daos
 
-import static com.google.common.base.Preconditions.checkNotNull
-
 import static org.apache.commons.codec.digest.DigestUtils.shaHex
 
 import org.mrfogg.domains.User
@@ -29,10 +27,10 @@ class UserDAO extends BaseDAO<User> {
         return Optional.fromNullable(criteria.uniqueResult())
     }
 
-    User persist(User user) throws HibernateException {
+    User create(User user) {
         user.password = crypt(user.password)
-        currentSession().saveOrUpdate(checkNotNull(user))
-        return user
+        user.token = "${UUID.randomUUID()}"
+        super.create(user)
     }
 
     void removeToken(User user) {

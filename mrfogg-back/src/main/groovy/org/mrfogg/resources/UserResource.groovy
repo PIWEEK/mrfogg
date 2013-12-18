@@ -51,15 +51,14 @@ class UserResource {
         return user
     }
 
-    @GET
+    @GET @Path('/populate')
     @Timed
     @UnitOfWork
-    @Path('/populate')
     Map test() {
         this.userDAO.with {
-            persist(new User(email: 'mgdelacroix@gmail.com', password: 'mgdelacroix'))
-            persist(new User(email: 'mario.ggar@gmail.com', password: 'marioggar'))
-            persist(new User(email: 'alotor@gmail.com', password: 'alotor'))
+            create(new User(email: 'mgdelacroix@gmail.com', password: 'mgdelacroix'))
+            create(new User(email: 'mario.ggar@gmail.com', password: 'marioggar'))
+            create(new User(email: 'alotor@gmail.com', password: 'alotor'))
         }
         
         return [message: 'Usuarios creados']
