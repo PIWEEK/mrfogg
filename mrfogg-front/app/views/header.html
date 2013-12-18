@@ -15,8 +15,8 @@
     </div>
     <div class="menu" ng-controller="UserController">
         <img class="user" ng-src="{{ user.avatar }}?s=34">
-        <div class="menu-button">
-            <a class="icon-menu">
+        <div class="menu-button" ng-controller="TooltipController">
+            <a ngh-href="#/" class="icon-menu" ng-click="showTooltip()">
             </a>
             <div class="tooltip">
                 <a href="#/"><i class="icon-view"></i> Ver mis viajes </a>

@@ -12,6 +12,13 @@
     -ms-user-select: @select;
 }
 
+.animation-transition (@animation: 0.1s) {
+    -webkit-transition: all @animation ease;
+    -moz-transition: all @animation ease;
+    -o-transition: all @animation ease;
+    transition: all @animation ease;
+}
+
 .clearfix(@content: " "){
     &:after {
       content: @content;

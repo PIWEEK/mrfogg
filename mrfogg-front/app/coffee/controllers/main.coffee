@@ -35,9 +35,9 @@ TripListController = ($scope, $rootScope, resource) ->
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
-        $scope.mytrips = _.remove($scope.triplist, (trip) -> 
+        $scope.mytrips = _.remove($scope.triplist, (trip) ->
             return trip.id == tripId
-        ) 
+        )
         $scope.mytrip = $scope.mytrips[0]
     return
 
@@ -68,6 +68,11 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
+TooltipController = ($scope)->
+    $scope.showTooltip = ()=>
+       $(".icon-menu").siblings(".tooltip").toggle();
+    return
+
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
@@ -75,3 +80,4 @@ module.controller("UserListController", ["$scope", "$rootScope", "resource", Use
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
 module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
+module.controller("TooltipController", ["$scope", TooltipController])

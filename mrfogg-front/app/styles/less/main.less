@@ -20,6 +20,7 @@ html,body{
     vertical-align: top;
 }
 a {
+    cursor: pointer;
     color: white;
     text-decoration: none;
     &:hover {
@@ -238,6 +239,7 @@ p {
             vertical-align: top;
             width: 150px;
             .menu-button {
+                .select();
                 float: right;
                 position: relative;
                 a {
@@ -250,7 +252,9 @@ p {
                 }
                 .tooltip {
                     .rounded-corners(6px);
+                    .animation-transition(1.0s);
                     background: @darkbase;
+                    display: none;
                     top: 50px;
                     position: absolute;
                     width: 234px;
@@ -321,7 +325,8 @@ p {
                     }
                     i {
                         display: inline-block;
-                        margin-top: 1px;
+                        margin-top: 2px;
+                        margin-bottom: -2px;
                     }
                     &.done {
                         background: @successfull;
