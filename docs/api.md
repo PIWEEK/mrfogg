@@ -16,7 +16,7 @@ Descripcion de MR. FOGG (TODO)
 
 + Response 200 (application/json)
 
-        {"todo": "todo"}
+        { "token": "9ae355fb-c3ff-4f36-9b8a-b64cdd513d68" }
 
 ## Logout [/logout]
 ### Login into the application [POST]
@@ -36,8 +36,16 @@ Descripcion de MR. FOGG (TODO)
 ### List all users [GET]
 + Response 200 (application/json)
 
-        [{ "id": 1, "username": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" },
-         { "id": 2, "username": "mgdelacroix@gmail.com", "avatar": "http://gravatar.com/mgdelacroix" }]
+        [{ "id": 1, "email": "mgdelacroix@gmail.com", "avatar": "http://www.gravatar.com/avatar/3f98f26534b1ef1012596da615661867" },
+         { "id": 2, "email": "mario.ggar@gmail.com", "avatar": "http://www.gravatar.com/avatar/59d33ac8915ede62376b0986224d17bd" },
+         { "id": 3, "email": "alotor@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" }]
+
+## Current user detail [/users/me]
+### Retrieve the user details [GET]
+
++ Response 200 (application/json)
+
+        { "id": 3, "email": "alotor@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" }
 
 ## User detail [/users/{userId}]
 ### Retrieve the user details [GET]
@@ -47,7 +55,7 @@ Descripcion de MR. FOGG (TODO)
 
 + Response 200 (application/json)
 
-        { "id": 1, "username": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
+        { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
 
 # Group Trip API
 ## Trips [/trips]
@@ -57,8 +65,8 @@ Descripcion de MR. FOGG (TODO)
 
         [
             { "id": 1, "name": "Viaje a Londres" },
-            { "id": 1, "name": "Verano 2014" },
-            { "id": 1, "name": "Fin de semana en la playa" }
+            { "id": 2, "name": "Verano 2014" },
+            { "id": 3, "name": "Fin de semana en la playa" }
         ]
 
 ### Creates a new trip [POST]
@@ -76,7 +84,11 @@ Descripcion de MR. FOGG (TODO)
             "id": 1,
             "name": "Viaje a Londres",
             "description": "Nos vamos de viaje con motivo del GGX lo vamos a pasar mu bien!!",
-            "ownerId": 1
+            "ownerId": {
+                "id": 1, 
+                "email": "alotor@gmail.com", 
+                "avatar": "http://gravatar.com/alotor" 
+            }
         }
 
 ## Trips Detail [/trips/{tripId}]
@@ -91,7 +103,11 @@ Descripcion de MR. FOGG (TODO)
             "id": 1,
             "name": "Viaje a Londres",
             "description": "Nos vamos de viaje con motivo del GGX lo vamos a pasar mu bien!!",
-            "ownerId": 1
+            "ownerId": {
+                "id": 1, 
+                "email": "alotor@gmail.com", 
+                "avatar": "http://gravatar.com/alotor" 
+            }
         }
 
 ### Modify the trip details [PUT]
@@ -178,21 +194,36 @@ Descripcion de MR. FOGG (TODO)
             {
                 "id": 1,
                 "title": "Encuesta de bares",
+                "dateCreated": "2013-12-18T15:55:00.245Z",
                 "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
-                "owner": 1,
-                "widget": "/widget/poll/10001",
+                "owner": {
+                    "id": 1, 
+                    "email": "alotor@gmail.com", 
+                    "avatar": "http://gravatar.com/alotor" 
+                },
+                "widget": {
+                    "model": "/widget/images/10001",
+                    "template": "/assets/client/mrfogg-widget-images.html"
+                },
                 "comments": [
-                    { "userId": 1, "Lorem ipsum" },
-                    { "userId": 2, "Lorem ipsum" }
+                    { "user": { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }, "text": "Lorem ipsum", "dateCreated": "2013-12-18T15:55:00.245Z" },
+                    { "user": { "id": 2, "email": "ramiro@gmail.com", "avatar": "http://gravatar.com/ramiro" }, "text": "Lorem ipsum", "dateCreated": "2013-12-18T15:55:00.245Z" }
                 ]
             },
-
             {
                 "id": 2,
                 "title": "Mapa de la zona centro",
+                "dateCreated": "2013-12-18T15:55:00.245Z",
                 "description": "Mapa de la zona centro",
-                "owner": 1,
-                "widget": "/widget/map/10001",
+                "owner": {
+                    "id": 1, 
+                    "email": "alotor@gmail.com", 
+                    "avatar": "http://gravatar.com/alotor" 
+                },
+                "widget": {
+                    "model": "/widget/images/10001",
+                    "template": "http://localhost:8080/assets/client/mrfogg-widget-images.html"
+                },
                 "comments": []
             }
         ]
@@ -208,7 +239,10 @@ Descripcion de MR. FOGG (TODO)
         {
             "title": "Encuesta de bares",
             "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
-            "widget": "/widget/poll/10001"
+            "widget": {
+                "model": "/widget/images/10001",
+                "template": "/assets/client/mrfogg-widget-images.html"
+            }
         }
 
 + Response 200 (application/json)
@@ -217,16 +251,18 @@ Descripcion de MR. FOGG (TODO)
         {
             "id": 1,
             "title": "Encuesta de bares",
+            "dateCreated": "2013-12-18T15:55:00.245Z",
             "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
-            "owner": 1,
+            "owner": {
+                "id": 1, 
+                "email": "alotor@gmail.com", 
+                "avatar": "http://gravatar.com/alotor" 
+            },
             "widget": {
                 "id": "1001",
                 "type": "/widget/poll"
             },
-            "comments": [
-                { "userId": 1, "Lorem ipsum" },
-                { "userId": 2, "Lorem ipsum" }
-            ]
+            "comments": []
         }
 
 
@@ -244,13 +280,15 @@ Descripcion de MR. FOGG (TODO)
             "id": 1,
             "title": "Encuesta de bares",
             "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
-            "owner": 1,
+            "owner": {
+                "id": 1, 
+                "email": "alotor@gmail.com", 
+                "avatar": "http://gravatar.com/alotor" 
+            },
             "widget": {
                 "id": "1001",
                 "type": "/widget/poll"
             },
-            "comments": [
-                { "userId": 1, "Lorem ipsum" },
-                { "userId": 2, "Lorem ipsum" }
-            ]
+            "comments": []
         }
+
