@@ -5,7 +5,7 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
-TaskListController = ($scope, $rootScope, $routeParams, resource) ->
+TaskListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Tasks'
     $rootScope.tripid = parseInt($routeParams.tripid, 10)
     #localstorage
@@ -38,13 +38,16 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
     return
 
-TripListController = ($scope, $rootScope, resource) ->
+TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
+    $rootScope.tripid = parseInt($routeParams.tripid, 10)
+    $rootScope.tripid = 1 if not $rootScope.tripid
+    $scope.$emit('tripid', $rootScope.tripid);
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
         $scope.mytrips = _.remove($scope.triplist, (trip) -> 
-            return trip.id == tripId
+            return trip.id == $rootScope.tripid
         ) 
         $scope.mytrip = $scope.mytrips[0]
     return
@@ -77,14 +80,9 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
     return
 
 CardsController = ($scope, $rootScope, resource, $routeParams)->
-    $scope.widgetHost = "http://localhost:8080"
-
     onSuccess = (data) ->
         console.log("SUCCESS", data)
         $scope.loadedCards = data._attrs
-
-        for card in data._attrs
-            console.debug("card", card)
 
     onError = (data) ->
         console.log("error " + data)
@@ -125,8 +123,8 @@ module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
-module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
-module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", "resource", TaskListController])
+module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", $gmStorage, "resource", TripListController])
+module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", $gmStorage, "resource", TaskListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 
