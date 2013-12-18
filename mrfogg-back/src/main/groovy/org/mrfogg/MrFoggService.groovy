@@ -74,11 +74,10 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
     @Override
     public void run(MrFoggConfiguration configuration, Environment environment) throws ClassNotFoundException {
-        def userDao = new UserDAO(hibernateBundle.sessionFactory)
-        def authService = new AuthHibernateService(userDao:userDao)
 
         final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
         final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
+        final AuthHibernateService authService = new AuthHibernateService(userDao:userDAO)
 
         environment.addFilter(new CorsFilter(), '/*')
         environment.addResource(new UserResource(userDAO: userDAO))
