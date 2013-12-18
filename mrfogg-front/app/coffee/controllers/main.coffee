@@ -5,7 +5,7 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
-UsersController = ($scope, $rootScope, resource) ->
+UserListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Users'
 
     onSuccess = (data) ->
@@ -20,7 +20,17 @@ UsersController = ($scope, $rootScope, resource) ->
 
     return
 
-TripsController = ($scope, $rootScope, resource) ->
+UserController = ($scope, $rootScope, $routeParams, resource, $gmStorage) ->
+    $rootScope.pageTitle = 'My profile'
+    $rootScope.userid = parseInt($routeParams.uid, 10)
+    $rootScope.userid = $gmStorage.get('uid') if not $rootScope.userid
+
+    resource.getUser($rootScope.userid).then (result) ->
+        $scope.user = result
+
+    return
+
+TripListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
     $scope.tripList = resource.getTrips()
     return
@@ -55,8 +65,9 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
-module.controller("UsersController", ["$scope", "$rootScope", "resource", UsersController])
-module.controller("TripsController", ["$scope", "$rootScope", "resource", TripsController])
+module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
+module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location",
                   "$routeParams", "resource", "$gmAuth",
                   MrLoginController])
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", "$gmStorage", UserController])

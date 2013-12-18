@@ -2,14 +2,22 @@
 <div class="trips-holder">
     <div class="trips">
         <a href="#" class="trip-name">{{ tripName }}  das das das das das das das<i class="icon-unfold-2"></i></a>
-        <div class="trip-list">
-            <a href="#">Chinchilla Trip</a>
-            <a href="#">Chinchilla Trip das das das das das das das das das das das dasds a</a>
-            <a href="#">Chinchilla Trip</a>
+        <div class="trip-list" ng-controller="TripsController">
+        <ul>
+            <li ng-repeat="trip in triplist">
+                <a ng-href="/trip/{{ trip.id }}">
+                {{ user.email }}
+                </a>
+            </li>
+        </ul>
         </div>
     </div>
 </div>
 <div class="menu">
-    <div></div>
-    <img src="#" />
+    <div class="me" ng-controller="UserController">
+       <a href="#">
+           <img ng-src="http://www.gravatar.com/avatar/{{ user.avatar }}">
+           {{ user.email }}
+       </a>
+    </div>
 </div>
