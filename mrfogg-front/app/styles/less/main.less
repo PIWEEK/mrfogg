@@ -238,11 +238,11 @@ p {
                             display: inline-block;
                             margin-bottom: -4px
                         }
-                        font-size: 1.5em;
+                        font-size: 1.2em;
                         &:hover {
                             background: @lightblue;
                             opacity: 1;
-                            color: white;
+                            color: @darkbase;
                         }
                     }
 
@@ -265,25 +265,62 @@ p {
         vertical-align: top;
         .task {
             background: white;
+            -webkit-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
+            -moz-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
             margin-bottom: 15px;
+            padding-bottom: 10px;
             h2 {
-                background: @lightblue;
-                font-size: 1.6em;
+                background: @darkbase;
+                font-size: 1.5em;
                 margin: 0;
-                padding: 3px;
+                padding: 3px 8px;
             }
             ul {
                 padding: 0;
                 margin: 0;
                 li {
                     list-style: none;
+                    background: @lightblue;
                     color: @darkbase;
+                    padding: 10px;
+                    margin: 10px;
+                    -webkit-transition: all 0.2s ease-in-out;
+                    -moz-transition: all 0.2s ease-in-out;
+                    -o-transition: all 0.2s ease-in-out;
+                    -ms-transition: all 0.2s ease-in-out;
+                    transition: all 0.2s ease-in-out;
+                    .rounded-corners(6px);
                     .icon-checkbox {
                         margin-left: -1px;
                     }
                     i {
                         display: inline-block;
                         margin-top: 1px;
+                    }
+                    &.done {
+                        background: @successfull;
+                        color: @darksuccessfull;
+                        &:hover {
+                        -webkit-box-shadow: 0 3px 0 @darksuccessfull;
+                        -moz-box-shadow: 0 3px 0 @darksuccessfull;
+                        box-shadow: 0 3px 0 @darksuccessfull;
+                        }
+                    }
+                    &:hover {
+                        -webkit-transform: scale3d(1.04, 1.04, 1.04);
+                        -moz-transform: scale3d(1.04, 1.04, 1.04);
+                        -o-transform: scale3d(1.04, 1.04, 1.04);
+                        -ms-transform: scale3d(1.04, 1.04, 1.04);
+                        transform: scale3d(1.04, 1.04, 1.04);
+                        -webkit-transition: all 0.2s ease-in-out;
+                        -moz-transition: all 0.2s ease-in-out;
+                        -o-transition: all 0.2s ease-in-out;
+                        -ms-transition: all 0.2s ease-in-out;
+                        transition: all 0.3s ease-in-out;
+                        -webkit-box-shadow: 0 3px 0 @basecolor;
+                        -moz-box-shadow: 0 3px 0 @basecolor;
+                        box-shadow: 0 3px 0 @basecolor;
                     }
                 }
             }
@@ -296,7 +333,7 @@ p {
         .card {
             padding: 20px;
             margin-bottom: 20px;
-            background: #D5E9C3;
+            background: white;
             opacity: 0.8;
             h2, h3 {
                 margin: 0px;
