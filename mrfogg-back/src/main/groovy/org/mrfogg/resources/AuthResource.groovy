@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response
 
 import org.mrfogg.domains.User
 
-@Path('/')
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class AuthResource {
