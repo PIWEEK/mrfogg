@@ -54,8 +54,8 @@
 
 .swing {
     -webkit-transform-origin: center;
-      -ms-transform-origin: center;
-      transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
      -webkit-animation: swing 25s linear infinite;
 }
 
@@ -68,4 +68,33 @@
 @-webkit-keyframes spin-back {
 	from { -webkit-transform: rotate(360deg); }
 	to { -webkit-transform: rotate(0deg); }
+}
+
+
+.plane-first {
+    -webkit-animation: plane 15s linear infinite;
+    border-right: solid 10px blue;
+}
+
+
+@-webkit-keyframes  plane {
+    0% {
+        -webkit-transform: translate3d(0, 0px, 0px);
+        -webkit-animation-timing-function: ease-in;
+    }
+    25% {
+        -webkit-transform: translate3d(0, 260px, 0px);
+        -webkit-animation-timing-function: ease-out;
+    }
+    50% {
+        -webkit-transform: translate3d(0, 520px, 0px);
+    }
+    75% {
+        -webkit-transform: translate3d(0, 260px, 0px);
+        -webkit-animation-timing-function: ease-out;
+    }
+    100% {
+        -webkit-transform: translate3d(0, 0px, 0px);
+        -webkit-animation-timing-function: ease-in;
+    }
 }
