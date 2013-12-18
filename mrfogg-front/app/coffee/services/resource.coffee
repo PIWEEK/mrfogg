@@ -146,7 +146,7 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 
         onSuccess = (data, status) ->
             $gmStorage.set("token", data["token"])
-            console.log("token:"+data["token"])
+            $gmStorage.set("uid", data["id"])
             user = $model.make_model("users", data)
             defered.resolve(user)
 
@@ -165,7 +165,7 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 
 
     # Get a user info
-    service.getUser = -> queryOne('users')
+    service.getUser = (userId) -> queryOne('users', userId)
 
     # Get users list
     service.getUsers = -> queryMany('users')

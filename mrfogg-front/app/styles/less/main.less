@@ -191,7 +191,7 @@ p {
                 }
             }
             &:hover {
-            .rounded-corners(6px 6px 0 0);
+                .rounded-corners(6px 6px 0 0);
                 .trip-list {
                     display: block;
 
@@ -258,12 +258,34 @@ p {
         display: inline-block;
         margin-top: 75px;
         width: 280px;
-        outline: solid 1px blue;
+        padding: 0;
         vertical-align: top;
+        .task {
+            background: white;
+            margin-bottom: 15px;
+            h2 {
+                background: @lightblue;
+                font-size: 1.6em;
+                margin: 0;
+                padding: 3px;
+            }
+            ul {
+                li {
+                    color: @darkbase;
+                    .icon-checkbox {
+                        margin-left: -1px;
+                    }
+                    i {
+                        display: inline-block;
+                        margin-top: 1px;
+                    }
+                }
+            }
+        }
     }
     .right-col {
         display: inline-block;
-        margin-top: 72px;
+        margin-top: 75px;
         outline: solid 1px green;
         width: 700px;
 
