@@ -33,6 +33,13 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
 
     $routeProvider.when('/',
         {templateUrl: '/views/container.html', controller: "ContainerController"})
+
+    $routeProvider.when('/trips/:tripId',
+        {templateUrl: '/views/container.html', controller: "ContainerController"})
+
+    $routeProvider.when('/trips/:tripId/tasks/:taskId',
+        {templateUrl: '/views/container.html', controller: "ContainerController"})
+
     $routeProvider.when('/login',
         {templateUrl: '/views/login.html', controller:"MrLoginController"})
     $routeProvider.when('/users',

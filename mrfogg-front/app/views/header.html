@@ -6,8 +6,11 @@
             <a href="#/" class="trip-name">{{ mytrip.name }}<i class="icon-unfold-2"></i></a>
             <ul class="trip-list">
                 <li ng-repeat="trip in triplist">
-                    <a ng-href="/trips/{{ trip.id }}">
-                    {{ trip.name }}
+                    <a ng-href="#/trips/{{ trip.id }}">
+                    <!--
+                    <a ng-click="changeTrip(trip.id)">
+                    -->
+                        {{ trip.name }}
                     </a>
                 </li>
             </ul>
