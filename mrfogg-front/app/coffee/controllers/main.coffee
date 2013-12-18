@@ -30,9 +30,6 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
     return
 
-TripsController = ($scope, $rootScope, resource) ->
-    return
-
 TripListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
     resource.getTrips($rootScope.userid).then (result) ->
@@ -75,7 +72,7 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
-CardsController = ($scope, $rootScope, resource)->
+CardsController = ($scope, $rootScope, resource, $routeParams)->
     onSuccess = (data) ->
         console.log("SUCCESS", data)
         $scope.loadedCards = data._attrs
@@ -85,7 +82,10 @@ CardsController = ($scope, $rootScope, resource)->
         $rootScope.error = true
         $rootScope.errorMessage = data.detail
 
-    resource.getTaskCards(1, 1).then(onSuccess, onError)
+    tripId = $routeParams.tripId
+    taskId = $routeParams.taskId
+
+    resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
     return
 
 CommentController = ($scope)->
@@ -103,10 +103,10 @@ CommentController = ($scope)->
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
-module.controller("TripsController", ["$scope", "$rootScope", "resource", TripsController])
-module.controller("CardsController", ["$scope", "$rootScope", "resource", CardsController])
+module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", CommentController])
 
