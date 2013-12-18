@@ -35,9 +35,10 @@ TripListController = ($scope, $rootScope, resource) ->
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
-        $scope.mytrip = _.remove($scope.triplist, (trip) -> 
+        $scope.mytrips = _.remove($scope.triplist, (trip) -> 
             return trip.id == tripId
         ) 
+        $scope.mytrip = $scope.mytrips[0]
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
