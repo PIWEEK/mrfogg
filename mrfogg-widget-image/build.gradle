@@ -82,11 +82,6 @@ cobertura {
     coverageSourceDirs = [sourceSets.main.allSource.srcDirs]
 }
 
-codenarc {
-    configFile = project.file('src/test/resources/codenarcrule.groovy')
-    reportFormat = System.properties['codeNarcOutput'] ?: 'html'
-}
-
 shadow {
     exclude 'META-INF/*.DSA'
     exclude 'META-INF/*.RSA'

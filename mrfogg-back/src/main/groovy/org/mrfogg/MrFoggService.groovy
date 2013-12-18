@@ -10,9 +10,7 @@ import com.yammer.dropwizard.migrations.MigrationsBundle
 import com.yammer.dropwizard.auth.oauth.OAuthProvider
 
 import org.mrfogg.auth.TokenAuthenticator
-import org.mrfogg.daos.TripDAO
 import org.mrfogg.daos.UserDAO
-import org.mrfogg.domains.Trip
 import org.mrfogg.domains.User
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.resources.UserResource
@@ -76,7 +74,6 @@ class MrFoggService extends Service<MrFoggConfiguration> {
     public void run(MrFoggConfiguration configuration, Environment environment) throws ClassNotFoundException {
 
         final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
-        final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
         final AuthHibernateService authService = new AuthHibernateService(userDao:userDAO)
 
         environment.addFilter(new CorsFilter(), '/*')

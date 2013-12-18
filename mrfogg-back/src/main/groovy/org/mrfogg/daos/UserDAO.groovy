@@ -7,11 +7,9 @@ import static org.apache.commons.codec.digest.DigestUtils.shaHex
 import org.mrfogg.domains.User
 import com.google.common.base.Optional
 
-import org.hibernate.SessionFactory
 import org.hibernate.HibernateException
 import org.hibernate.criterion.Restrictions
 
-import com.yammer.dropwizard.hibernate.AbstractDAO
 import groovy.transform.InheritConstructors
 
 @InheritConstructors

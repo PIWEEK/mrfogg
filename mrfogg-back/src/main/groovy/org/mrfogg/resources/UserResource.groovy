@@ -2,9 +2,6 @@ package org.mrfogg.resources
 
 import org.mrfogg.domains.User
 import org.mrfogg.daos.UserDAO
-import org.mrfogg.domains.Trip
-import org.mrfogg.daos.TripDAO
-import com.google.common.base.Optional
 import com.yammer.metrics.annotation.Timed
 import com.yammer.dropwizard.auth.Auth
 import com.yammer.dropwizard.hibernate.UnitOfWork
@@ -40,7 +37,7 @@ class UserResource {
         return this.userDAO.list()
     }
 
-    @GET @Path("{id}")
+    @GET @Path('{id}')
     @Timed
     @UnitOfWork
     User show(@PathParam('id') Long id) {
@@ -65,7 +62,7 @@ class UserResource {
             persist(new User(email: 'alotor@gmail.com', password: 'alotor'))
         }
         
-        return [message: "Usuarios creados"]
+        return [message: 'Usuarios creados']
     }
 
 }
