@@ -151,13 +151,9 @@ p {
             img {
                 max-width: 280px;
                 padding-right: 20px;
-                overflow: hidden;
-                height: 34px;
-                text-overflow: ellipsis;
-                position: relative;
-                white-space: nowrap;
+
             }
-            i {
+            .icon-unfold-2 {
                 position: absolute;
                 font-size: 20px;
                 right: 0;
@@ -174,16 +170,35 @@ p {
                 width: 100%;
                 z-index: 90;
                 .rounded-corners(0 0 6px 6px);
+                ul {
+                    padding-bottom: 10px;
+                }
+                li {
+                    list-style: none;
+                    text-overflow: ellipsis;
+                    position: relative;
+                    white-space: nowrap;
+                }
                 a {
-                    padding: 10px 5px;
+                    padding: 0 15px 10px;
                     display: block;
                     font-size: 0.7em;
-                    height: auto;
+                    height: 13px;
                     text-transform: uppercase;
-                    white-space: nowrap;
                     list-style: none;
                     text-align: left;
                     max-width:190%;
+                    height: 34px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    position: relative;
+                    white-space: nowrap;
+                    &:last-child {
+                        padding-bottom: 0;
+                    }
+                    &:first-child {
+                        padding-top: 10px;
+                    }
                     &:hover {
                         background: @lightblue;
                         opacity: 1;
@@ -205,9 +220,18 @@ p {
         }
         .trip-name {
             display: inline-block;
-            text-align: center;
+            height: 34px;
+            text-align: left;
             vertical-align: top;
             text-transform: uppercase;
+            overflow: hidden;
+            height: 34px;
+            text-overflow: ellipsis;
+            position: relative;
+            white-space: nowrap;
+            padding-right: 20px;
+            padding-left: 10px;
+            width: 270px;
         }
         .menu {
             display: inline-block;
