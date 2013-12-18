@@ -15,7 +15,7 @@ import org.mrfogg.daos.UserDAO
 import org.mrfogg.domains.Trip
 import org.mrfogg.domains.User
 import org.mrfogg.resources.AuthResource
-import org.mrfogg.resources.HelloWorldResource
+import org.mrfogg.resources.UserResource
 import org.mrfogg.services.AuthHibernateService
 import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.filter.CorsFilter
@@ -81,7 +81,7 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
 
         environment.addFilter(new CorsFilter(), '/*')
-        environment.addResource(new HelloWorldResource(userDAO: userDAO, tripDAO: tripDAO))
+        environment.addResource(new UserResource(userDAO: userDAO))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
 
