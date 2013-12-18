@@ -100,12 +100,27 @@ p {
         max-width: 1000px;
         height: 100%;
         margin: 0 auto;
-        overflow: hidden;
     }
     header {
-        background: @basecolor;
-        display: table;
-        padding: 10px;
+        position: relative;
+        max-width: 10000px;
+        .background {
+            background: @basecolor;
+            padding: 0 10000px;
+            margin: 0 -10000px;
+            height: 60px;
+            position: absolute;
+            z-index: 1;
+        }
+        .content {
+            display: table;
+            max-width: 1000px;
+            padding: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
         h1 {
             background: url("../images/mainlogo.png") no-repeat;
             display: inline-block;
@@ -196,16 +211,59 @@ p {
             display: inline-block;
             vertical-align: top;
             width: 150px;
+            .menu-button {
+                float: right;
+                position: relative;
+                a {
+                    color: white;
+                    font-size: 35px;
+                    padding: 3px 10px;
+                    line-height: 38px;
+                    display: block;
+
+                }
+                .tooltip {
+                    .rounded-corners(6px);
+                    background: @darkbase;
+                    top: 50px;
+                    position: absolute;
+                    width: 234px;
+                    right: 13px;
+                    overflow: hidden;
+                    a {
+                        i {
+                            padding-top: 4px;
+                            display: inline-block;
+                            margin-bottom: -4px
+                        }
+                        font-size: 1.5em;
+                        &:hover {
+                            background: @lightblue;
+                            opacity: 1;
+                            color: white;
+                        }
+                    }
+
+                }
+            }
+            .user {
+                border: solid 3px white;
+                float: right;
+                height: 34px;
+                width: 34px;
+            }
         }
     }
     .left-col {
         display: inline-block;
+        margin-top: 75px;
         width: 280px;
         outline: solid 1px blue;
         vertical-align: top;
     }
     .right-col {
         display: inline-block;
+        margin-top: 72px;
         outline: solid 1px green;
         width: 700px;
 
