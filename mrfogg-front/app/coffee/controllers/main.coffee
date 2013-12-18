@@ -30,6 +30,9 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
     return
 
+TripsController = ($scope, $rootScope, resource) ->
+    return
+
 TripListController = ($scope, $rootScope, resource) ->
     $rootScope.pageTitle = 'Trips'
     resource.getTrips($rootScope.userid).then (result) ->
@@ -68,10 +71,34 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
+
 TooltipController = ($scope)->
     $scope.showTooltip = ()=>
        $(".icon-menu").siblings(".tooltip").toggle();
+
+CardsController = ($scope, $rootScope, resource)->
+    onSuccess = (data) ->
+        console.log("SUCCESS", data)
+        $scope.loadedCards = data._attrs
+
+    onError = (data) ->
+        console.log("error " + data)
+        $rootScope.error = true
+        $rootScope.errorMessage = data.detail
+
+    resource.getTaskCards(1, 1).then(onSuccess, onError)
     return
+
+CommentController = ($scope)->
+    console.log($scope.card)
+    $scope.inputComment = ""
+    $scope.comments = $scope.card.comments
+    $scope.addComment = ()->
+        user = { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
+        comment = { "user": user, text: $scope.inputComment }
+        $scope.comments.push comment
+        $scope.inputComment = ""
+
 
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
@@ -79,5 +106,12 @@ module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
+<<<<<<< HEAD
 module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("TooltipController", ["$scope", TooltipController])
+=======
+module.controller("TripsController", ["$scope", "$rootScope", "resource", TripsController])
+module.controller("CardsController", ["$scope", "$rootScope", "resource", CardsController])
+module.controller("CommentController", ["$scope", CommentController])
+
+>>>>>>> 1eb18bbe43590c215ecba7915f9006f79a982efc

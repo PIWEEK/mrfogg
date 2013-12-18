@@ -24,6 +24,7 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         return data
 
     queryMany = (name, params, options, urlParams) ->
+        console.log("queryMany", name, params, options, urlParams)
         defaultHttpParams = {
             method: "GET",
             headers:  headers(),
@@ -187,18 +188,18 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 
     # Get a task
     service.getTripTasks = (tripId, taskId) ->
-        return queryOne("tasks", "#{tripId}/tasks/#{taskId}")
+        return queryOne("trips", "#{tripId}/tasks/#{taskId}")
 
     # Get the cards for a task
-    service.getTaskCards = (taskId, cardId) ->
+    service.getTaskCards = (tripId, taskId) ->
         return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
-    
+
     ## Create a new card inside the task?
     #service.postTaskCards = (tripId, taskId) ->
     #    return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
-    
 
-    
+
+
 
 
 ##    service.createTask = (form) ->

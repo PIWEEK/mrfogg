@@ -2,12 +2,27 @@
 <section class="left-col" ng-include="'/views/tasks.html'"></section>
 
 <section class="right-col">
-    <div class="card" ng-repeat="card in loadedCards">
-        <h2>{{ card.title }}</h2>
-        <h3>{{ card.owner.email }}</h3>
-        <p>{{ card.description }}</p>
-        <h1>{{ test }}</h1>
-        <div class="widget" ng-include="card.widgetTemplate"></div>
+    <div class="card-container" ng-controller="CardsController">
+        <div class="card" ng-repeat="card in loadedCards">
+            <h2>{{ card.title }}</h2>
+            <h3><i class="icon-user"></i> {{ card.owner.email }}</h3>
+            <p>{{ card.description }}</p>
+            <h1>{{ test }}</h1>
+            <div class="widget" ng-include="card.widgetTemplate"></div>
+
+            <div class="comments" ng-controller="CommentController">
+                <div class="comment" ng-repeat="comment in comments">
+                    <span class="comment-user">{{ comment.user.email }}</span>
+                    <span class="comment-text">{{ comment.text }}</span>
+                </div>
+                <form ng-submit="addComment()">
+                    <textarea class="comment-input" ng-model="inputComment"></textarea>
+                    <div>
+                        <input type="submit" value="Submit"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 

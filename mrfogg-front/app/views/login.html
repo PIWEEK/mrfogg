@@ -7,10 +7,10 @@
     <div class="form">
         <form ng-submit="submit()">
             <fieldset>
-                <input type="text" class="input-small" placeholder="Username" id="inputUsername">
+                <input type="text" ng-model="form.email" class="input-small" placeholder="Username" id="inputUsername">
             </fieldset>
             <fieldset>
-                <input type="password" class="input-small" placeholder="Password" id="inputPassword">
+                <input type="password" ng-model="form.password" class="input-small" placeholder="Password" id="inputPassword">
             </fieldset>
             <fieldset>
                 <button class="btn" type="submit">Login</button>
