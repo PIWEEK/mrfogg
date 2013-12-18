@@ -33,8 +33,6 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide,
         {templateUrl: '/views/login.html', controller:"MrLoginController"})
     $routeProvider.when('/users',
         {templateUrl: '/views/userlist.html', controller:"UsersController"})
-    $routeProvider.when('/users/:uid',
-        {templateUrl: '/views/user.html', controller:"UserController"})
 
     apiUrls = {
         "login": "/login"
