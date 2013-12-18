@@ -2,10 +2,12 @@
 <section class="left-col" ng-include="'/views/tasks.html'"></section>
 
 <section class="right-col">
-    <div class="card">
-        <h2>Tarea tralara</h2>
-        <h3>Alonso mamonsete</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, pariatur excepturi exercitationem enim praesentium eos explicabo cupiditate sit fugit ab. Cumque, beatae, nulla.</p>
+    <div class="card" ng-repeat="card in loadedCards">
+        <h2>{{ card.title }}</h2>
+        <h3>{{ card.owner.email }}</h3>
+        <p>{{ card.description }}</p>
+        <h1>{{ test }}</h1>
+        <div class="widget" ng-include="card.widgetTemplate"></div>
     </div>
 </section>
 
