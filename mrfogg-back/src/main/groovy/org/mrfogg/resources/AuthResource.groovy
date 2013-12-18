@@ -22,7 +22,7 @@ class AuthResource {
     @Path('/login')
     @UnitOfWork
     def login(Map input) {
-        def user = new User(email:input.email, password:input.password, avatar: '')
+        def user = new User(email:input.email, password:input.password)
         def token = authService.authenticateUser(user)
         return ['token': token]
     }
