@@ -88,15 +88,25 @@ CardsController = ($scope, $rootScope, resource, $routeParams)->
     resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
     return
 
-CommentController = ($scope)->
+CommentController = ($scope, resource, $routeParams)->
     console.log($scope.card)
     $scope.inputComment = ""
     $scope.comments = $scope.card.comments
+
+    tripId = $routeParams.tripId
+    taskId = $routeParams.taskId
+    cardId = $scope.card.id
+
     $scope.addComment = ()->
         user = { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
         comment = { "user": user, text: $scope.inputComment }
         $scope.comments.push comment
+
+        commentData =
+            text: $scope.inputComment
+
         $scope.inputComment = ""
+        resource.postComment(tripId, taskId, cardId, commentData)
 
     return
 
@@ -108,5 +118,5 @@ module.controller("UserListController", ["$scope", "$rootScope", "resource", Use
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
-module.controller("CommentController", ["$scope", CommentController])
+module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 
