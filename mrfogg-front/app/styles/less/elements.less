@@ -1,0 +1,75 @@
+@import "color.less";
+
+/************ Buttons *************/
+.btn {
+    background: @basecolor;
+    color: white;
+    font-size: 1em;
+    margin: 0;
+    padding: 10px 15px;
+    text-align: center;
+    text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.4);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+        background: @darkbase;
+        color: white;
+        padding: 12px 15px 8px 15px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.btn-info {
+    background: @info;
+    color: @darkinfo;
+    text-shadow: none;
+}
+
+.btn-successfull {
+    background: @successfull;
+    color: @darksuccessfull;
+    text-shadow: none;
+}
+
+/************ messages *************/
+.message {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid @darkinfo;
+    background: @info;
+    color: @darkinfo;
+    z-index: 999;
+    a {
+        color: @darkinfo;
+    }
+}
+
+.message-error {
+    background: @error;
+    border-color: @darkerror;
+    color: @darkerror;
+    a {
+        color: @darkerror;
+    }
+}
+
+.message-successfull {
+    background: @successfull;
+    border-color: @darksuccessfull;
+    color: @darksuccessfull;
+    a {
+        color: @darksuccessfull;
+    }
+}
+
