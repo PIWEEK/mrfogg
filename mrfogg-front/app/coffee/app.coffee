@@ -11,7 +11,7 @@ modules = [
     "mrfogg.controllers.main",
 
     # Widgets
-    "mrfogg.widgets",
+    # "mrfogg.widgets",
 
     # Services
     "mrfogg.services.resource",
