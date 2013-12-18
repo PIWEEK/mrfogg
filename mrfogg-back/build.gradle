@@ -131,3 +131,16 @@ task dropAll(dependsOn: 'shadow', group: 'dropwizard',  description: "Run drop-a
         args = ["${shadow.shadowJar.getPath()}", 'db', 'drop-all', 'dev_config.yml', '--confirm-delete-everything']
     }
 }
+
+/* This will re-build the project if there is any change in the code */
+task watch(type: net.kaleidos.gradle.watch.ContinuousTask) { }
+
+/* Running the project from the code not from the fat-jar */
+task devRun(group: 'dropwizard', description:'Run service with reloading enabled') {
+    javaexec {
+        main = pmainClass
+        classpath = pclasspath
+        args = ['server', 'dev_config.yml']
+        jvmArgs = ["-javaagent:${pagent}", "-noverify"]
+    }
+}
