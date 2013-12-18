@@ -8,8 +8,15 @@ import javax.persistence.Table
 import javax.persistence.ManyToMany
 import javax.persistence.FetchType
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex
+
+import org.mrfogg.marshallers.UserSerializer
+
 @Entity
 @Table(name = 'user')
+@JsonSerialize(using = UserSerializer.class)
 class User {
 
     @Id
@@ -20,7 +27,7 @@ class User {
     String email
     String password
     String token
-    @ManyToMany(targetEntity = Trip, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Trip)
     List<Trip> trips
 
 }

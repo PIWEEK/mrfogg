@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
 import javax.persistence.ManyToMany
+import javax.persistence.JoinTable
 import javax.persistence.FetchType
 
 @Entity
@@ -20,6 +21,7 @@ class Trip {
     String name
     String description
     @ManyToMany(targetEntity = User, fetch = FetchType.EAGER)
-    User users
+    @JoinTable
+    List<User> users
 
 }
