@@ -17,7 +17,6 @@ buildscript {
 }
 
 apply plugin: 'cobertura'
-apply plugin: 'codenarc'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'shadow'
@@ -28,9 +27,6 @@ group=currentGroup
 task wrapper(type: Wrapper) {
     gradleVersion = '1.6'
 }
-
-// Run code narc before the test phase begins
-test.dependsOn codenarcMain
 
 repositories {
     mavenCentral()
@@ -84,11 +80,6 @@ cobertura {
     coverageFormats = ['xml', 'html']
     coverageIncludes = ['**/*.java', '**/*.groovy']
     coverageSourceDirs = [sourceSets.main.allSource.srcDirs]
-}
-
-codenarc {
-    configFile = rootProject.file('src/test/resources/codenarcrule.groovy')
-    reportFormat = System.properties['codeNarcOutput'] ?: 'html'
 }
 
 shadow {

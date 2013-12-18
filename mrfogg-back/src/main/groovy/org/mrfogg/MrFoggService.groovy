@@ -8,9 +8,6 @@ import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
 import com.yammer.dropwizard.migrations.MigrationsBundle
 import com.yammer.dropwizard.auth.oauth.OAuthProvider
-import com.yammer.dropwizard.cli.Cli
-import com.yammer.dropwizard.cli.ServerCommand
-import com.yammer.dropwizard.config.Bootstrap
 
 import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.daos.TripDAO
@@ -20,10 +17,12 @@ import org.mrfogg.domains.User
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.resources.HelloWorldResource
 import org.mrfogg.services.AuthHibernateService
-import org.mrfogg.services.AuthInMemoryService
 import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.filter.CorsFilter
 
+import groovy.util.logging.Log4j
+
+@Log4j
 class MrFoggService extends Service<MrFoggConfiguration> {
     List widgets = []
 
@@ -37,9 +36,9 @@ class MrFoggService extends Service<MrFoggConfiguration> {
     }
 
     public MrFoggService() {
-        def loader = ServiceLoader.load(WidgetProvider.class)
+        def loader = ServiceLoader.load(WidgetProvider)
         loader.each {
-            println ">> $it"
+            log.debug ">> $it"
             widgets << it
         }
     }
@@ -81,7 +80,7 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
         final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
 
-        environment.addFilter(new CorsFilter(), "/*");
+        environment.addFilter(new CorsFilter(), '/*')
         environment.addResource(new HelloWorldResource(userDAO: userDAO, tripDAO: tripDAO))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))

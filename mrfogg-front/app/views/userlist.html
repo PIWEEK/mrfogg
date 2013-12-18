@@ -1,8 +1,8 @@
-<div class="userlist" ng-controller="UsersController">
+<div class="userlist" ng-controller="UserListController">
     <ul>
        <li ng-repeat="user in userlist">
        <a ng-href="/user/{{ user.id }}">
-           <img ng-src="http://www.gravatar.com/avatar/{{ user.avatar }}">
+           <img ng-src="{{ user.avatar }}">
            {{ user.email }}
        </a>
        </li>

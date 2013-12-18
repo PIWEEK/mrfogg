@@ -1,27 +1,22 @@
 package org.mrfogg.resources
 
-import org.mrfogg.domains.Greeting
-import org.mrfogg.daos.GreetingDAO
+import org.mrfogg.domains.User
 import org.mrfogg.test.ResourceSpec
 
 class HelloWorldResourceSpec extends ResourceSpec {
 
     void setUpResources() {
-        def mockedDAO = Mock(GreetingDAO) {
-                1 * persist(_) >> new Greeting(message: 'it worked')
-            }
-        assert mockedDAO instanceof GreetingDAO
-        jersey.addResource(new HelloWorldResource(mockedDAO))
+        jersey.addResource(new HelloWorldResource())
     }
 
     def 'Showing a hello world greeting'() {
         when: 'Invoking the resource endpoint'
-            def greetings =
+            def user =
                 jersey.client().
-                    resource('/hello-world').
-                    get(Greeting)
+                    resource('/hello-world?name=john').
+                    get(User)
         then: 'The server response should have a Hello greeting in the beggining'
-             greetings.message.startsWith('HELLO')
+             user.email.startsWith('john')
     }
 
 

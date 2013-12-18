@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
 import javax.persistence.ManyToMany
-import javax.persistence.FetchType
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 
@@ -16,7 +15,7 @@ import org.mrfogg.marshallers.UserSerializer
 
 @Entity
 @Table(name = 'user')
-@JsonSerialize(using = UserSerializer.class)
+@JsonSerialize(using = UserSerializer)
 class User {
 
     @Id
@@ -39,7 +38,7 @@ class User {
         String hashedEmail = md5Hex(
             this.email.trim()
                       .toLowerCase()
-                      .getBytes("UTF-8")
+                      .getBytes('UTF-8')
         )
         return url + hashedEmail
     }
