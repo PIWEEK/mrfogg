@@ -1,12 +1,13 @@
 module.exports = (grunt) ->
     externalSources = [
-        'app/js/jquery.js',
-        'app/js/lodash.js',
-        'app/js/angular.js',
-        'app/js/angular-route.js',
-        'app/js/angular-sanitize.js',
-        'app/js/angular-animate.js',
-        'app/js/sha1.js',
+        'app/bower_components/jquery/jquery.js',
+        'app/bower_components/angular/angular.js',
+        'app/bower_components/lodash/dist/lodash.js',
+        'app/bower_components/angular-resource/angular-resource.js',
+        'app/bower_components/angular-cookies/angular-cookies.js',
+        'app/bower_components/angular-sanitize/angular-sanitize.js',
+        'app/bower_components/angular-route/angular-route.js',
+        'app/bower_components/angular-animate/angular-animate.js'
     ]
 
     grunt.initConfig({
