@@ -49,10 +49,10 @@ p {
 
 .bg-holder {
     height: 100%;
-    overflow: hidden;
     position:  fixed;
     width: 100%;
     background: #d6f6ff;
+    overflow: hidden;
     .earth-holder {
         left: 50%;
         position: absolute;
@@ -304,6 +304,34 @@ p {
             }
             h3 {
                 font-size: 1.0em;
+            }
+
+            .comments {
+                border: 1px solid black;
+                padding: 5px;
+
+                .comment {
+                    border: 1px solid black;
+                    position: relative;
+                    padding: 10px;
+                    margin-top: 2px;
+                    margin-bottom: 2px;
+
+                    .comment-user {
+                        position: absolute;
+                        right: 5px;
+                        top: 0px;
+                    }
+                    .comment-text {
+                        display: block;
+                        margin-top: 10px;
+                    }
+                }
+
+                .comment-input {
+                    width: 99%;
+                    height: 40px;
+                }
             }
         }
     }

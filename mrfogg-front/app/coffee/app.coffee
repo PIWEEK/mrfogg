@@ -10,13 +10,13 @@ modules = [
     # Controller
     "mrfogg.controllers.main",
 
-    # Widgets
-    # "mrfogg.widgets",
-
     # Services
     "mrfogg.services.resource",
     "mrfogg.services.common",
     "mrfogg.services.model",
+
+    # Widgets
+    "mrfogg.widgets",
 
     # Greenmine Plugins
     "gmUrls",
@@ -43,7 +43,9 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
         "logout": "/logout"
         "users": "/users"
         "trips": "/trips"
-        }
+        "cards": "/trips/%s/tasks/%s/cards"
+    }
+
     $gmUrlsProvider.setUrls("api", apiUrls)
 
     $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:8080/**'])
@@ -54,34 +56,6 @@ init = ($rootScope, $gmStorage, $gmAuth, $gmUrls, config)->
     console.log ("Initializing...")
     $rootScope.auth = $gmAuth.getUser()
     $gmUrls.setHost("api", config.host,config.scheme)
-
-
-    $rootScope.loadedCards = [
-        {
-            "id": 1,
-            "title": "Encuesta de bares",
-            "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
-            "owner": {
-                "email": "alonso.torres@kaleidos.net"
-            },
-            "widget": "/widget/images/10001",
-            "widgetTemplate": "http://localhost:8080/assets/client/mrfogg-widget-images.html",
-            "comments": [
-                { "userId": 1, "Lorem ipsum" },
-                { "userId": 2, "Lorem ipsum" }
-            ]
-        },
-        {
-            "id": 2,
-            "title": "Mapa de la zona centro",
-            "description": "Mapa de la zona centro",
-            "owner": {
-                "email": "ramiro.sanchez@kaleidos.net"
-            },
-            "widget": "/widget/map/10002",
-            "comments": []
-        }
-    ]
 
     return
 
@@ -97,3 +71,4 @@ angular.module('mrfogg.config', []).value('config', {
     debug: false
 })
 
+angular.module("mrfogg.widgets", [])
