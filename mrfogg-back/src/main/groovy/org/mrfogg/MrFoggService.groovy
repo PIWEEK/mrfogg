@@ -10,8 +10,7 @@ import com.yammer.dropwizard.migrations.MigrationsBundle
 import com.yammer.dropwizard.auth.oauth.OAuthProvider
 
 import org.mrfogg.auth.TokenAuthenticator
-import org.mrfogg.daos.UserDAO
-import org.mrfogg.daos.TripDAO
+import org.mrfogg.daos.BaseDAO
 import org.mrfogg.domains.User
 import org.mrfogg.resources.TripResource
 import org.mrfogg.resources.AuthResource
@@ -21,14 +20,27 @@ import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.filter.CorsFilter
 
 import groovy.util.logging.Log4j
+import org.hibernate.SessionFactory
 
 @Log4j
 class MrFoggService extends Service<MrFoggConfiguration> {
+
     List widgets = []
 
     static final Class[] ENTITIES = [
         org.mrfogg.domains.User,
-        org.mrfogg.domains.Trip
+        org.mrfogg.domains.Trip,
+        org.mrfogg.domains.Task,
+        org.mrfogg.domains.Card,
+        org.mrfogg.domains.Widget
+    ]
+
+    static final Class[] DAOS = [
+        org.mrfogg.daos.UserDAO,
+        org.mrfogg.daos.TripDAO,
+        org.mrfogg.daos.TaskDAO,
+        org.mrfogg.daos.CardDAO,
+        org.mrfogg.daos.WidgetDAO
     ]
 
     public static void main(String[] args) throws Exception {
@@ -36,15 +48,15 @@ class MrFoggService extends Service<MrFoggConfiguration> {
     }
 
     public MrFoggService() {
-        def loader = ServiceLoader.load(WidgetProvider)
-        loader.each {
-            log.debug ">> $it"
-            widgets << it
-        }
+        widgets +=
+            ServiceLoader.load(WidgetProvider).
+            collect { w ->
+                log.debug ">> $w"
+                return w
+            }
     }
 
     HibernateBundle<MrFoggConfiguration> hibernateBundle =
-
         new HibernateBundle<MrFoggConfiguration>(ENTITIES) {
             @Override
             public DatabaseConfiguration getDatabaseConfiguration(MrFoggConfiguration configuration) {
@@ -75,17 +87,27 @@ class MrFoggService extends Service<MrFoggConfiguration> {
     @Override
     public void run(MrFoggConfiguration configuration, Environment environment) throws ClassNotFoundException {
 
-        final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
-        final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
-        final AuthHibernateService authService = new AuthHibernateService(userDao:userDAO)
+        final Map<String,BaseDAO> daoMap = getDaoMap(hibernateBundle.sessionFactory)
+        final AuthHibernateService authService = new AuthHibernateService(userDao: daoMap.userDAO)
 
         environment.addFilter(new CorsFilter(), '/*')
-        environment.addResource(new UserResource(userDAO: userDAO))
-        environment.addResource(new TripResource(tripDAO: tripDAO))
+        environment.addResource(new UserResource(userDAO: daoMap.userDAO))
+        environment.addResource(new TripResource(tripDAO: daoMap.tripDAO))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
 
         // Plugins:
         widgets*.run(configuration, environment)
+    }
+
+    Map<String, BaseDAO> getDaoMap(SessionFactory sessionFactory) {
+
+        return DAOS.collectEntries { daoClazz ->
+            def key = daoClazz.simpleName.replaceAll(/^./) { it.toLowerCase() }
+            def value = daoClazz.newInstance(sessionFactory)
+
+            [(key.toString()) : value]
+        }
+
     }
 }
