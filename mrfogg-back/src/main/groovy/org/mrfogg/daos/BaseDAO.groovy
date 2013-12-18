@@ -20,4 +20,8 @@ class BaseDAO<T> extends AbstractDAO<T> {
         return persist(o)
     }
 
+    List<T> listAll() {
+       list(criteria())
+    }
+
 }

@@ -12,6 +12,7 @@ import com.yammer.dropwizard.auth.oauth.OAuthProvider
 import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.daos.UserDAO
 import org.mrfogg.domains.User
+import org.mrfogg.resources.TripResource
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.resources.UserResource
 import org.mrfogg.services.AuthHibernateService
@@ -78,11 +79,11 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
         environment.addFilter(new CorsFilter(), '/*')
         environment.addResource(new UserResource(userDAO: userDAO))
+        environment.addResource(new TripResource(tripDAO: tripDAO))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
 
         // Plugins:
         widgets*.run(configuration, environment)
     }
-
 }

@@ -20,6 +20,7 @@ class Trip {
     @Column(unique = true)
     String name
     String description
+
     @ManyToMany(targetEntity = User, fetch = FetchType.EAGER)
     @JoinTable
     List<User> users
