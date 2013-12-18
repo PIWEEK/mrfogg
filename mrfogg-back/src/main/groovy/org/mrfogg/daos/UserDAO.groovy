@@ -12,7 +12,6 @@ import org.hibernate.HibernateException
 import org.hibernate.criterion.Restrictions
 
 import com.yammer.dropwizard.hibernate.AbstractDAO
-import com.yammer.dropwizard.hibernate.UnitOfWork
 
 class UserDAO extends AbstractDAO<User> {
 
@@ -55,6 +54,10 @@ class UserDAO extends AbstractDAO<User> {
 
     String crypt(String password) {
         return shaHex(password.getBytes("UTF-8"))
+    }
+
+    List<User> list() {
+        list(criteria())
     }
 
 }

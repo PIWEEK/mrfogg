@@ -12,20 +12,23 @@ import com.yammer.dropwizard.cli.Cli
 import com.yammer.dropwizard.cli.ServerCommand
 import com.yammer.dropwizard.config.Bootstrap
 
-import org.mrfogg.domains.User
-import org.mrfogg.daos.UserDAO
-import org.mrfogg.services.AuthHibernateService
-import org.mrfogg.resources.HelloWorldResource
-import org.mrfogg.resources.AuthResource
 import org.mrfogg.auth.TokenAuthenticator
+import org.mrfogg.daos.TripDAO
+import org.mrfogg.daos.UserDAO
+import org.mrfogg.domains.Trip
 import org.mrfogg.domains.User
+import org.mrfogg.resources.AuthResource
+import org.mrfogg.resources.HelloWorldResource
+import org.mrfogg.services.AuthHibernateService
+import org.mrfogg.services.AuthInMemoryService
 import org.mrfogg.widget.WidgetProvider
 
 class MrFoggService extends Service<MrFoggConfiguration> {
     List widgets = []
 
     static final Class[] ENTITIES = [
-        org.mrfogg.domains.User
+        org.mrfogg.domains.User,
+        org.mrfogg.domains.Trip
     ]
 
     public static void main(String[] args) throws Exception {
@@ -74,11 +77,14 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         def userDao = new UserDAO(hibernateBundle.sessionFactory)
         def authService = new AuthHibernateService(userDao:userDao)
 
-        environment.addResource(new HelloWorldResource(userDao))
+        final UserDAO userDAO = new UserDAO(hibernateBundle.sessionFactory)
+        final TripDAO tripDAO = new TripDAO(hibernateBundle.sessionFactory)
+        environment.addResource(new HelloWorldResource(userDAO: userDAO, tripDAO: tripDAO))
         environment.addResource(new AuthResource(authService:authService))
         environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
 
         // Plugins:
         widgets*.run(configuration, environment)
     }
+
 }
