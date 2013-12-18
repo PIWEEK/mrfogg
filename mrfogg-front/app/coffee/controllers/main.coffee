@@ -5,12 +5,13 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
-TaskListController = ($scope, $rootScope, $routeParams, resource) ->
+TaskListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Tasks'
     $rootScope.tripid = parseInt($routeParams.tripid, 10)
-    #localstorage
-    resource.getTasks($rootScope.tripid).then (result) ->
-        $scope.tasklist = result
+    $scope.$on('tripid', (event, data) ->
+        console.log data
+        resource.getTasks($scope.tripid).then (result) ->
+            $scope.tasklist = result
     return
 
 UserListController = ($scope, $rootScope, resource) ->
@@ -38,15 +39,19 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
     return
 
-TripListController = ($scope, $rootScope, resource) ->
+TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
+    $rootScope.tripid = parseInt($routeParams.tripid, 10)
+    $rootScope.tripid = 1 if not $rootScope.tripid
+    $scope.$emit('tripid', $rootScope.tripid);
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
         $scope.mytrips = _.remove($scope.triplist, (trip) -> 
-            return trip.id == tripId
+            return trip.id == $rootScope.tripid
         ) 
         $scope.mytrip = $scope.mytrips[0]
+        #$gmStorage.set("tripid", $scope.mytrip)
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
@@ -76,52 +81,11 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
-CardsController = ($scope, $rootScope, resource, $routeParams)->
-    onSuccess = (data) ->
-        console.log("SUCCESS", data)
-        $scope.loadedCards = data._attrs
-
-    onError = (data) ->
-        console.log("error " + data)
-        $rootScope.error = true
-        $rootScope.errorMessage = data.detail
-
-    tripId = $routeParams.tripId
-    taskId = $routeParams.taskId
-
-    resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
-    return
-
-CommentController = ($scope, resource, $routeParams)->
-    console.log($scope.card)
-    $scope.inputComment = ""
-    $scope.comments = $scope.card.comments
-
-    tripId = $routeParams.tripId
-    taskId = $routeParams.taskId
-    cardId = $scope.card.id
-
-    $scope.addComment = ()->
-        user = { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
-        comment = { "user": user, text: $scope.inputComment }
-        $scope.comments.push comment
-
-        commentData =
-            text: $scope.inputComment
-
-        $scope.inputComment = ""
-        resource.postComment(tripId, taskId, cardId, commentData)
-
-    return
-
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
-module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
 module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", "resource", TaskListController])
-module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
-module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
-
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
