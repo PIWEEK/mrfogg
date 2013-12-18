@@ -66,8 +66,6 @@ module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
+module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
-module.controller("MrLoginController", ["$scope","$rootScope", "$location",
-                  "$routeParams", "resource", "$gmAuth",
-                  MrLoginController])
 module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", "$gmStorage", UserController])

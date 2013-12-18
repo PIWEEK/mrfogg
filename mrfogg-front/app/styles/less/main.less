@@ -1,6 +1,7 @@
 @import "color.less";
 @import "font.less";
 @import "animation.less";
+@import "elements.less";
 /*@import "tooltip.less";*/
 @import "shortcut.less";
 /*@import "responsive.less";*/
@@ -68,7 +69,7 @@ p {
         margin-left: -2100px;
     }
     .cloud {
-         width: 5000px;
+        width: 5000px;
         height: 5000px;
         background-image: url("../images/cloud.png");
         background-size: 100%;
@@ -77,7 +78,7 @@ p {
         margin-left: -2500px;
     }
     .cloud-2 {
-         width: 5000px;
+        width: 5000px;
         height: 5000px;
         background-image: url("../images/cloud2.png");
         background-size: 100%;
@@ -289,6 +290,22 @@ p {
         outline: solid 1px green;
         width: 700px;
 
+        .card {
+            padding: 20px;
+            border: 1px solid black;
+            margin: 40px;
+
+            background: #D5E9C3;
+            opacity: 0.8;
+
+            h2, h3 {
+                margin: 0px;
+                color: #5fbcd3;
+            }
+            h3 {
+                font-size: 1.0em;
+            }
+        }
     }
 }
 
@@ -309,7 +326,6 @@ p {
     }
     .form {
         background: white;
-        height: 180px;
         padding: 20px;
         width: 260px;
         fieldset {

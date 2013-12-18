@@ -1,11 +1,12 @@
 <!doctype html>
-<head>
-    <meta charset="utf-8">
-    <title>Mr. FOGG - Collaborative Trip Planning</title>
-    <meta name="description" content="Mr. FOGG - Collaborative Trip Planning">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mr. FOGG - Collaborative Trip Planning</title>
+        <meta name="description" content="Mr. FOGG - Collaborative Trip Planning">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/styles/main.css">
+    </head>
     <body ng-app="mrfogg" ng-controller="MainController">
         <div class="bg-holder">
             <div class="earth-holder">
@@ -31,5 +32,12 @@
 
         <script src="/dist/libs.js"></script>
         <script src="/dist/app.js"></script>
+        <!--
+        <script src="http://localhost:8080/assets/js/widget.js"></script>
+        -->
+
+        <div class="message">Una pregunta... Que puñetas es esto que estás haciendo? <a href="#" class="icon-cancel"></a></div>
+        <div class="message-error message">NOOOO... INTERNEEEE!!! <a href="#" class="icon-cancel"></a></div>
+        <div class="message-successfull message">BRAVO! Has conseguido hacer el pinopuente con doble tirabuzón! <a href="#" class="icon-cancel"></a></div>
     </body>
 </html>
