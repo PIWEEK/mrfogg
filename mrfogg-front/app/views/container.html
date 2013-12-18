@@ -4,7 +4,7 @@
 <section class="right-col">
     <div class="card" ng-repeat="card in loadedCards">
         <h2>{{ card.title }}</h2>
-        <h3>{{ card.owner.email }}</h3>
+        <h3><i class="icon-user"></i> {{ card.owner.email }}</h3>
         <p>{{ card.description }}</p>
         <h1>{{ test }}</h1>
         <div class="widget" ng-include="card.widgetTemplate"></div>

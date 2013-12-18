@@ -334,16 +334,27 @@ p {
         margin-top: 75px;
         width: 700px;
         .card {
-            padding: 20px;
+            padding: 0;
             margin-bottom: 20px;
             background: white;
             opacity: 0.8;
-            h2, h3 {
+            h2 {
+                font-size: 2.3em;
                 margin: 0px;
-                color: #5fbcd3;
+                padding: 10px;
+                color: white;
+                background: @basecolor;
+                text-shadow: 0 3px rgba(0, 0, 0, 0.3);
             }
             h3 {
+                background: @info;
                 font-size: 1.0em;
+                margin: 0px;
+                padding: 10px;
+                color: @darkinfo;
+            }
+            p {
+                padding: 15px;
             }
         }
     }
