@@ -24,15 +24,15 @@ class UserDAO extends AbstractDAO<User> {
     }
 
     Optional<User> findByEmail(String email) throws HibernateException{
-        _findByAttribute("email", email)
+        _findByAttribute('email', email)
     }
 
     Optional<User> findByToken(String token) throws HibernateException{
-        _findByAttribute("token", token)
+        _findByAttribute('token', token)
     }
 
     Optional<User> _findByAttribute(String attribute, String value) throws HibernateException{
-        def criteria = currentSession().createCriteria(User.class)
+        def criteria = currentSession().createCriteria(User)
         criteria.add(Restrictions.eq(attribute, value))
         return Optional.fromNullable(criteria.uniqueResult())
     }
@@ -53,7 +53,7 @@ class UserDAO extends AbstractDAO<User> {
     }
 
     String crypt(String password) {
-        return shaHex(password.getBytes("UTF-8"))
+        return shaHex(password.getBytes('UTF-8'))
     }
 
     List<User> list() {

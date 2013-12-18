@@ -16,7 +16,6 @@ import javax.ws.rs.Produces
 import javax.ws.rs.QueryParam
 import javax.ws.rs.core.MediaType
 
-import org.mrfogg.domains.User
 import groovy.util.logging.Log4j
 
 @Log4j
@@ -38,7 +37,7 @@ class HelloWorldResource {
     @GET
     @Timed
     User sayHello(@QueryParam('name') Optional<String> name) {
-        return new User(email: "${name}@world.com")
+        return new User(email: "${name.get()}@world.com")
     }
 
     @GET
@@ -58,13 +57,13 @@ class HelloWorldResource {
         User user = this.userDAO.persist(new User(email: 'mgdelacroix@gmail.com', password: 'aaa'))
         Trip trip = this.tripDAO.persist(new Trip(name: 'London', description: 'hola mundo'))
 
-        if(user.trips) {
+        if (user.trips) {
             user.trips.add(trip)
         } else {
             user.trips = [trip]
         }
         this.userDAO.persist(user)
-        return [message: "conseguido!!"]
+        return [message: 'conseguido!!']
     }
 
     @GET
