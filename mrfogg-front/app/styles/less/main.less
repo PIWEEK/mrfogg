@@ -99,7 +99,7 @@ p {
     top: 0;
     width: 100%;
     .container {
-        max-width: 1000px;
+        max-width: 1010px;
         height: 100%;
         margin: 0 auto;
     }
@@ -307,46 +307,50 @@ p {
                 margin: 0;
                 li {
                     list-style: none;
-                    background: @lightblue;
-                    color: @darkbase;
-                    padding: 10px;
-                    margin: 10px;
-                    -webkit-transition: all 0.2s ease-in-out;
-                    -moz-transition: all 0.2s ease-in-out;
-                    -o-transition: all 0.2s ease-in-out;
-                    -ms-transition: all 0.2s ease-in-out;
-                    transition: all 0.2s ease-in-out;
-                    .rounded-corners(6px);
-                    .icon-checkbox {
-                        margin-left: -1px;
-                    }
-                    i {
-                        display: inline-block;
-                        margin-top: 1px;
-                    }
-                    &.done {
-                        background: @successfull;
-                        color: @darksuccessfull;
-                        &:hover {
-                        -webkit-box-shadow: 0 3px 0 @darksuccessfull;
-                        -moz-box-shadow: 0 3px 0 @darksuccessfull;
-                        box-shadow: 0 3px 0 @darksuccessfull;
-                        }
-                    }
-                    &:hover {
-                        -webkit-transform: scale3d(1.04, 1.04, 1.04);
-                        -moz-transform: scale3d(1.04, 1.04, 1.04);
-                        -o-transform: scale3d(1.04, 1.04, 1.04);
-                        -ms-transform: scale3d(1.04, 1.04, 1.04);
-                        transform: scale3d(1.04, 1.04, 1.04);
+                    a {
+                        display: block;
+                        opacity: 1;
+                        background: @lightblue;
+                        color: @darkbase;
+                        padding: 10px;
+                        margin: 10px;
                         -webkit-transition: all 0.2s ease-in-out;
                         -moz-transition: all 0.2s ease-in-out;
                         -o-transition: all 0.2s ease-in-out;
                         -ms-transition: all 0.2s ease-in-out;
-                        transition: all 0.3s ease-in-out;
-                        -webkit-box-shadow: 0 3px 0 @basecolor;
-                        -moz-box-shadow: 0 3px 0 @basecolor;
-                        box-shadow: 0 3px 0 @basecolor;
+                        transition: all 0.2s ease-in-out;
+                        .rounded-corners(6px);
+                        .icon-checkbox {
+                            margin-left: -1px;
+                        }
+                        i {
+                            display: inline-block;
+                            margin-top: 1px;
+                        }
+                        &.done {
+                            background: @successfull;
+                            color: @darksuccessfull;
+                            &:hover {
+                            -webkit-box-shadow: 0 3px 0 @darksuccessfull;
+                            -moz-box-shadow: 0 3px 0 @darksuccessfull;
+                            box-shadow: 0 3px 0 @darksuccessfull;
+                            }
+                        }
+                        &:hover {
+                            -webkit-transform: scale3d(1.04, 1.04, 1.04);
+                            -moz-transform: scale3d(1.04, 1.04, 1.04);
+                            -o-transform: scale3d(1.04, 1.04, 1.04);
+                            -ms-transform: scale3d(1.04, 1.04, 1.04);
+                            transform: scale3d(1.04, 1.04, 1.04);
+                            -webkit-transition: all 0.2s ease-in-out;
+                            -moz-transition: all 0.2s ease-in-out;
+                            -o-transition: all 0.2s ease-in-out;
+                            -ms-transition: all 0.2s ease-in-out;
+                            transition: all 0.3s ease-in-out;
+                            -webkit-box-shadow: 0 3px 0 @basecolor;
+                            -moz-box-shadow: 0 3px 0 @basecolor;
+                            box-shadow: 0 3px 0 @basecolor;
+                        }
                     }
                 }
             }
