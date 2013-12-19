@@ -23,18 +23,6 @@ MainController = ($scope, resource, $timeout) ->
     $scope.$on("new-card", (data)->
         $scope.showCardForm = false
     )
-    return
-
-TaskListController = ($scope, $rootScope, resource) ->
-    $scope.taskToggleStatus = (task) ->
-        if task.status == "done"
-            task.status = "pending"
-        else
-            task.status = "done"
-        p = resource.updateTask($rootScope.mytrip.id, task.id, task)
-        p.then ()->
-            console.log("guardado OK, pidendo lista")
-
     $scope.isFlashWarnVisible = false
     $scope.isFlashErrorVisible = false
     $scope.isFlashSuccessVisible = false
@@ -53,6 +41,17 @@ TaskListController = ($scope, $rootScope, resource) ->
 
         $timeout(hideFlash, 2000)
     )
+    return
+
+TaskListController = ($scope, $rootScope, resource) ->
+    $scope.taskToggleStatus = (task) ->
+        if task.status == "done"
+            task.status = "pending"
+        else
+            task.status = "done"
+        p = resource.updateTask($rootScope.mytrip.id, task.id, task)
+        p.then ()->
+            console.log("guardado OK, pidendo lista")
 
     return
 
