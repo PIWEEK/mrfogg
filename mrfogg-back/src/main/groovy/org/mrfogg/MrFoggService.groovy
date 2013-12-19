@@ -14,8 +14,10 @@ import org.mrfogg.daos.BaseDAO
 import org.mrfogg.domains.User
 import org.mrfogg.resources.TripResource
 import org.mrfogg.resources.AuthResource
+import org.mrfogg.resources.FixtureResource
 import org.mrfogg.resources.UserResource
 import org.mrfogg.services.AuthHibernateService
+import org.mrfogg.services.FixtureService
 import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.filter.CorsFilter
 
@@ -89,12 +91,16 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
         final Map<String,BaseDAO> daoMap = getDaoMap(hibernateBundle.sessionFactory)
         final AuthHibernateService authService = new AuthHibernateService(userDao: daoMap.userDAO)
+        final FixtureService fixtureService = [daoMap]
 
-        environment.addFilter(new CorsFilter(), '/*')
-        environment.addResource(new UserResource(userDAO: daoMap.userDAO))
-        environment.addResource(new TripResource(tripDAO: daoMap.tripDAO))
-        environment.addResource(new AuthResource(authService:authService))
-        environment.addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
+        environment.with {
+            addFilter(new CorsFilter(), '/*')
+            addResource(new UserResource(userDAO: daoMap.userDAO))
+            addResource(new TripResource(tripDAO: daoMap.tripDAO))
+            addResource(new AuthResource(authService: authService))
+            addResource(new FixtureResource(fixtureService: fixtureService))
+            addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
+        }
 
         // Plugins:
         widgets*.run(configuration, environment)
