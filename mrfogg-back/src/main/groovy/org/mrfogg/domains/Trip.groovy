@@ -10,8 +10,12 @@ import javax.persistence.ManyToMany
 import javax.persistence.JoinTable
 import javax.persistence.FetchType
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import org.mrfogg.marshallers.TripSerializer
+
 @Entity
 @Table(name = 'trip')
+@JsonSerialize(using = TripSerializer)
 class Trip extends BaseDomain {
 
     @Column(unique = true, nullable = false)
