@@ -16,18 +16,15 @@ class AuthHibernateService {
 
     public String authenticateUser(User user) {
         def authUser = userDao.findByEmail(user.email)
-        if (authUser.isPresent()) {
-            return authUser.get().token
+        if (!authUser.isPresent()) {
+            throw new AuthenticationException('Invalid user or password')
         }
-        def token = "${UUID.randomUUID()}"
-        user.token = token
-        userDao.persist(user)
-        return token
+        return authUser.get().token
     }
 
     public removeAuth(User user) {
         if (!users[user.token]) {
-            throw new AuthenticationException('user not found')
+            throw new AuthenticationException('User not found')
         }
         userDao.removeToken(user)
     }

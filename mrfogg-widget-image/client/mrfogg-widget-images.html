@@ -1,4 +1,11 @@
-<div ng-controller="ImageWidgetController">
-    <h1>Soy una imagen de verdad! {{ test }}</h1>
-    <p>bla bla bla</p>
+<style>
+    .images-widget {
+        border: 1px solid #888;
+        margin: 10px;
+        box-shadow: 5px 5px 6px #888;
+        text-align: center;
+    }
+</style>
+<div ng-controller="ImageWidgetController" class="images-widget">
+    <img ng-src="{{ imageUrl }}"/>
 </div>

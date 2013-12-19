@@ -2,8 +2,6 @@ package org.mrfogg.domains
 
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 import javax.persistence.Table
 import javax.persistence.ManyToMany
 
@@ -16,16 +14,14 @@ import org.mrfogg.marshallers.UserSerializer
 @Entity
 @Table(name = 'user')
 @JsonSerialize(using = UserSerializer)
-class User {
+class User extends BaseDomain {
 
-    @Id
-    @GeneratedValue
-    Long id
-
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     String email
+    @Column(unique = true, nullable = false)
     String password
     String token
+
     @ManyToMany(targetEntity = Trip)
     List<Trip> trips
 
@@ -35,11 +31,13 @@ class User {
      */
     String getAvatarURL() {
         String url = 'http://www.gravatar.com/avatar/'
-        String hashedEmail = md5Hex(
-            this.email.trim()
-                      .toLowerCase()
-                      .getBytes('UTF-8')
-        )
+        String hashedEmail =
+            md5Hex(
+                this.email.trim()
+                  .toLowerCase()
+                  .getBytes('UTF-8')
+            )
+
         return url + hashedEmail
     }
 
