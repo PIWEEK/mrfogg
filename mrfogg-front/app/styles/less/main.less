@@ -379,11 +379,8 @@ p {
                 margin: 0;
                 li {
                     list-style: none;
-                    a {
-                        display: block;
-                        opacity: 1;
+                    display: table;
                     background: @lightblue;
-                    color: @darkbase;
                     padding: 10px;
                     margin: 10px;
                     -webkit-transition: all 0.2s ease-in-out;
@@ -391,24 +388,8 @@ p {
                     -o-transition: all 0.2s ease-in-out;
                     -ms-transition: all 0.2s ease-in-out;
                     transition: all 0.2s ease-in-out;
+                    width: 260px;
                     .rounded-corners(6px);
-                    .icon-checkbox {
-                        margin-left: -1px;
-                    }
-                    i {
-                        display: inline-block;
-                        margin-top: 2px;
-                        margin-bottom: -2px;
-                    }
-                    &.done {
-                        background: @successfull;
-                        color: @darksuccessfull;
-                        &:hover {
-                        -webkit-box-shadow: 0 3px 0 @darksuccessfull;
-                        -moz-box-shadow: 0 3px 0 @darksuccessfull;
-                        box-shadow: 0 3px 0 @darksuccessfull;
-                        }
-                    }
                     &:hover {
                         -webkit-transform: scale3d(1.04, 1.04, 1.04);
                         -moz-transform: scale3d(1.04, 1.04, 1.04);
@@ -423,6 +404,29 @@ p {
                         -webkit-box-shadow: 0 3px 0 @basecolor;
                         -moz-box-shadow: 0 3px 0 @basecolor;
                         box-shadow: 0 3px 0 @basecolor;
+                    }
+                    &.done {
+                        background: @successfull;
+                        &:hover {
+                        -webkit-box-shadow: 0 3px 0 @darksuccessfull;
+                        -moz-box-shadow: 0 3px 0 @darksuccessfull;
+                        box-shadow: 0 3px 0 @darksuccessfull;
+                        }
+                        a {
+                            color: @darksuccessfull;
+                        }
+                    }
+                    a {
+                    display: table-cell;
+                    color: @darkbase;
+                    opacity: 1;
+                    .icon-checkbox {
+                        margin-left: -1px;
+                        }
+                    i {
+                        display: inline-block;
+                        margin-top: 2px;
+                        margin-bottom: -2px;
                         }
                     }
                 }
