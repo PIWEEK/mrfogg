@@ -1,0 +1,27 @@
+<form name="newCard" ng-controller="NewCardController">
+    <div class="title-holder">
+        <input
+            ng-model="card.title"
+            class="title"
+            placeholder="Escribe aqui el nombre de tu viaje"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Escribe aqui el nombre de tu viaje'" />
+    </div>
+    <h3><i class="icon-user"></i>{{ user.email }}</h3>
+    <fieldset>
+        <label>Descripcion</label>
+        <textarea ng-model="card.description"></textarea>
+    </fieldset>
+    <fieldset>
+        <label>Elige tu widget:</label>
+        <div class="select-style">
+            <select ng-model="card.widget">
+                <option value="/assets/client/mrfogg-widget-images.html">Imagen</option>
+            </select>
+        </div>
+    </fieldset>
+    <fieldset>
+        <button class="btn" type="submit" ng-click="publishCard()">Publicar</button>
+        <button class="btn btn-cancel" type="submit" ng-click="closeCardButton()">Cancelar</button>
+    </fieldset>
+</form>

@@ -41,6 +41,7 @@ class TripService {
         destination.with {
             name = trip.name
             description = trip.description
+            members = trip.members
         }
         return this.tripDao.persist(destination)
     }

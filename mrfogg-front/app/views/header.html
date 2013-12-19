@@ -7,28 +7,24 @@
             <ul class="trip-list">
                 <li ng-repeat="trip in triplist">
                     <a ng-href="#/trips/{{ trip.id }}">
-                    <!--
-                    <a ng-click="changeTrip(trip.id)">
-                    -->
                         {{ trip.name }}
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="menu" ng-controller="UserController">
+
+    <div class="menu">
         <img class="user" ng-src="{{ user.avatar }}?s=34">
         <div class="menu-button" ng-controller="TooltipController">
-            <a ngh-href="#/" class="icon-menu" ng-click="showTooltip()">
+            <a class="icon-menu" ng-click="showTooltip()">
             </a>
-            <div class="tooltip">
-                <a href="#/"><i class="icon-view"></i> Ver mis viajes </a>
-                <a href="#/"><i class="icon-checkbox"></i> Crear nuevo viaje </a>
-                <a href="#/"><i class="icon-add2"></i> Nueva Tarea </a>
+            <div class="tooltip" ng-show="isTooltipVisible" ng-mouseleave="hideTooltip()">
+                <a ng-click="addTripButton(); hideTooltip()"><i class="icon-checkbox"></i> Crear nuevo viaje </a>
+                <a ng-click="addTaskButton(); hideTooltip()"><i class="icon-add2"></i> Nueva Tarea </a>
+                <a ng-click="addCardButton(); hideTooltip()"><i class="icon-add2"></i> Nueva Tarjeta </a>
+                <a ng-click="addCardButton(); hideTooltip()"><i class="icon-add2"></i> Logout </a>
             </div>
         </div>
-        <div
-            ng-click="addTripButton()"
-            style="cursor:pointer;color:white;border: 1px solid white;float: left;width: 40px;height: 40px;text-align: center;font-size: 54px;line-height: 40px;">+</div>
     </div>
 </div>

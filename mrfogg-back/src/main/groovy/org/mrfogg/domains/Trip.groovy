@@ -25,9 +25,9 @@ class Trip extends BaseDomain {
 
     @JoinTable
     @ManyToMany(targetEntity = User, fetch = FetchType.EAGER)
-    List<User> users
+    List<User> users = []
 
     @OneToMany(cascade = ALL, mappedBy = 'trip')
-    List<Task> tasks
+    List<Task> tasks = []
 
 }

@@ -1,10 +1,9 @@
-<div class="task" ng-controller="TripListController">
-    <h2>Tareas</h2>
-	<div
-        ng-click="addTaskButton()"
-        style="cursor:pointer;position: absolute;top: 3px;right: 5px;width: 25px;height: 25px;border: 1px solid white;color: white;text-align: center;font-size: 40px;line-height: 25px;">+</div>
-    
+<div class="task">
+    <h2>Task title</h2>
+
     <ul class="content" ng-repeat="task in tasklist">
-        <li><a class="{{ task.done }}" ng-href="#/trips/1/tasks/{{ task.id }}"><i class="icon-checked"></i>{{ task.name }}</a></li>
+        <li>
+        <a ng-click="taskToggleStatus(task)"><i class="icon-checked"></i></a>
+        <a class="{{ task.status }}" ng-href="#/trips/1/tasks/{{ task.id }}">{{ task.name }}</a></li>
     </ul>
 </div>

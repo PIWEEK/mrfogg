@@ -1,7 +1,4 @@
-MainController = ($scope, resource) ->
-    resource.getUser("me").then (result) ->
-        $scope.user = result
-
+MainController = ($scope) ->
     $scope.addTaskButton = ()->
         $scope.showTaskDialog = true
 
@@ -23,14 +20,6 @@ MainController = ($scope, resource) ->
     $scope.$on("new-card", (data)->
         $scope.showCardForm = false
     )
-
-    $scope.taskToggleStatus = (task) ->
-        if task.status == "done"
-            task.status = "pending"
-        else
-            task.status = "done"
-        console.log "new status: "+task.status
-
     return
 
 ContainerController = ($scope) ->
@@ -38,6 +27,8 @@ ContainerController = ($scope) ->
     return
 
 UserListController = ($scope, $rootScope, resource) ->
+    $rootScope.pageTitle = 'Users'
+
     onSuccess = (data) ->
         $scope.userlist = data
 
@@ -50,9 +41,21 @@ UserListController = ($scope, $rootScope, resource) ->
 
     return
 
+UserController = ($scope, $rootScope, $routeParams, resource) ->
+    $rootScope.pageTitle = 'My profile'
+    $rootScope.userid = parseInt($routeParams.uid, 10)
+    $rootScope.userid = "me" if not $rootScope.userid
+
+    resource.getUser($rootScope.userid).then (result) ->
+        $scope.user = result
+
+    return
+
 TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
+<<<<<<< HEAD
     tripIdFromUrl = parseInt($routeParams.tripId, 10)
+    console.log "tripid "+$rootScope.tripId
     changed = false
     trip_unset = false
     if not isNaN(tripIdFromUrl) and (tripIdFromUrl != $rootScope.tripId)
@@ -62,15 +65,28 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
         trip_unset = true
     if trip_unset
         $rootScope.tripId = 1
-    if trip_unset or changed
+    if trip_unset or changed    
         resource.getTrips($rootScope.userid).then (result) ->
             $scope.triplist = result
-            $scope.mytrips = _.remove($scope.triplist, (trip) ->
+            $scope.mytrips = _.remove($scope.triplist, (trip) -> 
                 return trip.id == $rootScope.tripId
-            )
+            ) 
             $rootScope.mytrip = $scope.mytrips[0]
             resource.getTasks($rootScope.tripId).then (result) ->
                 $rootScope.tasklist = result._attrs
+=======
+    $rootScope.tripId = parseInt($routeParams.tripId, 10)
+    $rootScope.tripId = 1 if not $rootScope.tripId
+    resource.getTrips($rootScope.userid).then (result) ->
+        $scope.triplist = result
+        $scope.mytrips = _.remove($scope.triplist, (trip) ->
+            return trip.id == $rootScope.tripId
+        )
+        $scope.mytrip = $scope.mytrips[0]
+        #$gmStorage.set("tripid", $scope.mytrip)
+        resource.getTasks($rootScope.tripId).then (result) ->
+            $scope.tasklist = result._attrs
+>>>>>>> Added new card form
 
     return
 
@@ -101,41 +117,37 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
-TooltipController = ($scope, $document)->
-    $scope.isTooltipVisible = false
-    $scope.showTooltip = ()->
-        $scope.isTooltipVisible = !$scope.isTooltipVisible
-
-    $scope.hideTooltip = ()->
-        $scope.isTooltipVisible = false
-
-
+TooltipController = ($scope)->
+    $scope.showTooltip = ()=>
+       $(".icon-menu").siblings(".tooltip").toggle();
 
 CardsController = ($scope, $rootScope, resource, $routeParams)->
     $scope.widgetHost = "http://localhost:8080"
 
     onSuccess = (data) ->
+        console.log("SUCCESS", data)
         $scope.loadedCards = data._attrs
 
+        for card in data._attrs
+            console.debug("card", card)
+
     onError = (data) ->
+        console.log("error " + data)
         $rootScope.error = true
         $rootScope.errorMessage = data.detail
 
     tripId = $routeParams.tripId
     taskId = $routeParams.taskId
 
-    $scope.$on("new-card", (event, data)->
-        console.log("guardando", data)
-        p = resource.postCard(tripId, taskId, data)
-        p.then ()->
-            console.log("guardado OK, pidendo lista")
-            resource.getTaskCards(tripId, taskId).then(onSuccess, onError)
+    $scope.$on("new-card", (data)->
+        console.log("NEW CardsController", data)
     )
 
     resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
     return
 
 CommentController = ($scope, resource, $routeParams)->
+    console.log($scope.card)
     $scope.inputComment = ""
     $scope.comments = $scope.card.comments
 
@@ -144,7 +156,8 @@ CommentController = ($scope, resource, $routeParams)->
     cardId = $scope.card.id
 
     $scope.addComment = ()->
-        comment = { "user": $scope.user, text: $scope.inputComment }
+        user = { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
+        comment = { "user": user, text: $scope.inputComment }
         $scope.comments.push comment
 
         commentData =
@@ -165,10 +178,11 @@ NewCardController = ($scope)->
     return
 
 module = angular.module("mrfogg.controllers.main", [])
-module.controller("MainController", ["$scope","resource", MainController])
+module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
-module.controller("TooltipController", ["$scope", "$document", TooltipController])
+module.controller("TooltipController", ["$scope", TooltipController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", "$gmStorage", "resource", TripListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
