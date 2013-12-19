@@ -1,6 +1,6 @@
 <div class="task">
-    <h2>Task title <div ng-click="addTaskButton()"><i class="icon-add"></i></div></h2>
-    
+    <h2>Task title</h2>
+
     <ul class="content" ng-repeat="task in tasklist">
         <li><a class="{{ task.status }}" ng-href="#/trips/1/tasks/{{ task.id }}"><i class="icon-checked"></i>{{ task.name }}</a></li>
     </ul>
