@@ -23,6 +23,19 @@ html,body{
     box-sizing: border-box;
 
 }
+
+fieldset {
+    border: 0;
+}
+.textarea {
+        background: #e0eef3;
+        min-height: 120px;
+        border: 0;
+        color: #186e8a;
+        padding: 10px 15px;
+        resize: none;
+        width: 100%;
+    }
 a {
     cursor: pointer;
     color: white;
@@ -622,6 +635,38 @@ p {
             }
         }
     }
+}
+
+/************ tooltips *************/
+
+.veil {
+    background: white;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    opacity: 0.9;
+    z-index: 10000;
+}
+.new-card-dialog {
+    width: 400px;
+    z-index: 1000;
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    margin-left: -200px;
+    padding: 15px;
+    z-index: 10050;
+    h2 {
+     background: #5fbcd3;margin: 0px;font-size: 30px;margin-left: -15px;margin-right: -15px;margin-top: -15px;margin-bottom: 15px;
+    }
+    fieldset {
+        text-align: center;
+        &:first-child {
+            margin-top: 30px;
+        }
+    }
+
 }
 
 /* Create the animation blocks */
