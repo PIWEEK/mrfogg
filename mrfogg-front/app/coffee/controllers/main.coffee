@@ -39,21 +39,21 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
     resource.getUser($rootScope.userid).then (result) ->
         $scope.user = result
 
-
     return
 
-TripListController = ($scope, $rootScope, resource) ->
+TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
+    $rootScope.tripId = parseInt($routeParams.tripId, 10)
+    $rootScope.tripId = 1 if not $rootScope.tripId
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
-        tripId = 1
         $scope.mytrips = _.remove($scope.triplist, (trip) -> 
-            return trip.id == tripId
+            return trip.id == $rootScope.tripId
         ) 
         $scope.mytrip = $scope.mytrips[0]
-
-    $scope.changeTrip = (tripId)->
-        alert("cambio #{tripId}")
+        #$gmStorage.set("tripid", $scope.mytrip)
+        resource.getTasks($rootScope.tripId).then (result) ->
+            $scope.tasklist = result._attrs
 
     return
 
@@ -138,7 +138,7 @@ module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "re
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("TooltipController", ["$scope", TooltipController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
-module.controller("TripListController", ["$scope", "$rootScope", "resource", TripListController])
+module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", "$gmStorage", "resource", TripListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 
