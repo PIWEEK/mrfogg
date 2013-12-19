@@ -5,7 +5,7 @@
     <div class="card-container" ng-controller="CardsController">
         <div class="card register">
             <form>
-                <div class="title"><input class="title" placeholder="Escribe aqui el nombre de tu viaje"/></div>
+                <div class="title"><input class="title" placeholder="Escribe aqui el nombre de tu viaje" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Escribe aqui el nombre de tu viaje'" /></div>
                 <h3><i class="icon-user"></i> TODO: Add user email <!-- No vale card owner por que la card no tiene owner --></h3>
                 <fieldset>
                     <label>Descripcion</label>
