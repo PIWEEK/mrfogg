@@ -2,8 +2,6 @@ package org.mrfogg.exceptions
 
 import javax.ws.rs.WebApplicationException
 import groovy.transform.InheritConstructors
-import org.mrfogg.marshallers.ExceptionSerializer
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
 
 /**
  * This exception will be the root for exceptions thrown by
@@ -14,7 +12,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize
  * known HTTP error code
  */
 @InheritConstructors
-@JsonSerialize(using = ExceptionSerializer)
 abstract class MrFoggException extends WebApplicationException {
 
 
