@@ -16,6 +16,7 @@ import org.mrfogg.resources.TripResource
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.resources.FixtureResource
 import org.mrfogg.resources.UserResource
+import org.mrfogg.services.TripService
 import org.mrfogg.services.AuthHibernateService
 import org.mrfogg.services.FixtureService
 import org.mrfogg.widget.WidgetProvider
@@ -91,12 +92,13 @@ class MrFoggService extends Service<MrFoggConfiguration> {
 
         final Map<String,BaseDAO> daoMap = getDaoMap(hibernateBundle.sessionFactory)
         final AuthHibernateService authService = new AuthHibernateService(userDao: daoMap.userDAO)
+        final TripService tripService = new TripService(tripDao: daoMap.tripDAO, userDao: daoMap.userDAO)
         final FixtureService fixtureService = [daoMap]
 
         environment.with {
             addFilter(new CorsFilter(), '/*')
             addResource(new UserResource(userDAO: daoMap.userDAO))
-            addResource(new TripResource(tripDAO: daoMap.tripDAO))
+            addResource(new TripResource(tripService: tripService))
             addResource(new AuthResource(authService: authService))
             addResource(new FixtureResource(fixtureService: fixtureService))
             addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))

@@ -13,6 +13,7 @@ class TripSerializer<Trip>  extends JsonSerializer {
             writeNumberField('id', trip.id)
             writeStringField('name', trip.name)
             writeStringField('description', trip.description)
+            writeObjectField('members', trip.users)
             writeEndObject()
         }
     }
