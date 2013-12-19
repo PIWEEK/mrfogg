@@ -73,9 +73,14 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
     return
 
 CardsController = ($scope, $rootScope, resource, $routeParams)->
+    $scope.widgetHost = "http://localhost:8080"
+
     onSuccess = (data) ->
         console.log("SUCCESS", data)
         $scope.loadedCards = data._attrs
+
+        for card in data._attrs
+            console.debug("card", card)
 
     onError = (data) ->
         console.log("error " + data)

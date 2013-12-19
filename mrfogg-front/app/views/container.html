@@ -7,8 +7,7 @@
             <h2>{{ card.title }}</h2>
             <h3><i class="icon-user"></i> {{ card.owner.email }}</h3>
             <p>{{ card.description }}</p>
-            <h1>{{ test }}</h1>
-            <div class="widget" ng-include="card.widgetTemplate"></div>
+            <div class="widget" ng-include="widgetHost + card.widget.template"></div>
 
             <div class="comments" ng-controller="CommentController">
                 <div class="comment" ng-repeat="comment in comments">

@@ -195,15 +195,24 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
 
     service.postComment = (tripId, taskId, cardId, data)->
-        console.log("POSTING", data)
-
         defered = $q.defer()
 
         return $http(
             method:'POST'
+            headers: headers(false),
             url: "#{$gmUrls.api("trips")}/#{tripId}/tasks/#{taskId}/cards/#{cardId}/comments"
             data: JSON.stringify(data)
         )
+
+    service.getWidgetData = (widgetData)->
+        defered = $q.defer()
+
+        return $http(
+            method:'GET'
+            headers: headers(false),
+            url: "#{$gmUrls.api("root")}#{widgetData}"
+        )
+
 
     ## Create a new card inside the task?
     #service.postTaskCards = (tripId, taskId) ->
