@@ -171,8 +171,9 @@ p {
         margin: 0 auto;
     }
     header {
-        position: relative;
+        position: fixed;
         max-width: 10000px;
+        z-index: 100;
         .background {
             background: @basecolor;
             padding: 0 10000px;
@@ -183,7 +184,7 @@ p {
         }
         .content {
             display: table;
-            max-width: 1000px;
+            width: 1000px;
             padding: 10px;
             position: absolute;
             left: 0;
