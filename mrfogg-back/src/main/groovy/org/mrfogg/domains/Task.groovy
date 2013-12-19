@@ -18,7 +18,7 @@ import org.mrfogg.marshallers.TaskSerializer
 @JsonSerialize(using = TaskSerializer)
 class Task extends BaseDomain {
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     String name
 
     @ManyToOne

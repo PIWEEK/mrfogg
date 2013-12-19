@@ -95,7 +95,7 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final Map<String,BaseDAO> daoMap = getDaoMap(hibernateBundle.sessionFactory)
         final AuthHibernateService authService = new AuthHibernateService(userDao: daoMap.userDAO)
         final TripService tripService = new TripService(tripDao: daoMap.tripDAO, userDao: daoMap.userDAO)
-        final TaskService taskService = new TaskService(taskDao: daoMap.taskDAO)
+        final TaskService taskService = new TaskService(taskDao: daoMap.taskDAO, tripDao: daoMap.tripDAO)
         final FixtureService fixtureService = [daoMap]
 
         environment.with {
