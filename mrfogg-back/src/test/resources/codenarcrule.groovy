@@ -11,7 +11,9 @@ ruleset {
         'AbstractClassWithoutAbstractMethod' enabled: false
         'AbstractClassWithPublicConstructor' enabled: false
     }
-    ruleset('rulesets/dry.xml')
+    ruleset('rulesets/dry.xml') {
+        'DuplicateStringLiteral' enabled: false
+    }
     ruleset('rulesets/exceptions.xml')
     ruleset('rulesets/formatting.xml')
     ruleset('rulesets/generic.xml')
