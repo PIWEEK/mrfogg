@@ -12,13 +12,14 @@ import javax.ws.rs.core.Response
 
 import org.mrfogg.domains.User
 
+@Path('/auth')
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class AuthResource {
     def authService
 
     @POST
-    @Path('/login')
+    @Path('login')
     @UnitOfWork
     def login(Map input) {
         def user = new User(email:input.email, password:input.password)
@@ -27,7 +28,7 @@ class AuthResource {
     }
 
     @POST
-    @Path('/logout')
+    @Path('logout')
     @UnitOfWork
     Response logout(@Auth User user) {
         authService.removeAuth(user)
