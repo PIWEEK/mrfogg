@@ -1,4 +1,4 @@
-MainController = ($scope, resource) ->
+MainController = ($scope, resource, $timeout) ->
     resource.getUser("me").then (result) ->
         $scope.user = result
 
@@ -30,6 +30,25 @@ MainController = ($scope, resource) ->
         else
             task.status = "done"
         console.log "new status: "+task.status
+
+    $scope.isFlashWarnVisible = false
+    $scope.isFlashErrorVisible = false
+    $scope.isFlashSuccessVisible = false
+
+    $scope.$on("flash", (event, data)->
+        $scope.isFlashWarnVisible = true if data.type == "warn"
+        $scope.isFlashErrorVisible = true if data.type == "error"
+        $scope.isFlashSuccessVisible = true if data.type == "success"
+        $scope.flashMessage = data.message
+
+        hideFlash = ()->
+            console.log "FUNCIONAAAA"
+            $scope.isFlashWarnVisible = false
+            $scope.isFlashErrorVisible = false
+            $scope.isFlashSuccessVisible = false
+
+        $timeout(hideFlash, 2000)
+    )
 
     return
 
@@ -157,15 +176,18 @@ CommentController = ($scope, resource, $routeParams)->
 
 NewCardController = ($scope)->
     $scope.publishCard = ()->
-        $scope.$emit("new-card", $scope.card)
-        $scope.card = {}
+        if $scope.card.title and $scope.card.description
+            $scope.$emit("new-card", $scope.card)
+            $scope.card = {}
+        else
+            $scope.$emit("flash", { "type": "error", "message": "Error de validación"})
 
     $scope.card = {}
 
     return
 
 module = angular.module("mrfogg.controllers.main", [])
-module.controller("MainController", ["$scope","resource", MainController])
+module.controller("MainController", ["$scope","resource", "$timeout", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("TooltipController", ["$scope", "$document", TooltipController])

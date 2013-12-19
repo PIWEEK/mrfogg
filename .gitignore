@@ -8,3 +8,4 @@ mrfogg-front/app/styles/*.css
 *.db
 mrfogg-back/logs
 mrfogg-widget-image/src/main/resources/assets
+*.orig
