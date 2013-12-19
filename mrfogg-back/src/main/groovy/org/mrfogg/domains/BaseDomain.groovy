@@ -11,7 +11,7 @@ class BaseDomain {
     @GeneratedValue
     Long id
 
-    Date dateCreate
-    Date lastUpdate
+    Date dateCreated
+    Date lastModified
 
 }

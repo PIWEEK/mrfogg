@@ -27,6 +27,6 @@ class Task extends BaseDomain {
     TaskStatus status = TaskStatus.pending
 
     @OneToMany(cascade = ALL, mappedBy = 'task')
-    List<Card> cards
+    List<Card> cards = []
 
 }
