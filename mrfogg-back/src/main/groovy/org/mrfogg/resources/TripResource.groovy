@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType
 
 import org.mrfogg.domains.User
 import org.mrfogg.domains.Trip
-import org.mrfogg.daos.TripDAO
 import org.mrfogg.services.TripService
 
 import com.yammer.dropwizard.auth.Auth
@@ -61,7 +60,7 @@ class TripResource {
     @Timed
     @Path('{id}/addUser/{userId}')
     @UnitOfWork
-    Trip addUserToTrip(@Auth User user,@PathParam('userId') Long addedUser, @PathParam('id') Long trip) {
+    Trip addUserToTrip(@Auth User user, @PathParam('userId') Long addedUser, @PathParam('id') Long trip) {
         log.debug("User ${user.email} is adding user ${addedUser} to trip ${trip}")
         return tripService.addUserToTrip(addedUser, trip)
     }
