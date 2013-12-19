@@ -23,6 +23,14 @@ MainController = ($scope, resource) ->
     $scope.$on("new-card", (data)->
         $scope.showCardForm = false
     )
+
+    $scope.taskToggleStatus = (task) ->
+        if task.status == "done"
+            task.status = "pending"
+        else
+            task.status = "done"
+        console.log "new status: "+task.status
+
     return
 
 ContainerController = ($scope) ->
@@ -63,15 +71,6 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
             $rootScope.mytrip = $scope.mytrips[0]
             resource.getTasks($rootScope.tripId).then (result) ->
                 $rootScope.tasklist = result._attrs
-
-
-    taskToggleDone = (task) ->
-        if task.status = "done"
-            task.status = "pending"
-        else
-            task.status = "done"
-
-
 
     return
 
