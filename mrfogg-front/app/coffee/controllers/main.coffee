@@ -64,6 +64,15 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
             resource.getTasks($rootScope.tripId).then (result) ->
                 $rootScope.tasklist = result._attrs
 
+
+    taskToggleDone = (task) ->
+        if task.status = "done"
+            task.status = "pending"
+        else
+            task.status = "done"
+
+
+
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
