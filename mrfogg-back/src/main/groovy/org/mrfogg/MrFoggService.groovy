@@ -12,10 +12,12 @@ import com.yammer.dropwizard.auth.oauth.OAuthProvider
 import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.daos.BaseDAO
 import org.mrfogg.domains.User
+import org.mrfogg.resources.TaskResource
 import org.mrfogg.resources.TripResource
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.resources.FixtureResource
 import org.mrfogg.resources.UserResource
+import org.mrfogg.services.TaskService
 import org.mrfogg.services.TripService
 import org.mrfogg.services.AuthHibernateService
 import org.mrfogg.services.FixtureService
@@ -93,12 +95,14 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final Map<String,BaseDAO> daoMap = getDaoMap(hibernateBundle.sessionFactory)
         final AuthHibernateService authService = new AuthHibernateService(userDao: daoMap.userDAO)
         final TripService tripService = new TripService(tripDao: daoMap.tripDAO, userDao: daoMap.userDAO)
+        final TaskService taskService = new TaskService(taskDao: daoMap.taskDAO)
         final FixtureService fixtureService = [daoMap]
 
         environment.with {
             addFilter(new CorsFilter(), '/*')
             addResource(new UserResource(userDAO: daoMap.userDAO))
             addResource(new TripResource(tripService: tripService))
+            addResource(new TaskResource(taskService: taskService))
             addResource(new AuthResource(authService: authService))
             addResource(new FixtureResource(fixtureService: fixtureService))
             addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
