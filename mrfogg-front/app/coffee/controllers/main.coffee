@@ -43,17 +43,26 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
 TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
-    $rootScope.tripId = parseInt($routeParams.tripId, 10)
-    $rootScope.tripId = 1 if not $rootScope.tripId
-    resource.getTrips($rootScope.userid).then (result) ->
-        $scope.triplist = result
-        $scope.mytrips = _.remove($scope.triplist, (trip) -> 
-            return trip.id == $rootScope.tripId
-        ) 
-        $scope.mytrip = $scope.mytrips[0]
-        #$gmStorage.set("tripid", $scope.mytrip)
-        resource.getTasks($rootScope.tripId).then (result) ->
-            $scope.tasklist = result._attrs
+    tripIdFromUrl = parseInt($routeParams.tripId, 10)
+    console.log "tripid "+$rootScope.tripId
+    changed = false
+    trip_unset = false
+    if not isNaN(tripIdFromUrl) and (tripIdFromUrl != $rootScope.tripId)
+        $rootScope.tripId = tripIdFromUrl
+        changed = true
+    if isNaN(tripIdFromUrl)
+        trip_unset = true
+    if trip_unset
+        $rootScope.tripId = 1
+    if trip_unset or changed    
+        resource.getTrips($rootScope.userid).then (result) ->
+            $scope.triplist = result
+            $scope.mytrips = _.remove($scope.triplist, (trip) -> 
+                return trip.id == $rootScope.tripId
+            ) 
+            $rootScope.mytrip = $scope.mytrips[0]
+            resource.getTasks($rootScope.tripId).then (result) ->
+                $rootScope.tasklist = result._attrs
 
     return
 
