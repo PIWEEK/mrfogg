@@ -22,14 +22,6 @@ class UserResource {
 
     UserDAO userDAO
 
-    @POST
-    @UnitOfWork
-    User create(Map params) {
-        return this.userDAO.persist(
-            new User(params)
-        )
-    }
-
     @GET
     @Timed
     @UnitOfWork
@@ -55,12 +47,6 @@ class UserResource {
     @Timed
     @UnitOfWork
     Map test() {
-        this.userDAO.with {
-            create(new User(email: 'mgdelacroix@gmail.com', password: 'mgdelacroix'))
-            create(new User(email: 'mario.ggar@gmail.com', password: 'marioggar'))
-            create(new User(email: 'alotor@gmail.com', password: 'alotor'))
-        }
-        
         return [message: 'Usuarios creados']
     }
 
