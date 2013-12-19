@@ -11,7 +11,6 @@ module.exports = (grunt) ->
         copy:
             dev:
                 files:[
-                    expand: true
                     src: ['client/*.html']
                     dest: 'src/main/resources/assets/'
                 ]

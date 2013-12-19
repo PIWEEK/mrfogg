@@ -1,10 +1,10 @@
 package org.mrfogg.daos
 
-import org.mrfogg.domains.Trip
+import org.mrfogg.domains.Card
 import groovy.transform.InheritConstructors
 
 @InheritConstructors
-class TripDAO extends BaseDAO<Trip> {
+class CardDAO extends BaseDAO<Card> {
 
 
 }

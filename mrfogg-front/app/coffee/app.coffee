@@ -46,6 +46,7 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
         {templateUrl: '/views/userlist.html', controller:"UserListController"})
 
     apiUrls = {
+        "root": "/"
         "login": "/login"
         "logout": "/logout"
         "users": "/users"
