@@ -24,7 +24,6 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         return data
 
     queryMany = (name, params, options, urlParams) ->
-        console.log("queryMany", name, params, options, urlParams)
         defaultHttpParams = {
             method: "GET",
             headers:  headers(),
@@ -184,7 +183,6 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 
     # Get a trip tasks
     service.getTasks = (tripId) ->
-        console.log ">>>"+tripId
         return queryOne("trips", "#{tripId}/tasks")
 
     # Get a task
@@ -199,8 +197,18 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         defered = $q.defer()
         return $http(
             method:'POST'
+            headers: headers(false),
             url: "#{$gmUrls.api("trips")}/#{tripId}/tasks/#{taskId}/cards/#{cardId}/comments"
             data: JSON.stringify(data)
+        )
+
+    service.getWidgetData = (widgetData)->
+        defered = $q.defer()
+
+        return $http(
+            method:'GET'
+            headers: headers(false),
+            url: "#{$gmUrls.api("root")}#{widgetData}"
         )
 
     service.postCard = (tripId, taskId, data)->

@@ -29,8 +29,6 @@ modules = [
 ]
 
 configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $compileProvider, $gmUrlsProvider, $sceDelegateProvider)->
-    console.log ("Config...")
-
     $routeProvider.when('/',
         {templateUrl: '/views/container.html', controller: "ContainerController"})
 
@@ -61,7 +59,6 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
     return
 
 init = ($rootScope, $gmStorage, $gmAuth, $gmUrls, config)->
-    console.log ("Initializing...")
     $rootScope.auth = $gmAuth.getUser()
     $gmUrls.setHost("api", config.host,config.scheme)
 
