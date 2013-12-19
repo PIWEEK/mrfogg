@@ -58,7 +58,7 @@ class TripService {
         Trip trip = this.tripDao.get(tripId)
 
         if (!user || !trip) {
-            return new PersistenceException("To add a user user and trip are needed")
+            return new PersistenceException('To add a user user and trip are needed')
         }
 
         trip.users << user
