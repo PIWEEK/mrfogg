@@ -3,6 +3,31 @@
 
 <section class="right-col">
     <div class="card-container" ng-controller="CardsController">
+        <div class="card register">
+            <form>
+                <div class="title"><input class="title" placeholder="Escribe aqui el nombre de tu viaje" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Escribe aqui el nombre de tu viaje'" /></div>
+                <h3><i class="icon-user"></i> TODO: Add user email <!-- No vale card owner por que la card no tiene owner --></h3>
+                <fieldset>
+                    <label>Descripcion</label>
+                    <textarea></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>Elige tu widget:</label>
+                    <div class="select-style">
+                        <select>
+                            <option>Widget 1</option>
+                            <option>Widget 2</option>
+                            <option>Widget 3</option>
+                            <option>Widget 4</option>
+                            <option>Widget 5</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <button class="btn" type="submit">Publicar</button>
+                </fieldset>
+            </form>
+        </div>
         <div class="card" ng-repeat="card in loadedCards">
             <h2>{{ card.title }}</h2>
             <h3><i class="icon-user"></i> {{ card.owner.email }}</h3>
@@ -11,17 +36,23 @@
 
             <div class="comments" ng-controller="CommentController">
                 <div class="comment" ng-repeat="comment in comments">
-                    <span class="comment-user">{{ comment.user.email }}</span>
+                    <span class="comment-user">
+                        <img class="user" ng-src="{{ comment.user.avatar }}?s=34">
+                    </span>
                     <span class="comment-text">{{ comment.text }}</span>
                 </div>
                 <form ng-submit="addComment()">
-                    <textarea class="comment-input" ng-model="inputComment"></textarea>
+                    <textarea placeholder="Escribe tu comentario..." class="comment-input" ng-model="inputComment"></textarea>
                     <div>
-                        <input type="submit" value="Submit" />
+                        <input class="btn" type="submit" value="Submit" />
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
+
 </section>
 
