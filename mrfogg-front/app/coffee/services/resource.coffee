@@ -194,7 +194,6 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
 
     service.postComment = (tripId, taskId, cardId, data)->
-        defered = $q.defer()
         return $http(
             method:'POST'
             headers: headers(false),
@@ -203,8 +202,6 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         )
 
     service.getWidgetData = (widgetData)->
-        defered = $q.defer()
-
         return $http(
             method:'GET'
             headers: headers(false),
@@ -212,9 +209,9 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         )
 
     service.postCard = (tripId, taskId, data)->
-        defered = $q.defer()
         return $http(
             method:'POST'
+            headers: headers(false),
             url: "#{$gmUrls.api("trips")}/#{tripId}/tasks/#{taskId}/cards"
             data: JSON.stringify(data)
         )
