@@ -7,7 +7,6 @@ import com.yammer.dropwizard.auth.Auth
 import com.yammer.dropwizard.hibernate.UnitOfWork
 
 import javax.ws.rs.GET
-import javax.ws.rs.POST
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
 import javax.ws.rs.PathParam
@@ -21,14 +20,6 @@ import groovy.util.logging.Log4j
 class UserResource {
 
     UserDAO userDAO
-
-    @POST
-    @UnitOfWork
-    User create(Map params) {
-        return this.userDAO.persist(
-            new User(params)
-        )
-    }
 
     @GET
     @Timed
@@ -60,7 +51,6 @@ class UserResource {
             create(new User(email: 'mario.ggar@gmail.com', password: 'marioggar'))
             create(new User(email: 'alotor@gmail.com', password: 'alotor'))
         }
-        
         return [message: 'Usuarios creados']
     }
 
