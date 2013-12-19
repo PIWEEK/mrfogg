@@ -8,6 +8,8 @@ import com.yammer.dropwizard.db.DatabaseConfiguration
 import com.yammer.dropwizard.hibernate.HibernateBundle
 import com.yammer.dropwizard.migrations.MigrationsBundle
 import com.yammer.dropwizard.auth.oauth.OAuthProvider
+import com.yammer.metrics.core.MetricsRegistry
+import com.yammer.metrics.reporting.JmxReporter
 
 import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.daos.BaseDAO
@@ -25,6 +27,9 @@ import org.mrfogg.services.AuthHibernateService
 import org.mrfogg.services.FixtureService
 import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.filter.CorsFilter
+import org.mrfogg.exceptions.MrFoggExceptionMapper
+import org.mrfogg.exceptions.WebApplicationExceptionMapper
+import org.mrfogg.exceptions.ThrowableMapper
 
 import org.mrfogg.health.MemoryHealthCheck
 
@@ -102,6 +107,8 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final TaskService taskService = new TaskService(taskDao: daoMap.taskDAO, tripDao: daoMap.tripDAO)
         final CardService cardService = new CardService(cardDao: daoMap.cardDAO)
         final FixtureService fixtureService = [daoMap]
+        final MetricsRegistry metricsRegistry = new MetricsRegistry()
+        final JmxReporter reporter = new JmxReporter(metricsRegistry)
 
         environment.with {
             addFilter(new CorsFilter(), '/*')
@@ -112,13 +119,17 @@ class MrFoggService extends Service<MrFoggConfiguration> {
             addResource(new AuthResource(authService: authService))
             addResource(new FixtureResource(fixtureService: fixtureService))
             addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
-
+            addProvider(new WebApplicationExceptionMapper())
+            addProvider(new MrFoggExceptionMapper())
+            addProvider(new ThrowableMapper())
             addHealthCheck(new MemoryHealthCheck())
 
         }
 
         // Plugins:
         widgets*.run(configuration, environment)
+        // JMX reporter
+        reporter.start()
     }
 
     Map<String, BaseDAO> getDaoMap(SessionFactory sessionFactory) {
