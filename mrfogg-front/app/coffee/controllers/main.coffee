@@ -23,13 +23,17 @@ MainController = ($scope, resource) ->
     $scope.$on("new-card", (data)->
         $scope.showCardForm = false
     )
+    return
 
+TaskListController = ($scope, $rootScope, resource) ->
     $scope.taskToggleStatus = (task) ->
         if task.status == "done"
             task.status = "pending"
         else
             task.status = "done"
-        console.log "new status: "+task.status
+        p = resource.updateTask($rootScope.mytrip.id, task.id, task)
+        p.then ()->
+            console.log("guardado OK, pidendo lista")
 
     return
 
@@ -174,4 +178,4 @@ module.controller("TripListController", ["$scope", "$rootScope", "$routeParams",
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 module.controller("NewCardController", ["$scope", NewCardController])
-
+module.controller("TaskListController", ["$scope", "$rootScope", "resource", TaskListController])
