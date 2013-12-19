@@ -231,6 +231,15 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
             url: "#{$gmUrls.api("trips")}"
             data: JSON.stringify(data)
         )
+
+    service.postTask = (tripId, data)->
+        return $http(
+            method:'POST'
+            headers: headers(false),
+            url: "#{$gmUrls.api("trips")}/#{tripId}/tasks"
+            data: JSON.stringify(data)
+        )
+
     ## Create a new card inside the task?
     #service.postTaskCards = (tripId, taskId) ->
     #    return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")

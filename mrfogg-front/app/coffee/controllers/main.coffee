@@ -65,6 +65,15 @@ TaskListController = ($scope, $rootScope, resource) ->
         p.then ()->
             console.log("guardado OK, pidendo lista")
 
+    $scope.addTask = ()->
+        cb = resource.postTask($rootScope.mytrip.id, $scope.task)
+        cb.then (response)->
+            $rootScope.tasklist.push(response.data)
+        $scope.task = {}
+        return
+
+    $scope.task = {}
+
     return
 
 ContainerController = ($scope) ->
