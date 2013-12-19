@@ -415,7 +415,15 @@ p {
                 fieldset {
                     border: 0;
                 }
+                .title-holder {
+                    overflow: hidden;
+                    background: @basecolor;
+                    &.error {
+                        background: @error;
+                    }
+                }
                 input.title {
+                    background: none;
                     border: 0;
                     font-size: 2.3em;
                     font-family: base;
@@ -423,7 +431,6 @@ p {
                     margin: 0px;
                     padding: 10px;
                     color: white;
-                    background: @basecolor;
                     text-shadow: 0 3px rgba(0, 0, 0, 0.3);
                     width: 100%;
                     &::-webkit-input-placeholder { /* WebKit browsers */
@@ -493,11 +500,12 @@ p {
                 color: @darkinfo;
             }
             p {
+                margin: 0;
                 padding: 15px;
             }
 
             .comments {
-                padding: 5px;
+                padding: 10px;
 
                 .comment, .comment-input {
                     border: 1px solid rgb(226, 219, 219);
@@ -509,7 +517,7 @@ p {
                     border-bottom: double rgb(207, 196, 196);
                     .rounded-corners(4px);
                     color: gray;
-                    width: 95%;
+                    width: 100%;
 
                     .comment-user {
                         position: absolute;
@@ -525,7 +533,6 @@ p {
                     }
                     .comment-text {
                         display: block;
-                        margin-top: 10px;
                     }
 
                 }
