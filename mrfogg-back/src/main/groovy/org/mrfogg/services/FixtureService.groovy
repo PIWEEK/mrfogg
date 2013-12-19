@@ -1,5 +1,6 @@
 package org.mrfogg.services
 
+import org.mrfogg.domains.Card
 import org.mrfogg.domains.User
 import org.mrfogg.domains.Trip
 import org.mrfogg.domains.Task
@@ -39,6 +40,12 @@ class FixtureService {
 
         londonTrip.tasks << task
         daoMap.tripDAO.persist(londonTrip)
+
+        3.times { i ->
+            Card card = daoMap.cardDAO.create(new Card(title: "card ${i + 1}", owner: mgdelacroix, task: task))
+            task.cards << card
+            daoMap.taskDAO.persist(task)
+        }
 
     }
 
