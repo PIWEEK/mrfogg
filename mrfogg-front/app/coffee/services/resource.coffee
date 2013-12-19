@@ -184,7 +184,8 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
 
     # Get a trip tasks
     service.getTasks = (tripId) ->
-        return queryMany("trips", "#{tripId}/tasks")
+        console.log ">>>"+tripId
+        return queryOne("trips", "#{tripId}/tasks")
 
     # Get a task
     service.getTask = (tripId, taskId) ->

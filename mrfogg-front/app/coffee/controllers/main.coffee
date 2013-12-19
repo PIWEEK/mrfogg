@@ -38,22 +38,17 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
 TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
-    $rootScope.tripid = parseInt($routeParams.tripid, 10)
-    $rootScope.tripid = 1 if not $rootScope.tripid
-    $scope.$emit("mytrip:refresh")
+    $rootScope.tripId = parseInt($routeParams.tripId, 10)
+    $rootScope.tripId = 1 if not $rootScope.tripId
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
-        tripId = 1
         $scope.mytrips = _.remove($scope.triplist, (trip) -> 
-            return trip.id == $rootScope.tripid
+            return trip.id == $rootScope.tripId
         ) 
         $scope.mytrip = $scope.mytrips[0]
         #$gmStorage.set("tripid", $scope.mytrip)
-    $scope.$on("mytrip:refresh", loadTasks)
-
-    loadTasks = ->
-        resource.getTasks($rootScope.tripid).then (result) ->
-            $scope.tasklist = result
+        resource.getTasks($rootScope.tripId).then (result) ->
+            $scope.tasklist = result._attrs
 
     return
 
