@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mr. FOGG - Collaborative Trip Planning</title>
+        <meta name="description" content="Mr. FOGG - Collaborative Trip Planning">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/styles/main.css">
+    </head>
+    <body ng-app="mrfogg" ng-controller="MainController">
+        <div class="bg-holder">
+            <div class="earth-holder">
+                <div id="earth" class="circle"></div>
+                <div class="cloud">
+                </div>
+                <div class="cloud-2">
+                </div>
+                <div class="planes">
+                    <div class="plane plane-1 plane1"></div>
+                    <div class="plane plane-2 plane2"></div>
+                    <div class="plane plane-3 plane3"></div>
+                </div>
+                <div class="planes-2">
+                    <div class="plane plane-1 plane4"></div>
+                    <div class="plane plane-2 plane5"></div>
+                    <div class="plane plane-3 plane6"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="new-task-dialog" ng-show="showTaskDialog" ng-include="'/views/dialogTask.html'"></div>
+        <div id="new-trip-dialog" ng-show="showTripDialog" ng-include="'/views/dialogTrip.html'"></div>
+
+        <div class="wrapper">
+            <div class="container" ng-view></div>
+        </div>
+
+        <div ng-include="'/views/flash.html'"></div>
+
+        <script src="/dist/libs.js"></script>
+        <script src="/dist/app.js"></script>
+        <script src="http://localhost:8080/assets/js/widget.js"></script>
+
+    </body>
+</html>
