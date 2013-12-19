@@ -101,9 +101,15 @@ MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmA
 
     return
 
-TooltipController = ($scope)->
-    $scope.showTooltip = ()=>
-       $(".icon-menu").siblings(".tooltip").toggle();
+TooltipController = ($scope, $document)->
+    $scope.isTooltipVisible = false
+    $scope.showTooltip = ()->
+        $scope.isTooltipVisible = !$scope.isTooltipVisible
+
+    $scope.hideTooltip = ()->
+        $scope.isTooltipVisible = false
+
+
 
 CardsController = ($scope, $rootScope, resource, $routeParams)->
     $scope.widgetHost = "http://localhost:8080"
@@ -158,7 +164,7 @@ module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope","resource", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
-module.controller("TooltipController", ["$scope", TooltipController])
+module.controller("TooltipController", ["$scope", "$document", TooltipController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", "$gmStorage", "resource", TripListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
