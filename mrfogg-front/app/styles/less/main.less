@@ -497,35 +497,44 @@ p {
             }
 
             .comments {
-                border: 1px solid black;
                 padding: 5px;
 
-                .comment {
-                    border: 1px solid black;
+                .comment, .comment-input {
+                    border: 1px solid rgb(226, 219, 219);
                     position: relative;
-                    padding: 10px;
+                    padding: 15px;
                     margin-top: 2px;
-                    margin-bottom: 2px;
+                    margin-bottom: 10px;
+                    background: white;
+                    border-bottom: double rgb(207, 196, 196);
+                    .rounded-corners(4px);
+                    color: gray;
+                    width: 95%;
 
                     .comment-user {
                         position: absolute;
                         right: 5px;
-                        top: 0px;
+                        top: -4px;
+                        padding: 5px;
+                        .rounded-corners(4px);
+                        border: 1px solid @basecolor;
+                        background: white;
+                        -webkit-box-shadow: 0 2px 0 @basecolor;
+                        -moz-box-shadow: 0 2px 0 @basecolor;
+                        box-shadow: 0 2px 0 @basecolor;
                     }
                     .comment-text {
                         display: block;
                         margin-top: 10px;
                     }
-                }
 
+                }
                 .comment-input {
-                    width: 99%;
-                    height: 40px;
+                    border-color: @basecolor;
                 }
             }
         }
     }
-
 
 }
 
