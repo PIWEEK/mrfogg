@@ -24,7 +24,7 @@ class Task extends BaseDomain {
     @ManyToOne
     @JoinColumn
     Trip trip
-    TaskStatus status = TaskStatus.PENDING
+    TaskStatus status = TaskStatus.pending
 
     @OneToMany(cascade = ALL, mappedBy = 'task')
     List<Card> cards

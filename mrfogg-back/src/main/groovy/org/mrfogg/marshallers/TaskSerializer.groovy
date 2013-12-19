@@ -12,7 +12,7 @@ class TaskSerializer<Task> extends JsonSerializer {
             writeStartObject()
             writeNumberField('id', task.id)
             writeStringField('name', task.name)
-            writeStringField('status', task.status.toString().toLowerCase())
+            writeStringField('status', task.status.toString())
             writeEndObject()
         }
     }

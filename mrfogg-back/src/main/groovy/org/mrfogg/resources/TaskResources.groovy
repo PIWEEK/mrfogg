@@ -4,6 +4,7 @@ import groovy.util.logging.Log4j
 
 import javax.ws.rs.GET
 import javax.ws.rs.POST
+import javax.ws.rs.PUT
 import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Consumes
@@ -36,6 +37,13 @@ class TaskResource {
     @UnitOfWork
     Task create(@PathParam('tripId') Long tripId, Map params) {
         return taskService.createTaskForTrip(tripId, params.name)
+    }
+
+    @PUT @Path('{id}')
+    @Timed
+    @UnitOfWork
+    Task create(@PathParam('id') Long id, Task task) {
+        return taskService.updateTaskById(task, id)
     }
 
 }
