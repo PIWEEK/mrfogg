@@ -381,6 +381,35 @@ p {
             box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
             margin-bottom: 15px;
             padding-bottom: 10px;
+            .register {
+                border: dashed 2px @darkbase;
+                padding: 8px 10px;
+                .rounded-corners(3px);
+                .input {
+                    padding: 0 0 0 5px;
+                }
+                input {
+                    background: white;
+                    border: 0;
+                    color: @darkbase ;
+                    height: 19px;
+                    font-family: base;
+                    font-size: 1em;
+                    padding: 10px;
+                    width: 100%;
+                    .rounded-corners(3px);
+                    &::-webkit-input-placeholder { /* WebKit browsers */
+                        color: @darkbase ;
+                    }
+                    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                        color: @darkbase ;
+                    }
+                    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                        color: @darkbase ;
+                    }
+                }
+
+            }
             h2 {
                 background: @darkbase;
                 font-size: 1.5em;
@@ -457,6 +486,7 @@ p {
             margin-bottom: 20px;
             background: rgba(255, 255, 255, 0.7);
             &.register {
+                border:  dashed 2px @darkbase;
                 fieldset {
                     border: 0;
                 }
