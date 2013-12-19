@@ -2,10 +2,10 @@
     <h2>Task title</h2>
 
     <ul class="content" ng-repeat="task in tasklist">
-        <li>
+        <li ng-class="task.status">
         <a ng-click="taskToggleStatus(task)">
-            <i ng-class="{'icon-checked':task.status=='done', 
+            <i ng-class="{'icon-checked':task.status=='done',
                           'icon-checkbox':task.status=='pending'}"></i></a>
-        <a ng-class="task.status" ng-href="#/trips/1/tasks/{{ task.id }}">{{ task.name }}</a></li>
+        <a ng-href="#/trips/1/tasks/{{ task.id }}">{{ task.name }}</a></li>
     </ul>
 </div>
