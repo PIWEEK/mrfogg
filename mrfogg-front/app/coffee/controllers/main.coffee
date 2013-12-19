@@ -31,6 +31,11 @@ MainController = ($scope, resource, $timeout, $routeParams, $location) ->
     $scope.$on("new-card", (data)->
         $scope.showCardForm = false
     )
+
+    $scope.$on("new-trip", (data)->
+        $scope.showTripDialog = false
+    )
+
     $scope.isFlashWarnVisible = false
     $scope.isFlashErrorVisible = false
     $scope.isFlashSuccessVisible = false
@@ -193,7 +198,34 @@ NewCardController = ($scope)->
             $scope.$emit("flash", { "type": "error", "message": "Error de validación"})
 
     $scope.card = {}
+    return
 
+NewTripController = ($scope, resource, $location)->
+    $scope.publishTrip = ()->
+        if $scope.trip.name and $scope.trip.description
+            cb = resource.postTrip($scope.trip)
+            cb.then(
+                (result)->
+                    $scope.$emit("new-trip", $scope.trip)
+                    $scope.trip = { members : [] }
+                    $location.url("/trips/#{result.data.id}")
+                    console.log("New trip", result)
+                (error)-> $scope.$emit("flash", { "type": "error", "message": error})
+            )
+        else
+            $scope.$emit("flash", { "type": "error", "message": "No se puede crear el viaje, revise los campos"})
+        return
+
+    $scope.enterEmail = ()->
+        found = false
+        for curr in $scope.trip.members
+            found = true if $scope.emailInput is curr
+        $scope.trip.members.push($scope.emailInput) unless found
+        $scope.emailInput = ""
+        return
+
+    $scope.trip = { members : [] }
+    $scope.emailInput = ""
     return
 
 module = angular.module("mrfogg.controllers.main", [])
@@ -207,3 +239,4 @@ module.controller("CardsController", ["$scope", "$rootScope", "resource", "$rout
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 module.controller("NewCardController", ["$scope", NewCardController])
 module.controller("TaskListController", ["$scope", "$rootScope", "resource", TaskListController])
+module.controller("NewTripController", ["$scope", "resource", "$location", NewTripController])

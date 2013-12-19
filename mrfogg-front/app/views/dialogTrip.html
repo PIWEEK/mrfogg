@@ -1,20 +1,33 @@
 <div class="veil" style=""></div>
 <div class="back-cloud"></div>
-<div class="new-card-dialog">
+
+<div class="new-card-dialog" ng-controller="NewTripController">
     <div class="ribbon">
         <div class="ribbon-stitches-top"></div>
         <strong class="ribbon-content">
-            <input type="input" name="title" value="" placeholder="Titulo de nuevo viaje">
+            <input ng-model="trip.name" type="input" name="name" value=""
+                placeholder="Titulo de nuevo viaje">
         </strong>
         <div class="ribbon-stitches-bottom">
         </div>
     </div>
     <form>
         <fieldset>
-            <textarea class="textarea" type="input" name="description" placeholder="Descripcion">                </textarea>
+            <textarea ng-model="trip.description"
+                class="textarea" type="input" name="description"
+                placeholder="Cuentanos algo de tu viaje"></textarea>
         </fieldset>
         <fieldset>
-            <input class="btn" type="submit" value="Guardar">
+            <input ng-model="emailInput"
+                class="email-input" type="text"
+                ng-enter="enterEmail()" ng-space="enterEmail()" ng-coma="enterEmail()"
+                placeholder="Escribe el email de tus amigos"/>
+            <ul class="email-list">
+                <li ng-repeat="email in trip.emails">{{ email }}</li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <input class="btn" type="submit" value="Guardar" ng-click="publishTrip()">
             <input class="btn btn-cancel" type="submit" value="Cancelar" ng-click="closeTripButton()">
         </fieldset>
     </form>
