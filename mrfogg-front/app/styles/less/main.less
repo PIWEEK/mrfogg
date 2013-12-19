@@ -48,28 +48,8 @@ p {
     line-height: 1.5;
 }
 
-
-
 /************ Background *************/
-.plane {
-    background: red;
-    position: absolute;
-    height: 30px;
-    width: 30px;
-    z-index: 0;
-    &.plane-1 {
-        top: 50%;
-        right: 0;
-    }
-    &.plane-2 {
-        top: 50%;
-        left: 0;
-    }
-    &.plane-3 {
-        bottom: 0;
-        left: 50%;
-    }
-}
+
 .bg-holder {
     height: 100%;
     position:  fixed;
@@ -114,9 +94,33 @@ p {
         width: 5000px;
         height: 5000px;
         background-size: 100%;
-        -webkit-animation: spin-back 80s linear infinite;
+        -webkit-animation: spin-back 30s linear infinite;
         position: absolute;
         margin-left: -2500px;
+        .plane {
+            background: url(../images/airplane2.png);
+            background-size: 100%;
+            display: block;
+            position: absolute;
+            height: 18px;
+            width: 50px;
+            z-index: 0;
+            &.plane-1 {
+                -webkit-animation: plane 15s linear infinite;
+                top: 50%;
+                right: 0;
+            }
+            &.plane-2 {
+                -webkit-animation: plane2 15s linear infinite;
+                top: 50%;
+                left: 0;
+            }
+            &.plane-3 {
+                -webkit-animation: plane3 15s linear infinite;
+                bottom: 0;
+                left: 50%;
+            }
+        }
     }
     .planes-2 {
         width: 5000px;
@@ -125,6 +129,30 @@ p {
         -webkit-animation: spin 40s linear infinite;
         position: absolute;
         margin-left: -2500px;
+        .plane {
+            background: url(../images/airplane1.png);
+            background-size: 100%;
+            display: block;
+            position: absolute;
+            height: 18px;
+            width: 50px;
+            z-index: 0;
+            &.plane-1 {
+                -webkit-animation: plane4 15s linear infinite;
+                top: 50%;
+                right: 0;
+            }
+            &.plane-2 {
+                -webkit-animation: plane5 15s linear infinite;
+                top: 50%;
+                left: 0;
+            }
+            &.plane-3 {
+                -webkit-animation: plane6 15s linear infinite;
+                bottom: 0;
+                left: 50%;
+            }
+        }
     }
 }
 
