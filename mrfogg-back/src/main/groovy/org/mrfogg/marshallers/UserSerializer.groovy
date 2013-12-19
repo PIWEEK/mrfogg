@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.JsonSerializer
 
-class UserSerializer<User>  extends JsonSerializer {
+class UserSerializer<User> extends JsonSerializer {
 
     void serialize(User user, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.with {

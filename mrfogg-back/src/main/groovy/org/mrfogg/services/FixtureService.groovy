@@ -1,6 +1,8 @@
 package org.mrfogg.services
 
 import org.mrfogg.domains.User
+import org.mrfogg.domains.Trip
+import org.mrfogg.domains.Task
 
 class FixtureService {
 
@@ -12,11 +14,31 @@ class FixtureService {
 
     void loadInitialData() {
 
+        User mgdelacroix
+        User mariog
+        User alotor
+
         daoMap.userDAO.with {
-            create(new User(email: 'mgdelacroix@gmail.com', password: 'mgdelacroix'))
-            create(new User(email: 'mario.ggar@gmail.com', password: 'marioggar'))
-            create(new User(email: 'alotor@gmail.com', password: 'alotor'))
+            mgdelacroix = create(new User(email: 'mgdelacroix@gmail.com', password: 'mgdelacroix'))
+            mariog = create(new User(email: 'mario.ggar@gmail.com', password: 'marioggar'))
+            alotor = create(new User(email: 'alotor@gmail.com', password: 'alotor'))
         }
+
+        Trip londonTrip
+
+        londonTrip = daoMap.tripDAO.create(new Trip(name: 'Londres', description: 'Big Ben and Stuff'))
+
+        londonTrip.users << mgdelacroix
+        mgdelacroix.trips << londonTrip
+        daoMap.tripDAO.persist(londonTrip)
+        daoMap.userDAO.persist(mgdelacroix)
+
+        Task task
+
+        task = daoMap.taskDAO.create(new Task(name: 'Elegir el avión', trip: londonTrip))
+
+        londonTrip.tasks << task
+        daoMap.tripDAO.persist(londonTrip)
 
     }
 

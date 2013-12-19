@@ -23,7 +23,7 @@ class User extends BaseDomain {
     String token
 
     @ManyToMany(targetEntity = Trip)
-    List<Trip> trips
+    List<Trip> trips = []
 
     /**
      * Obtains the Gravatar url for the user avatar

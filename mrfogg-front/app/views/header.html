@@ -20,9 +20,10 @@
             <a class="icon-menu" ng-click="showTooltip()">
             </a>
             <div class="tooltip" ng-show="isTooltipVisible" ng-mouseleave="hideTooltip()">
-                <a href="#/" ng-click="addTripButton(); hideTooltip()"><i class="icon-checkbox"></i> Crear nuevo viaje </a>
-                <a href="#/" ng-click="addTaskButton(); hideTooltip()"><i class="icon-add2"></i> Nueva Tarea </a>
-                <a href="#/" ng-click="addCardButton(); hideTooltip()"><i class="icon-add2"></i> Nueva Tarjeta </a>
+                <a ng-click="addTripButton(); hideTooltip()"><i class="icon-checkbox"></i> Crear nuevo viaje </a>
+                <a ng-click="addTaskButton(); hideTooltip()"><i class="icon-add2"></i> Nueva Tarea </a>
+                <a ng-click="addCardButton(); hideTooltip()"><i class="icon-add2"></i> Nueva Tarjeta </a>
+                <a ng-click="addCardButton(); hideTooltip()"><i class="icon-add2"></i> Logout </a>
             </div>
         </div>
     </div>
