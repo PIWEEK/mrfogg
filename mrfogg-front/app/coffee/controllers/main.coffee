@@ -116,8 +116,12 @@ CardsController = ($scope, $rootScope, resource, $routeParams)->
     tripId = $routeParams.tripId
     taskId = $routeParams.taskId
 
-    $scope.$on("new-card", (data)->
-        console.log("NEW CardsController", data)
+    $scope.$on("new-card", (event, data)->
+        console.log("guardando", data)
+        p = resource.postCard(tripId, taskId, data)
+        p.then ()->
+            console.log("guardado OK, pidendo lista")
+            resource.getTaskCards(tripId, taskId).then(onSuccess, onError)
     )
 
     resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
