@@ -1,4 +1,7 @@
-MainController = ($scope) ->
+MainController = ($scope, resource) ->
+    resource.getUser("me").then (result) ->
+        $scope.user = result
+
     $scope.addTaskButton = ()->
         $scope.showTaskDialog = true
 
@@ -27,8 +30,6 @@ ContainerController = ($scope) ->
     return
 
 UserListController = ($scope, $rootScope, resource) ->
-    $rootScope.pageTitle = 'Users'
-
     onSuccess = (data) ->
         $scope.userlist = data
 
@@ -38,16 +39,6 @@ UserListController = ($scope, $rootScope, resource) ->
 
     promise = resource.getUsers()
     promise = promise.then(onSuccess, onError)
-
-    return
-
-UserController = ($scope, $rootScope, $routeParams, resource) ->
-    $rootScope.pageTitle = 'My profile'
-    $rootScope.userid = parseInt($routeParams.uid, 10)
-    $rootScope.userid = "me" if not $rootScope.userid
-
-    resource.getUser($rootScope.userid).then (result) ->
-        $scope.user = result
 
     return
 
@@ -135,8 +126,7 @@ CommentController = ($scope, resource, $routeParams)->
     cardId = $scope.card.id
 
     $scope.addComment = ()->
-        user = { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
-        comment = { "user": user, text: $scope.inputComment }
+        comment = { "user": $scope.user, text: $scope.inputComment }
         $scope.comments.push comment
 
         commentData =
@@ -157,9 +147,8 @@ NewCardController = ($scope)->
     return
 
 module = angular.module("mrfogg.controllers.main", [])
-module.controller("MainController", ["$scope", MainController])
+module.controller("MainController", ["$scope","resource", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
-module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("TooltipController", ["$scope", TooltipController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
