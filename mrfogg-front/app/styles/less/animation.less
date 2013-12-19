@@ -83,18 +83,59 @@
         -webkit-animation-timing-function: ease-in;
     }
     25% {
-        -webkit-transform: translate3d(0, 260px, 0px);
+        -webkit-transform: translate3d(150px, 260px, 0px);
         -webkit-animation-timing-function: ease-out;
     }
     50% {
-        -webkit-transform: translate3d(0, 520px, 0px);
+        -webkit-transform: translate3d(300px, 520px, 0px);
     }
     75% {
-        -webkit-transform: translate3d(0, 260px, 0px);
+        -webkit-transform: translate3d(150px, 260px, 0px);
         -webkit-animation-timing-function: ease-out;
     }
     100% {
         -webkit-transform: translate3d(0, 0px, 0px);
         -webkit-animation-timing-function: ease-in;
     }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transform: scale(1.03);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.pulse {
+    -webkit-animation: pulse 1s linear infinite;
 }

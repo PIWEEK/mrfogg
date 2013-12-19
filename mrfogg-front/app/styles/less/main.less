@@ -18,6 +18,10 @@ html,body{
 }
 * {
     vertical-align: top;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
 }
 a {
     cursor: pointer;
@@ -157,6 +161,7 @@ p {
             left: 0;
             top: 0;
             z-index: 2;
+            height: 80px;
         }
         h1 {
             background: url("../images/mainlogo.png") no-repeat;
@@ -273,6 +278,7 @@ p {
             vertical-align: top;
             width: 150px;
             .menu-button {
+                margin-top: -3px;
                 .select();
                 float: right;
                 position: relative;
@@ -405,6 +411,69 @@ p {
             padding: 0;
             margin-bottom: 20px;
             background: rgba(255, 255, 255, 0.7);
+            &.register {
+                fieldset {
+                    border: 0;
+                }
+                input.title {
+                    border: 0;
+                    font-size: 2.3em;
+                    font-family: base;
+                    font-weight: bold;
+                    margin: 0px;
+                    padding: 10px;
+                    color: white;
+                    background: @basecolor;
+                    text-shadow: 0 3px rgba(0, 0, 0, 0.3);
+                    width: 100%;
+                    &::-webkit-input-placeholder { /* WebKit browsers */
+                        color: white;
+                    }
+                    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                        color: white;
+                    }
+                    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+                        color: white;
+                    }
+                }
+                textarea {
+                    background: #e0eef3;
+                    min-height: 120px;
+                    border: 0;
+                    color: #186e8a;
+                    padding: 10px 15px;
+                    resize: none;
+                    width: 100%;
+                }
+                label {
+                    display: block;
+                    margin: 0 0 10px 0;
+                }
+                .select-style {
+                    border: 0px solid #ccc;
+                    width: 200px;
+                    border-radius: 3px;
+                    overflow: hidden;
+                    background: #e0eef3;
+                    .clearfix();
+                }
+
+                .select-style select {
+                    padding: 5px 8px;
+                    width: 100%;
+                    border: none;
+                    box-shadow: none;
+                    background: transparent;
+                    background-image: none;
+                }
+
+                .select-style select:focus {
+                    outline: none;
+                }
+                .btn {
+                    border: 0;
+                }
+            }
             h2 {
                 font-size: 2.3em;
                 margin: 0px;

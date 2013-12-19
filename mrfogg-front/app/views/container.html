@@ -3,6 +3,31 @@
 
 <section class="right-col">
     <div class="card-container" ng-controller="CardsController">
+        <div class="card register">
+            <form>
+                <div class="title"><input class="title" placeholder="Escribe aqui el nombre de tu viaje"/></div>
+                <h3><i class="icon-user"></i> TODO: Add user email <!-- No vale card owner por que la card no tiene owner --></h3>
+                <fieldset>
+                    <label>Descripcion</label>
+                    <textarea />
+                </fieldset>
+                <fieldset>
+                    <label>Elige tu widget::</label>
+                    <div class="select-style">
+                        <select>
+                            <option>Widget 1</option>
+                            <option>Widget 2</option>
+                            <option>Widget 3</option>
+                            <option>Widget 4</option>
+                            <option>Widget 5</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <button class="btn" type="submit">Publicar</button>
+                </fieldset>
+            </form>
+        </div>
         <div class="card" ng-repeat="card in loadedCards">
             <h2>{{ card.title }}</h2>
             <h3><i class="icon-user"></i> {{ card.owner.email }}</h3>
@@ -23,5 +48,9 @@
             </div>
         </div>
     </div>
+
+
+
+
 </section>
 
