@@ -1,6 +1,7 @@
 package org.mrfogg.health
 
 import static com.yammer.metrics.core.HealthCheck.Result
+import static java.lang.Runtime.getRuntime
 import com.yammer.metrics.core.HealthCheck
 import groovy.util.logging.Log4j
 
@@ -21,10 +22,12 @@ class MemoryHealthCheck extends HealthCheck {
         return checkMemoryGreaterThan(60)
     }
 
+    @SuppressWarnings('UnnecessaryGetter')
     Result checkMemoryGreaterThan(Integer percentage) {
 
-        double free = Runtime.getRuntime().freeMemory()
-        double total = Runtime.getRuntime().totalMemory()
+        Runtime runtime = getRuntime()
+        double free = runtime.freeMemory()
+        double total = runtime.totalMemory()
         double result = (free / total) * 100
 
         log.info("Memory freeMemory: ${free}%")
