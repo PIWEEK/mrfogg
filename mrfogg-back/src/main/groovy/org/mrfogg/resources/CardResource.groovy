@@ -35,6 +35,13 @@ class CardResource {
     // create new card
 
     // show card
+    @GET
+    @Path('{id}')
+    @Timed
+    @UnitOfWork
+    Card show(@PathParam('id') Long id) {
+        return cardService.get(id)
+    }
 
     // update card
 

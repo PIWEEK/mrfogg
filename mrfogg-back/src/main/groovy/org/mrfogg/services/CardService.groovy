@@ -11,4 +11,8 @@ class CardService {
         return this.cardDao.findAllByTaskId(id)
     }
 
+    Card get(Long id) {
+        return this.cardDao.get(id)
+    }
+
 }
