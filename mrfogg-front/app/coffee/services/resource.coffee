@@ -196,13 +196,18 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
         return queryOne("trips", "#{tripId}/tasks/#{taskId}/cards")
 
     service.postComment = (tripId, taskId, cardId, data)->
-        console.log("POSTING", data)
-
         defered = $q.defer()
-
         return $http(
             method:'POST'
             url: "#{$gmUrls.api("trips")}/#{tripId}/tasks/#{taskId}/cards/#{cardId}/comments"
+            data: JSON.stringify(data)
+        )
+
+    service.postCard = (tripId, taskId, data)->
+        defered = $q.defer()
+        return $http(
+            method:'POST'
+            url: "#{$gmUrls.api("trips")}/#{tripId}/tasks/#{taskId}/cards"
             data: JSON.stringify(data)
         )
 

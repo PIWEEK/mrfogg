@@ -10,6 +10,16 @@ MainController = ($scope) ->
 
     $scope.closeTripButton = ()->
         $scope.showTripDialog = false
+
+    $scope.addCardButton = ()->
+        $scope.showCardForm = true
+
+    $scope.closeCardButton = ()->
+        $scope.showCardForm = false
+
+    $scope.$on("new-card", (data)->
+        $scope.showCardForm = false
+    )
     return
 
 ContainerController = ($scope) ->
@@ -57,7 +67,7 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     if trip_unset or changed    
         resource.getTrips($rootScope.userid).then (result) ->
             $scope.triplist = result
-            $scope.mytrips = _.remove($scope.triplist, (trip) -> 
+        $scope.mytrips = _.remove($scope.triplist, (trip) ->
                 return trip.id == $rootScope.tripId
             ) 
             $rootScope.mytrip = $scope.mytrips[0]
@@ -115,6 +125,10 @@ CardsController = ($scope, $rootScope, resource, $routeParams)->
     tripId = $routeParams.tripId
     taskId = $routeParams.taskId
 
+    $scope.$on("new-card", (data)->
+        console.log("NEW CardsController", data)
+    )
+
     resource.getTaskCards(tripId, taskId).then(onSuccess, onError) if taskId and tripId
     return
 
@@ -140,6 +154,15 @@ CommentController = ($scope, resource, $routeParams)->
 
     return
 
+NewCardController = ($scope)->
+    $scope.publishCard = ()->
+        $scope.$emit("new-card", $scope.card)
+        $scope.card = {}
+
+    $scope.card = {}
+
+    return
+
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
@@ -150,4 +173,5 @@ module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$ro
 module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", "$gmStorage", "resource", TripListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
+module.controller("NewCardController", ["$scope", NewCardController])
 
