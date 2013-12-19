@@ -1,6 +1,5 @@
 module.exports = (grunt) ->
     externalSources = [
-        'app/bower_components/jquery/jquery.js',
         'app/bower_components/angular/angular.js',
         'app/bower_components/lodash/dist/lodash.js',
         'app/bower_components/angular-resource/angular-resource.js',
