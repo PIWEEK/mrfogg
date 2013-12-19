@@ -26,6 +26,8 @@ import org.mrfogg.services.FixtureService
 import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.filter.CorsFilter
 
+import org.mrfogg.health.MemoryHealthCheck
+
 import groovy.util.logging.Log4j
 import org.hibernate.SessionFactory
 
@@ -110,6 +112,9 @@ class MrFoggService extends Service<MrFoggConfiguration> {
             addResource(new AuthResource(authService: authService))
             addResource(new FixtureResource(fixtureService: fixtureService))
             addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
+
+            addHealthCheck(new MemoryHealthCheck())
+
         }
 
         // Plugins:

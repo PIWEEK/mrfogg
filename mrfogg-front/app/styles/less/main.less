@@ -23,6 +23,19 @@ html,body{
     box-sizing: border-box;
 
 }
+
+fieldset {
+    border: 0;
+}
+.textarea {
+        background: #e0eef3;
+        min-height: 120px;
+        border: 0;
+        color: #186e8a;
+        padding: 10px 15px;
+        resize: none;
+        width: 100%;
+    }
 a {
     cursor: pointer;
     color: white;
@@ -379,11 +392,8 @@ p {
                 margin: 0;
                 li {
                     list-style: none;
-                    a {
-                        display: block;
-                        opacity: 1;
+                    display: table;
                     background: @lightblue;
-                    color: @darkbase;
                     padding: 10px;
                     margin: 10px;
                     -webkit-transition: all 0.2s ease-in-out;
@@ -391,24 +401,8 @@ p {
                     -o-transition: all 0.2s ease-in-out;
                     -ms-transition: all 0.2s ease-in-out;
                     transition: all 0.2s ease-in-out;
+                    width: 260px;
                     .rounded-corners(6px);
-                    .icon-checkbox {
-                        margin-left: -1px;
-                    }
-                    i {
-                        display: inline-block;
-                        margin-top: 2px;
-                        margin-bottom: -2px;
-                    }
-                    &.done {
-                        background: @successfull;
-                        color: @darksuccessfull;
-                        &:hover {
-                        -webkit-box-shadow: 0 3px 0 @darksuccessfull;
-                        -moz-box-shadow: 0 3px 0 @darksuccessfull;
-                        box-shadow: 0 3px 0 @darksuccessfull;
-                        }
-                    }
                     &:hover {
                         -webkit-transform: scale3d(1.04, 1.04, 1.04);
                         -moz-transform: scale3d(1.04, 1.04, 1.04);
@@ -423,6 +417,29 @@ p {
                         -webkit-box-shadow: 0 3px 0 @basecolor;
                         -moz-box-shadow: 0 3px 0 @basecolor;
                         box-shadow: 0 3px 0 @basecolor;
+                    }
+                    &.done {
+                        background: @successfull;
+                        &:hover {
+                        -webkit-box-shadow: 0 3px 0 @darksuccessfull;
+                        -moz-box-shadow: 0 3px 0 @darksuccessfull;
+                        box-shadow: 0 3px 0 @darksuccessfull;
+                        }
+                        a {
+                            color: @darksuccessfull;
+                        }
+                    }
+                    a {
+                    display: table-cell;
+                    color: @darkbase;
+                    opacity: 1;
+                    .icon-checkbox {
+                        margin-left: -1px;
+                        }
+                    i {
+                        display: inline-block;
+                        margin-top: 2px;
+                        margin-bottom: -2px;
                         }
                     }
                 }
@@ -622,6 +639,50 @@ p {
             }
         }
     }
+}
+
+/************ tooltips *************/
+
+.veil {
+    background: white;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    opacity: 0.5;
+    z-index: 10000;
+}
+.back-cloud {
+    background: url(../images/cloud-form.png) no-repeat;
+    background-size: 100%;
+    position: fixed;
+    height: 644px;
+    left: 52%;
+    margin-left: -450px;
+    width: 786px;
+    z-index: 10002;
+}
+
+.new-card-dialog {
+    width: 400px;
+    z-index: 1000;
+    position: fixed;
+    top: 260px;
+    left: 50%;
+    margin-left: -200px;
+    padding: 15px;
+    z-index: 10050;
+    top: 220px;
+    h2 {
+     background: #5fbcd3;margin: 0px;font-size: 30px;margin-left: -15px;margin-right: -15px;margin-top: -15px;margin-bottom: 15px;
+    }
+    fieldset {
+        text-align: center;
+        &:first-child {
+            margin-top: 30px;
+        }
+    }
+
 }
 
 /* Create the animation blocks */

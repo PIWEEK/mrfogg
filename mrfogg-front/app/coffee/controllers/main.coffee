@@ -1,12 +1,6 @@
-MainController = ($scope, resource, $timeout) ->
+MainController = ($scope, resource, $timeout, $routeParams) ->
     resource.getUser("me").then (result) ->
         $scope.user = result
-
-    $scope.addTaskButton = ()->
-        $scope.showTaskDialog = true
-
-    $scope.closeTaskButton = ()->
-        $scope.showTaskDialog = false
 
     $scope.addTripButton = ()->
         $scope.showTripDialog = true
@@ -14,14 +8,40 @@ MainController = ($scope, resource, $timeout) ->
     $scope.closeTripButton = ()->
         $scope.showTripDialog = false
 
+    $scope.addTaskButton = ()->
+        $scope.showTaskDialog = true
+
+    $scope.closeTaskButton = ()->
+        $scope.showTaskDialog = false
+
     $scope.addCardButton = ()->
-        $scope.showCardForm = true
+        if $routeParams.taskId
+            $scope.showCardForm = true
+        else
+            $scope.$emit("flash", {"type":"error", "message": "No tiene seleccionada ninguna tarea"})
 
     $scope.closeCardButton = ()->
         $scope.showCardForm = false
 
     $scope.$on("new-card", (data)->
         $scope.showCardForm = false
+    )
+    $scope.isFlashWarnVisible = false
+    $scope.isFlashErrorVisible = false
+    $scope.isFlashSuccessVisible = false
+
+    $scope.$on("flash", (event, data)->
+        $scope.isFlashWarnVisible = true if data.type == "warn"
+        $scope.isFlashErrorVisible = true if data.type == "error"
+        $scope.isFlashSuccessVisible = true if data.type == "success"
+        $scope.flashMessage = data.message
+
+        hideFlash = ()->
+            $scope.isFlashWarnVisible = false
+            $scope.isFlashErrorVisible = false
+            $scope.isFlashSuccessVisible = false
+
+        $timeout(hideFlash, 2000)
     )
     return
 
@@ -34,25 +54,6 @@ TaskListController = ($scope, $rootScope, resource) ->
         p = resource.updateTask($rootScope.mytrip.id, task.id, task)
         p.then ()->
             console.log("guardado OK, pidendo lista")
-
-    $scope.isFlashWarnVisible = false
-    $scope.isFlashErrorVisible = false
-    $scope.isFlashSuccessVisible = false
-
-    $scope.$on("flash", (event, data)->
-        $scope.isFlashWarnVisible = true if data.type == "warn"
-        $scope.isFlashErrorVisible = true if data.type == "error"
-        $scope.isFlashSuccessVisible = true if data.type == "success"
-        $scope.flashMessage = data.message
-
-        hideFlash = ()->
-            console.log "FUNCIONAAAA"
-            $scope.isFlashWarnVisible = false
-            $scope.isFlashErrorVisible = false
-            $scope.isFlashSuccessVisible = false
-
-        $timeout(hideFlash, 2000)
-    )
 
     return
 
@@ -191,7 +192,7 @@ NewCardController = ($scope)->
     return
 
 module = angular.module("mrfogg.controllers.main", [])
-module.controller("MainController", ["$scope","resource", "$timeout", MainController])
+module.controller("MainController", ["$scope","resource", "$timeout", "$routeParams", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("TooltipController", ["$scope", "$document", TooltipController])
