@@ -1,6 +1,11 @@
-MainController = ($scope, resource, $timeout, $routeParams) ->
-    resource.getUser("me").then (result) ->
+MainController = ($scope, resource, $timeout, $routeParams, $location) ->
+    onUserSuccess = (result) ->
         $scope.user = result
+
+    onUserError = (result)->
+        $location.url("/login")
+
+    resource.getUser("me").then(onUserSuccess, onUserError)
 
     $scope.addTripButton = ()->
         $scope.showTripDialog = true
@@ -192,7 +197,7 @@ NewCardController = ($scope)->
     return
 
 module = angular.module("mrfogg.controllers.main", [])
-module.controller("MainController", ["$scope","resource", "$timeout", "$routeParams", MainController])
+module.controller("MainController", ["$scope","resource", "$timeout", "$routeParams", "$location", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("TooltipController", ["$scope", "$document", TooltipController])

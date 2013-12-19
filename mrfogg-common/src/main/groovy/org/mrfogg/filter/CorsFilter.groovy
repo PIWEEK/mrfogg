@@ -20,7 +20,7 @@ class CorsFilter implements Filter {
             httpServletResponse.addHeader("Access-Control-Expose-Headers", "true");
 
             if ("OPTIONS".equals(httpServletRequest.getMethod())) {
-                httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
+                httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization, X-Requested-With, X-Disable-Pagination");
                 httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
             }
