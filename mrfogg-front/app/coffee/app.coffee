@@ -45,8 +45,8 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
 
     apiUrls = {
         "root": "/"
-        "login": "/login"
-        "logout": "/logout"
+        "login": "/auth/login"
+        "logout": "/auth/logout"
         "users": "/users"
         "trips": "/trips"
         "cards": "/trips/%s/tasks/%s/cards"
