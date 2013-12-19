@@ -16,8 +16,11 @@ import org.mrfogg.marshallers.CardSerializer
 @JsonSerialize(using = CardSerializer)
 class Card extends BaseDomain {
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     String title
+
+    @Column(nullable = false)
+    String description
 
     @ManyToOne
     @JoinColumn

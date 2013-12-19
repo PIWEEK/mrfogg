@@ -1,6 +1,7 @@
 package org.mrfogg.services
 
 import org.mrfogg.daos.CardDAO
+import org.mrfogg.daos.TaskDAO
 import org.mrfogg.domains.Card
 import org.mrfogg.domains.User
 import org.mrfogg.domains.Task
@@ -8,6 +9,7 @@ import org.mrfogg.domains.Task
 class CardService {
 
     CardDAO cardDao
+    TaskDAO taskDao
 
     List<Card> listAllByTaskId(Long id) {
         return this.cardDao.findAllByTaskId(id)
@@ -18,9 +20,9 @@ class CardService {
     }
 
     Card createCardForTraskAndUser(Long taskId, User user, Map params) {
-        Task task = get(taskId)
+        Task task = taskDao.get(taskId)
 
-        return cardDao.create(new Card(title: params.title, owner: user, task: task))
+        return cardDao.create(new Card(title: params.title, description: params.description, owner: user, task: task))
     }
 
 }

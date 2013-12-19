@@ -105,7 +105,7 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final AuthHibernateService authService = new AuthHibernateService(userDao: daoMap.userDAO)
         final TripService tripService = new TripService(tripDao: daoMap.tripDAO, userDao: daoMap.userDAO)
         final TaskService taskService = new TaskService(taskDao: daoMap.taskDAO, tripDao: daoMap.tripDAO)
-        final CardService cardService = new CardService(cardDao: daoMap.cardDAO)
+        final CardService cardService = new CardService(cardDao: daoMap.cardDAO, taskDao: daoMap.taskDAO)
         final FixtureService fixtureService = [daoMap]
         final MetricsRegistry metricsRegistry = new MetricsRegistry()
         final JmxReporter reporter = new JmxReporter(metricsRegistry)

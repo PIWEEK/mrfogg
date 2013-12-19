@@ -12,6 +12,7 @@ class CardSerializer<Card> extends JsonSerializer {
             writeStartObject()
             writeNumberField('id', card.id)
             writeStringField('title', card.title)
+            writeStringField('description', card.description)
             writeObjectFieldStart('owner')
             writeNumberField('id', card.owner.id)
             writeStringField('email', card.owner.email)

@@ -42,7 +42,9 @@ class FixtureService {
         daoMap.tripDAO.persist(londonTrip)
 
         3.times { i ->
-            Card card = daoMap.cardDAO.create(new Card(title: "card ${i + 1}", owner: mgdelacroix, task: task))
+            Card card = daoMap.cardDAO.create(
+                new Card(title: "card ${i + 1}", owner: mgdelacroix, task: task, description: 'desc')
+            )
             task.cards << card
             daoMap.taskDAO.persist(task)
         }
