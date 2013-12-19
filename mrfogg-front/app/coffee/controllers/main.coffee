@@ -8,10 +8,7 @@ ContainerController = ($scope) ->
 TaskListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Tasks'
     $rootScope.tripid = parseInt($routeParams.tripid, 10)
-    $scope.$on('tripid', (event, data) ->
-        console.log data
-        resource.getTasks($scope.tripid).then (result) ->
-            $scope.tasklist = result
+
     return
 
 UserListController = ($scope, $rootScope, resource) ->
@@ -130,8 +127,8 @@ module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
-module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", $gmStorage, "resource", TripListController])
-module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", $gmStorage, "resource", TaskListController])
+module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", "$gmStorage", "resource", TripListController])
+module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", "$gmStorage", "resource", TaskListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
 module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
