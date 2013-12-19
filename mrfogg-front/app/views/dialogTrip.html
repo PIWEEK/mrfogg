@@ -1,0 +1,14 @@
+<div class="veil" style="background: #888; width: 100%; height: 100%; position: absolute; z-index: 1000; opacity: 0.6;"></div>
+<div class="new-card-dialog" style="width: 400px; height: 317px; background: white; z-index: 1000; position: absolute; top: 150px; left: 800px; padding: 15px; border: 10px solid #5fbcd3;">
+    <h2 style="background: #5fbcd3;margin: 0px;font-size: 30px;margin-left: -15px;margin-right: -15px;margin-top: -15px;margin-bottom: 15px;">Nueva Viaje</h2>
+    <form>
+        <label for="title" style="display: block; ">Titulo:</label>
+        <input type="input" name="title" value="" style="display: block;width:99%; height:20px;">
+        <label for="description" style="display: block;margin-top: 10px;">Descripcion:</label>
+        <textarea type="input" name="description" style="display: block;width: 99%;height:171px;"></textarea>
+        <div style="position: absolute;right: 10px;bottom: 10px;">
+            <input type="submit" value="Guardar">
+            <input type="submit" value="Cancelar" ng-click="closeTripButton()">
+        </div>
+    </form>
+</div>

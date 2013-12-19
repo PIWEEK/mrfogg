@@ -1,4 +1,15 @@
 MainController = ($scope) ->
+    $scope.addTaskButton = ()->
+        $scope.showTaskDialog = true
+
+    $scope.closeTaskButton = ()->
+        $scope.showTaskDialog = false
+
+    $scope.addTripButton = ()->
+        $scope.showTripDialog = true
+
+    $scope.closeTripButton = ()->
+        $scope.showTripDialog = false
     return
 
 ContainerController = ($scope) ->
@@ -27,6 +38,7 @@ UserController = ($scope, $rootScope, $routeParams, resource) ->
 
     resource.getUser($rootScope.userid).then (result) ->
         $scope.user = result
+
 
     return
 
