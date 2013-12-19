@@ -8,9 +8,10 @@ ContainerController = ($scope) ->
 TaskListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Tasks'
     $rootScope.tripid = parseInt($routeParams.tripid, 10)
-    #localstorage
-    resource.getTasks($rootScope.tripid).then (result) ->
-        $scope.tasklist = result
+    $scope.$on('tripid', (event, data) ->
+        console.log data
+        resource.getTasks($scope.tripid).then (result) ->
+            $scope.tasklist = result
     return
 
 UserListController = ($scope, $rootScope, resource) ->
@@ -42,7 +43,7 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
     $rootScope.tripid = parseInt($routeParams.tripid, 10)
     $rootScope.tripid = 1 if not $rootScope.tripid
-    $scope.$emit('tripid', $rootScope.tripid);
+    $scope.$emit("mytrip:refresh")
     resource.getTrips($rootScope.userid).then (result) ->
         $scope.triplist = result
         tripId = 1
@@ -50,6 +51,13 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
             return trip.id == $rootScope.tripid
         ) 
         $scope.mytrip = $scope.mytrips[0]
+        #$gmStorage.set("tripid", $scope.mytrip)
+    $scope.$on("mytrip:refresh", loadTasks)
+
+    loadTasks = ->
+        resource.getTasks($rootScope.tripid).then (result) ->
+            $scope.tasklist = result
+
     return
 
 MrLoginController = ($scope, $rootScope, $location, $routeParams, resource, $gmAuth) ->
@@ -120,11 +128,10 @@ CommentController = ($scope, resource, $routeParams)->
 module = angular.module("mrfogg.controllers.main", [])
 module.controller("MainController", ["$scope", MainController])
 module.controller("ContainerController", ["$scope", ContainerController])
-module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
 module.controller("UserListController", ["$scope", "$rootScope", "resource", UserListController])
 module.controller("MrLoginController", ["$scope","$rootScope", "$location", "$routeParams", "resource", "$gmAuth", MrLoginController])
 module.controller("TripListController", ["$scope", "$rootScope", "$routeParams", $gmStorage, "resource", TripListController])
 module.controller("TaskListController", ["$scope", "$rootScope", "$routeParams", $gmStorage, "resource", TaskListController])
 module.controller("CardsController", ["$scope", "$rootScope", "resource", "$routeParams", CardsController])
 module.controller("CommentController", ["$scope", "resource", "$routeParams", CommentController])
-
+module.controller("UserController", ["$scope", "$rootScope", "$routeParams", "resource", UserController])
