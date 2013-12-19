@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response
 
 import org.mrfogg.domains.User
 
-@Path('/')
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 class AuthResource {
@@ -22,7 +21,7 @@ class AuthResource {
     @Path('/login')
     @UnitOfWork
     def login(Map input) {
-        def user = new User(email:input.email, password:input.password, avatar: '')
+        def user = new User(email:input.email, password:input.password)
         def token = authService.authenticateUser(user)
         return ['token': token]
     }

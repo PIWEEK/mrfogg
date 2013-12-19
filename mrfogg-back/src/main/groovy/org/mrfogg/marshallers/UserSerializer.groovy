@@ -1,12 +1,13 @@
 package org.mrfogg.marshallers
 
+import org.mrfogg.domains.User
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.JsonSerializer
 
-class UserSerializer extends JsonSerializer {
+class UserSerializer<User>  extends JsonSerializer {
 
-    void serialize(Object user, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    void serialize(User user, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.with {
             writeStartObject()
             writeNumberField('id', user.id)
