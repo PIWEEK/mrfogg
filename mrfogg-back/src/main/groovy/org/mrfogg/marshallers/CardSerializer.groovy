@@ -19,8 +19,8 @@ class CardSerializer<Card> extends JsonSerializer {
             writeStringField('avatar', card.owner.avatarURL)
             writeEndObject()
 
+            writeArrayFieldStart('comments')
             if (card.comments) {
-                writeArrayFieldStart('comments')
                 card.comments.each { comment ->
                     writeStartObject()
                     writeObjectFieldStart('user')
@@ -31,8 +31,9 @@ class CardSerializer<Card> extends JsonSerializer {
                     writeStringField('text', comment.text)
                     writeEndObject()
                 }
-                writeEndArray()
             }
+            writeEndArray()
+
 
             writeObjectFieldStart('widget')
             if (card.id == 9) {
