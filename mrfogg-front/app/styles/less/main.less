@@ -542,6 +542,17 @@ p {
                             color: @darksuccessfull;
                         }
                     }
+                    &.current {
+                        background: @darkbase;
+                        &:hover {
+                        -webkit-box-shadow: 0 3px 0 @basecolor;
+                        -moz-box-shadow: 0 3px 0 @basecolor;
+                        box-shadow: 0 3px 0 @basecolor;
+                        }
+                        a {
+                            color: white;
+                        }
+                    }
                     a {
                     display: table-cell;
                     color: @darkbase;
