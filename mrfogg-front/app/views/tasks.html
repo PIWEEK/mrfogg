@@ -21,11 +21,12 @@
     </ul>
 </div>
 
-<div class="task" ng-controller="UserListController">
+<div class="memberlist" ng-controller="UserListController">
     <h2>VIAJEROS</h2>
     <ul class="content">
-        <li ng-class="task.status" ng-repeat="user in userlist">
-            <a class="text" ng-href="#/trips/{{ mytrip.id }}/tasks/{{ task.id }}">{{ task.name }}</a>
+        <li class="pending" ng-repeat="user in userList">
+        <a class="user"><img ng-src="{{ user.avatar }}?s=40"</a>
+            <a class="text">{{ user.email }}</a>
         </li>
         <li class="pending register">
             <a>
@@ -33,9 +34,9 @@
             </a>
             <a class="input">
                 <input
-                    ng-model="task.name"
-                    ng-enter="addTask()"
-                    class="title" placeholder="Nombre de la Tarea">
+                    ng-model="user.email"
+                    ng-enter="addUser()"
+                    class="title" placeholder="Agrega un viajero">
             </a>
         </li>
     </ul>

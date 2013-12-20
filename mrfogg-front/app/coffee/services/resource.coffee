@@ -232,7 +232,7 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
             data: JSON.stringify(data)
         )
 
-    service.putTripUsers = (data)->
+    service.putTripUsers = (tripId, data)->
         return $http(
             method:'PUT'
             headers: headers(false),

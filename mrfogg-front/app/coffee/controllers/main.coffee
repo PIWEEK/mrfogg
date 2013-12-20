@@ -57,11 +57,12 @@ MainController = ($scope, resource, $timeout, $routeParams, $location) ->
 
 UserListController = ($scope, $rootScope, resource) ->
     $scope.addUser = ()->
-        cb = resource.putTripUsers($rootScope.mytrip.id, $scope.email)
+        cb = resource.putTripUsers($rootScope.mytrip.id, $scope.user)
         cb.then (response)->
             $rootScope.userList = response.data
-        $scope.email = {}
+        $scope.user = {}
         return
+    $scope.user = {}
 
     return
 
@@ -110,8 +111,9 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
             return trip.id == $rootScope.tripId
         )
         $rootScope.mytrip = $scope.mytrips[0]
-        resource.getTripDetails($rootScope.mytrip.id).then (result) ->
-            $rootScope.userList = result.data.users
+        resource.getTrip($rootScope.tripId).then (result) ->
+            $rootScope.userList = result._attrs.members
+            console.log $rootScope.userList
         resource.getTasks($rootScope.tripId).then (result) ->
             $rootScope.tasklist = result._attrs
 
