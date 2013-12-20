@@ -119,9 +119,9 @@ class MrFoggService extends Service<MrFoggConfiguration> {
             addResource(new AuthResource(authService: authService))
             addResource(new FixtureResource(fixtureService: fixtureService))
             addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
-            addProvider(new WebApplicationExceptionMapper())
-            addProvider(new MrFoggExceptionMapper())
-            addProvider(new ThrowableMapper())
+            // addProvider(new WebApplicationExceptionMapper())
+            // addProvider(new MrFoggExceptionMapper())
+            // addProvider(new ThrowableMapper())
             addHealthCheck(new MemoryHealthCheck())
 
         }
