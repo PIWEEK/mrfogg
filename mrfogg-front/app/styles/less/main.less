@@ -377,6 +377,38 @@ p {
             }
         }
     }
+    .welcome {
+        top: 80px;
+        left: 50%;
+        margin-left: -471px;
+        position: absolute;
+        text-align: center;
+        .logo {
+            background: url(../images/mrfogg-logo.png) no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            height: 268px;
+            width: 320px;
+        }
+        h2 {
+            color: white;
+            text-shadow: 1px 1px 1px @darkbase;
+            font-size: 5.0em;
+            margin: 0 0 10px 0;
+            padding: 0;
+        }
+        p {
+            color: @darkbase;
+            text-shadow: 1px 1px 1px white;
+            font-size: 1.5em;
+            padding: 0;
+            margin: 0 0 40px 0;
+        }
+        a {
+            font-size: 2em;
+        }
+    }
+
 
     .welcome {
         top: 110px;
@@ -545,6 +577,25 @@ p {
             padding: 0;
             margin-bottom: 20px;
             background: rgba(255, 255, 255, 0.7);
+            &.placeholder {
+                .rounded-corners(6px);
+                background: @info;
+                overflow: hidden;
+                border: dashed 2px @darkinfo;
+                p {
+                    padding: 5px 10px;
+                }
+                h1 {
+                    font-size: 1.4em;
+                    color: @darkinfo;
+                    padding: 0 10px;
+                    margin: 0;
+                }
+                a {
+                    color: @darkinfo;
+                    text-decoration: underline;
+                }
+            }
             &.register {
                 border:  dashed 2px @darkbase;
                 fieldset {
