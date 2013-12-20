@@ -1,3 +1,5 @@
+![MR FOGG](https://raw.github.com/PIWEEK/mrfogg/master/mrfogg-front/app/images/mrfogg-logo.png)
+
 # MR FOGG
 Collaborative travel planning
 
