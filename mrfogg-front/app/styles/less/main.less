@@ -102,6 +102,7 @@ p {
         -webkit-animation: spin 250s linear infinite;
         position: absolute;
         margin-left: -2500px;
+        z-index: 2;
     }
     .cloud-2 {
         width: 5000px;
@@ -111,6 +112,7 @@ p {
         -webkit-animation: spin-back 420s linear infinite;
         position: absolute;
         margin-left: -2500px;
+        z-index: 1;
     }
     .planes {
         width: 5000px;
@@ -119,6 +121,7 @@ p {
         -webkit-animation: spin-back 45s linear infinite;
         position: absolute;
         margin-left: -2500px;
+        z-index: 3;
         .plane {
             background: url(../images/airplane2.png);
             background-size: 100%;
@@ -337,7 +340,7 @@ p {
                     color: white;
                     font-size: 35px;
                     padding: 3px 10px;
-                    line-height: 38px;
+                    line-height: 49px;
                     display: block;
 
                 }
@@ -369,8 +372,8 @@ p {
             .user {
                 border: solid 3px white;
                 float: right;
-                height: 34px;
-                width: 34px;
+                height: 40px;
+                width: 40px;
             }
         }
     }
@@ -389,13 +392,15 @@ p {
             -moz-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
             box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
             margin-bottom: 15px;
-            padding-bottom: 10;
+            overflow: hidden;
             .ico {
                 display: block;
+                padding: 10px 0px 10px 10px;
                 width: 20px;
             }
             .text {
                 width: 100%;
+                padding: 10px 10px 10px 10px;
             }
             .register {
                 border: dashed 2px @darkbase;
@@ -439,7 +444,6 @@ p {
                     list-style: none;
                     display: table;
                     background: @lightblue;
-                    padding: 10px;
                     margin: 10px;
                     -webkit-transition: all 0.2s ease-in-out;
                     -moz-transition: all 0.2s ease-in-out;
