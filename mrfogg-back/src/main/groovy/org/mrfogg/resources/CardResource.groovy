@@ -32,7 +32,9 @@ class CardResource {
     @UnitOfWork
     List<Card> card(@PathParam('taskId') Long taskId) {
         List<Card> cards = cardService.listAllByTaskId(taskId)
-        cards.comments.each { println it }
+        cards.comments.each {
+            log.info it
+        }
         return cards
     }
 

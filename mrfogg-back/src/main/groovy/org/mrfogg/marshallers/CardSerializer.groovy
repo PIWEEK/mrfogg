@@ -36,11 +36,11 @@ class CardSerializer<Card> extends JsonSerializer {
 
             writeObjectFieldStart('widget')
             if (card.id == 9) {
-                writeStringField('template', "/assets/client/mrfogg-widget-videos.html")
-                writeStringField('model', "widgets/videos/" + card.id)
+                writeStringField('template', '/assets/client/mrfogg-widget-videos.html')
+                writeStringField('model', 'widgets/videos/' + card.id)
             } else {
-                writeStringField('template', "/assets/client/mrfogg-widget-images.html")
-                writeStringField('model', "widgets/images/" + card.id)
+                writeStringField('template', '/assets/client/mrfogg-widget-images.html')
+                writeStringField('model', 'widgets/images/' + card.id)
             }
             writeEndObject()
 

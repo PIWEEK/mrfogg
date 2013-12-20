@@ -6,6 +6,7 @@ import org.mrfogg.domains.User
 import org.mrfogg.domains.Trip
 import org.mrfogg.domains.Task
 
+@SuppressWarnings('DuplicateNumberLiteral')
 class FixtureService {
 
     Map daoMap
