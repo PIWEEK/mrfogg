@@ -20,3 +20,23 @@
         </li>
     </ul>
 </div>
+
+<div class="task" ng-controller="UserListController">
+    <h2>VIAJEROS</h2>
+    <ul class="content">
+        <li ng-class="task.status" ng-repeat="user in userlist">
+            <a class="text" ng-href="#/trips/{{ mytrip.id }}/tasks/{{ task.id }}">{{ task.name }}</a>
+        </li>
+        <li class="pending register">
+            <a>
+                <i class="icon-add2"></i>
+            </a>
+            <a class="input">
+                <input
+                    ng-model="task.name"
+                    ng-enter="addTask()"
+                    class="title" placeholder="Nombre de la Tarea">
+            </a>
+        </li>
+    </ul>
+</div>
