@@ -19,6 +19,21 @@ class CardSerializer<Card> extends JsonSerializer {
             writeStringField('avatar', card.owner.avatarURL)
             writeEndObject()
 
+            if (card.comments) {
+                writeArrayFieldStart('comments')
+                card.comments.each { comment ->
+                    writeStartObject()
+                    writeObjectFieldStart('user')
+                    writeNumberField('id', comment.owner.id)
+                    writeStringField('email', comment.owner.email)
+                    writeStringField('avatar', comment.owner.avatarURL)
+                    writeEndObject()
+                    writeStringField('text', comment.text)
+                    writeEndObject()
+                }
+                writeEndArray()
+            }
+
             writeObjectFieldStart('widget')
             if (card.id == 6) {
                 writeStringField('template', "/assets/client/mrfogg-widget-videos.html")
@@ -27,7 +42,6 @@ class CardSerializer<Card> extends JsonSerializer {
                 writeStringField('template', "/assets/client/mrfogg-widget-images.html")
                 writeStringField('model', "widgets/images/" + card.id)
             }
-
             writeEndObject()
 
             writeEndObject()

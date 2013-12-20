@@ -1,11 +1,14 @@
 package org.mrfogg.domains
 
+import static javax.persistence.CascadeType.ALL
+
 import javax.persistence.Table
 import javax.persistence.Entity
 import javax.persistence.Column
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToOne
+import javax.persistence.OneToMany
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 
@@ -32,5 +35,8 @@ class Card extends BaseDomain {
 
     @OneToOne
     Widget widget
+
+    @OneToMany(cascade = ALL)
+    List<Comment> comments = []
 
 }

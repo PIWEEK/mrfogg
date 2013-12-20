@@ -31,7 +31,9 @@ class CardResource {
     @Timed
     @UnitOfWork
     List<Card> card(@PathParam('taskId') Long taskId) {
-        return cardService.listAllByTaskId(taskId)
+        List<Card> cards = cardService.listAllByTaskId(taskId)
+        cards.comments.each { println it }
+        return cards
     }
 
     @POST

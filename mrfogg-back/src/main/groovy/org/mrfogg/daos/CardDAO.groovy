@@ -10,8 +10,8 @@ class CardDAO extends BaseDAO<Card> {
 
     List<Card> findAllByTaskId(Long id) {
         return criteria().createCriteria('task')
-                  .add( Restrictions.eq('id', id) )
-                  .list()
+                         .add( Restrictions.eq('id', id) )
+                         .list()
     }
 
 }

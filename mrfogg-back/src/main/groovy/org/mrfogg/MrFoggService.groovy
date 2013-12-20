@@ -15,12 +15,14 @@ import org.mrfogg.auth.TokenAuthenticator
 import org.mrfogg.daos.BaseDAO
 import org.mrfogg.domains.User
 import org.mrfogg.resources.CardResource
+import org.mrfogg.resources.CommentResource
 import org.mrfogg.resources.TaskResource
 import org.mrfogg.resources.TripResource
 import org.mrfogg.resources.AuthResource
 import org.mrfogg.resources.FixtureResource
 import org.mrfogg.resources.UserResource
 import org.mrfogg.services.CardService
+import org.mrfogg.services.CommentService
 import org.mrfogg.services.TaskService
 import org.mrfogg.services.TripService
 import org.mrfogg.services.AuthHibernateService
@@ -46,7 +48,8 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         org.mrfogg.domains.Trip,
         org.mrfogg.domains.Task,
         org.mrfogg.domains.Card,
-        org.mrfogg.domains.Widget
+        org.mrfogg.domains.Widget,
+        org.mrfogg.domains.Comment
     ]
 
     static final Class[] DAOS = [
@@ -54,7 +57,8 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         org.mrfogg.daos.TripDAO,
         org.mrfogg.daos.TaskDAO,
         org.mrfogg.daos.CardDAO,
-        org.mrfogg.daos.WidgetDAO
+        org.mrfogg.daos.WidgetDAO,
+        org.mrfogg.daos.CommentDAO
     ]
 
     public static void main(String[] args) throws Exception {
@@ -106,6 +110,7 @@ class MrFoggService extends Service<MrFoggConfiguration> {
         final TripService tripService = new TripService(tripDao: daoMap.tripDAO, userDao: daoMap.userDAO)
         final TaskService taskService = new TaskService(taskDao: daoMap.taskDAO, tripDao: daoMap.tripDAO)
         final CardService cardService = new CardService(cardDao: daoMap.cardDAO, taskDao: daoMap.taskDAO)
+        final CommentService commentService = new CommentService(cardDao: daoMap.cardDAO, commentDao: daoMap.commentDAO)
         final FixtureService fixtureService = [daoMap]
         final MetricsRegistry metricsRegistry = new MetricsRegistry()
         final JmxReporter reporter = new JmxReporter(metricsRegistry)
@@ -116,14 +121,14 @@ class MrFoggService extends Service<MrFoggConfiguration> {
             addResource(new TripResource(tripService: tripService))
             addResource(new TaskResource(taskService: taskService))
             addResource(new CardResource(cardService: cardService))
+            addResource(new CommentResource(commentService: commentService))
             addResource(new AuthResource(authService: authService))
             addResource(new FixtureResource(fixtureService: fixtureService))
             addResource(new OAuthProvider<User>(new TokenAuthenticator(authService:authService), 'MR.FOGG'))
-            // addProvider(new WebApplicationExceptionMapper())
-            // addProvider(new MrFoggExceptionMapper())
-            // addProvider(new ThrowableMapper())
-            addHealthCheck(new MemoryHealthCheck())
-
+            //addProvider(new WebApplicationExceptionMapper())
+            //addProvider(new MrFoggExceptionMapper())
+            //addProvider(new ThrowableMapper())
+            //addHealthCheck(new MemoryHealthCheck())
         }
 
         // Plugins:
