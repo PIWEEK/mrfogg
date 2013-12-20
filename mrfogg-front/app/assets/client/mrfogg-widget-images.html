@@ -8,7 +8,7 @@
 </style>
 <div ng-controller="ImageWidgetController" class="images-widget">
     <div ng-show="isDisplaying">
-        <img ng-src="{{ imageUrl }}"/>
+        <img ng-src="{{ imageUrl }}" style="max-width: 650px;"/>
     </div>
     <div ng-show="isEditing" class="" style="padding: 10px;">
         <fieldset>
