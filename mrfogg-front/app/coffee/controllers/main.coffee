@@ -105,15 +105,14 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
         trip_unset = true
     if trip_unset
         $rootScope.tripId = 1
-    if trip_unset or changed
-        resource.getTrips($rootScope.userid).then (result) ->
-            $scope.triplist = result
-            $scope.mytrips = _.remove($scope.triplist, (trip) ->
-                return trip.id == $rootScope.tripId
-            )
-            $rootScope.mytrip = $scope.mytrips[0]
-            resource.getTasks($rootScope.tripId).then (result) ->
-                $rootScope.tasklist = result._attrs
+    resource.getTrips($rootScope.userid).then (result) ->
+        $scope.triplist = result
+        $scope.mytrips = _.remove($scope.triplist, (trip) ->
+            return trip.id == $rootScope.tripId
+        )
+        $rootScope.mytrip = $scope.mytrips[0]
+        resource.getTasks($rootScope.tripId).then (result) ->
+            $rootScope.tasklist = result._attrs
 
     return
 
