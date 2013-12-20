@@ -1,20 +1,20 @@
 <header ng-include="'/views/header.html'"></header>
-<div class="welcome">
+<div class="welcome" ng-show="mytrip == null" >
     <div class="logo"></div>
     <h2>Bienvenido a Mr. Fogg</h2>
     <p>Comienza a organizar viajes con tus amigos de una forma rapida y sencilla con Mr.Fogg.</p>
-    <a href="" class="btn">Crear tu viaje</a>
+    <a class="btn" ng-click="addTripButton()">Crear tu viaje</a>
 </div>
 <section class="left-col" ng-include="'/views/tasks.html'" ng-show="mytrip != null"></section>
 
 <section class="right-col">
     <div class="card-container" ng-controller="CardsController">
-        <div class="card placeholder">
+        <div class="card placeholder" ng-show="isCardPlaceHolderVisible">
             <p class="advice">Parece que no hay ninguna tarjeta.. <a>¡Agrega una ahora mismo!</a></p>
             <h1>Utilidad de una tarjeta:</h1>
             <p>Con las tarjetas tendras una herramienta de colaboracion entre los participantes del viaje, aqui podras exponer diferentes widgets para organizar tus tareas con tus compañero de viajes.</p>
         </div>
-        <div class="card placeholder">
+        <div class="card placeholder" ng-show="isTaskPlaceHolderVisible">
             <p class="advice">Parece que no hay ninguna tarea.. <a>¡Agrega una ahora mismo!</a></p>
             <h1>Utilidad de una tarea:</h1>
             <p>Organiza tus viajes con tus compañeros de viaje de forma facil y sencilla.</p>

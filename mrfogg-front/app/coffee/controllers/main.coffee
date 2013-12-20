@@ -53,6 +53,10 @@ MainController = ($scope, resource, $timeout, $routeParams, $location) ->
 
         $timeout(hideFlash, 2000)
     )
+
+    $scope.isTaskPlaceHolderVisible = false
+    $scope.isCardPlaceHolderVisible = false
+    $scope.isWelcomeVisible = false
     return
 
 UserListController = ($scope, $rootScope, resource) ->
