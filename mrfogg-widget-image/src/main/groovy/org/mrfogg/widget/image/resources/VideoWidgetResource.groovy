@@ -17,7 +17,8 @@ class VideoWidgetResource {
     @Timed
     @Path("{videoId}")
     String getVideo(@PathParam('imageId') Long imageId) {
-        return "http://www.youtube.com/watch?v=syxGGxT7_2Y"
+        // return "http://www.youtube.com/watch?v=syxGGxT7_2Y"
+        return "//www.youtube.com/embed/syxGGxT7_2Y"
     }
 
     @POST

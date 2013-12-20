@@ -13,17 +13,23 @@ import com.yammer.metrics.annotation.Timed
 @Path('/widgets/images/')
 @Produces(MediaType.APPLICATION_JSON)
 class ImageWidgetResource {
+    static resourcesMap = [:]
+
     @GET
     @Timed
     @Path("{imageId}")
     List getImage(@PathParam('imageId') Long imageId) {
-        return ["http://kaleidos.net/files/images/linux318x260_1.png"]
+        def result = "http://kaleidos.net/files/images/linux318x260_1.png"
+        if (resourcesMap[imageId]) {
+            return [resourcesMap[imageId]]
+        }
+        return [result]
     }
 
     @POST
     @Timed
     Map insertImage(Map input) {
-        println input
+        resourcesMap[new Long(input.id)] = input.url
         return input
     }
 }

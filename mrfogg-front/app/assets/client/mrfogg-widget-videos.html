@@ -8,12 +8,15 @@
 </style>
 <div ng-controller="VideoWidgetController" class="videos-widget">
     <div ng-show="isDisplaying">
+        <!--
         <iframe width="420" height="315" src="//www.youtube.com/embed/syxGGxT7_2Y" frameborder="0" allowfullscreen></iframe>
+        -->
+        <iframe width="420" height="315" ng-src="{{ videoUrl  }}" frameborder="0" allowfullscreen></iframe>
     </div>
     <div ng-show="isEditing" class="" style="padding: 10px;">
         <fieldset>
             <label for="videoUrl" style="float: left;">URL del Video</label>
-            <input type="input" name="videoUrl" style="width: 400px;">
+            <input type="input" name="videoUrl" ng-model="inputVideoUrl" style="width: 400px;">
         </fieldset>
     </div>
 </div>

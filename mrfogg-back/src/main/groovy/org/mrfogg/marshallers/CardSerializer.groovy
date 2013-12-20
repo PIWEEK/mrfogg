@@ -20,10 +20,10 @@ class CardSerializer<Card> extends JsonSerializer {
             writeEndObject()
 
             writeObjectFieldStart('widget')
-            //writeStringField('template', "/assets/client/mrfogg-widget-images.html")
-            //writeStringField('model', "widgets/images/2")
-            writeStringField('template', '/assets/client/mrfogg-widget-videos.html')
-            writeStringField('model', 'widgets/videos/2')
+            writeStringField('template', "/assets/client/mrfogg-widget-images.html")
+            writeStringField('model', "widgets/images/" + card.id)
+            // writeStringField('template', "/assets/client/mrfogg-widget-videos.html")
+            // writeStringField('model', "widgets/videos/" + card.id)
             writeEndObject()
 
             writeEndObject()

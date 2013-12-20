@@ -174,8 +174,9 @@ CardsController = ($scope, $rootScope, resource, $routeParams)->
     $scope.$on("new-card", (event, data)->
         console.log("guardando", data)
         p = resource.postCard(tripId, taskId, data)
-        p.then ()->
-            console.log("guardado OK, pidendo lista")
+        p.then (response)->
+            console.log("guardado OK, pidendo lista", response)
+            $scope.$broadcast("card-saved", response.data)
             resource.getTaskCards(tripId, taskId).then(onSuccess, onError)
     )
 

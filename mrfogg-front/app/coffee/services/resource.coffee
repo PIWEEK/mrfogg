@@ -208,6 +208,14 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
             url: "#{$gmUrls.api("root")}#{widgetData}"
         )
 
+    service.postWidgetData = (widgetData, data)->
+        return $http(
+            method:'POST'
+            headers: headers(false),
+            url: "#{$gmUrls.api("root")}#{widgetData}"
+            data: JSON.stringify(data)
+        )
+
     service.postCard = (tripId, taskId, data)->
         return $http(
             method:'POST'
