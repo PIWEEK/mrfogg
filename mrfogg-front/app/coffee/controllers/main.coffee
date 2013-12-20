@@ -57,7 +57,7 @@ MainController = ($scope, resource, $timeout, $routeParams, $location) ->
 
 UserListController = ($scope, $rootScope, resource) ->
     $scope.addUser = ()->
-        users = ['"'+$scope.user.email+'"']
+        users = [$scope.user.email]
         cb = resource.putTripUsers($rootScope.mytrip.id, users)
         cb.then (response)->
             $rootScope.userList = response.data
