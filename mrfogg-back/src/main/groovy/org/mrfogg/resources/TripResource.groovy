@@ -65,4 +65,13 @@ class TripResource {
         return tripService.addUserToTrip(addedUser, trip)
     }
 
+    @PUT
+    @Timed
+    @Path('{tripId}/addUsers')
+    @UnitOfWork
+    List<User> addUserListToTrip(@Auth User user, @PathParam('tripId') Long tripId, List emailList) {
+        log.debug("User ${user.email} is adding a bunch of users to trip ${trip}")
+        return tripService.addListOfUsersToTrip(emailList, tripId)
+    }
+
 }

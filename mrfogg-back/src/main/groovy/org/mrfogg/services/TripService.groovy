@@ -71,4 +71,23 @@ class TripService {
         return trip
     }
 
+    List<User> addListOfUsersToTrip(List<String> userEmailList, Long tripId) {
+
+        Trip trip = this.tripDao.get(tripId)
+        List<User> userList = userEmailList.collect { email ->
+            User user = this.userDao.findByEmail(email).get()
+            if (user) {
+                user.trips << trip
+                trip.users << user
+                this.userDao.persist(user)
+            }
+            return user
+        }
+
+        this.tripDao.persist(trip)
+
+        return trip.users
+
+    }
+
 }
