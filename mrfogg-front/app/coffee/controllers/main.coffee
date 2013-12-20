@@ -78,7 +78,6 @@ TaskListController = ($scope, $rootScope, resource) ->
         classes = task.status
         if task.current 
             classes = classes+" current"
-        console.log classes
         return classes
 
     $scope.taskToggleStatus = (task) ->
@@ -178,6 +177,7 @@ CardsController = ($scope, $rootScope, resource, $routeParams)->
 
     onSuccess = (data) ->
         $scope.loadedCards = data._attrs
+        $scope.isCardPlaceHolderVisible = $scope.loadedCards.length == 0
 
     onError = (data) ->
         $rootScope.error = true
