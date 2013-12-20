@@ -1,0 +1,19 @@
+<style>
+    .images-widget {
+        border: 1px solid #888;
+        margin: 10px;
+        box-shadow: 5px 5px 6px #888;
+        text-align: center;
+    }
+</style>
+<div ng-controller="ImageWidgetController" class="images-widget">
+    <div ng-show="isDisplaying">
+        <img ng-src="{{ imageUrl }}"/>
+    </div>
+    <div ng-show="isEditing" class="" style="padding: 10px;">
+        <fieldset>
+            <label for="imageUrl" style="float: left;">URL de la imagen</label>
+            <input type="input" name="imageUrl" style="width: 400px;">
+        </fieldset>
+    </div>
+</div>
