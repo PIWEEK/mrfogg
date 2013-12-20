@@ -1,7 +1,7 @@
 <div class="task" ng-controller="TaskListController">
     <h2>TAREAS</h2>
     <ul class="content">
-        <li ng-class="task.status" ng-repeat="task in tasklist">
+        <li ng-class="getTaskClasses(task)" ng-repeat="task in tasklist">
             <a ng-click="taskToggleStatus(task)" class="ico">
                 <i ng-class="{'icon-checked':task.status=='done', 'icon-checkbox':task.status=='pending'}"></i>
             </a>

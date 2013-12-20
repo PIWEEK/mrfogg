@@ -73,6 +73,14 @@ UserListController = ($scope, $rootScope, resource) ->
 
 
 TaskListController = ($scope, $rootScope, resource) ->
+
+    $scope.getTaskClasses = (task) ->
+        classes = task.status
+        if task.current 
+            classes = classes+" current"
+        console.log classes
+        return classes
+
     $scope.taskToggleStatus = (task) ->
         if task.status == "done"
             task.status = "pending"
@@ -101,6 +109,7 @@ ContainerController = ($scope) ->
 TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
     tripIdFromUrl = parseInt($routeParams.tripId, 10)
+    taskIdFromUrl = parseInt($routeParams.taskId, 10)
     changed = false
     trip_unset = false
     if not isNaN(tripIdFromUrl) and (tripIdFromUrl != $rootScope.tripId)
@@ -118,9 +127,11 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
         $rootScope.mytrip = $scope.mytrips[0]
         resource.getTrip($rootScope.tripId).then (result) ->
             $rootScope.userList = result._attrs.members
-            console.log $rootScope.userList
         resource.getTasks($rootScope.tripId).then (result) ->
             $rootScope.tasklist = result._attrs
+            for task in $rootScope.tasklist
+                if task.id == taskIdFromUrl
+                    task.current = "current"
 
     return
 
