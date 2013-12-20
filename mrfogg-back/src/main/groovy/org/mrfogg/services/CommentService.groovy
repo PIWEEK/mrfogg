@@ -19,10 +19,15 @@ class CommentService {
         return this.commentDao.get(id)
     }
 
-    Card createCommentForCardAndUser(Long cardId, User user, Map params) {
+    Comment createCommentForCardAndUser(Long cardId, User user, Map params) {
         Card card = cardDao.get(cardId)
 
-        return commentDao.create(new Comment(text: params.text, owner: user, card: card))
+        Comment comment = commentDao.create(new Comment(text: params.text, owner: user, card: card))
+
+        card.comments << comment
+        cardDao.persist(card)
+
+        return comment
     }
 
 }
