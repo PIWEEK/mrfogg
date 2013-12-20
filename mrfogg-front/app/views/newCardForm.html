@@ -17,7 +17,9 @@
         <div class="select-style">
             <select ng-model="card.widget">
                 <option value="/assets/client/mrfogg-widget-images.html">Imagen</option>
+                <option value="/assets/client/mrfogg-widget-videos.html">Video</option>
             </select>
+            <div class="widget" ng-include="card.widget"></div>
         </div>
     </fieldset>
     <fieldset>

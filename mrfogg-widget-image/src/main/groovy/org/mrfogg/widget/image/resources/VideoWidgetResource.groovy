@@ -10,19 +10,19 @@ import com.yammer.metrics.annotation.Timed
 
 
 @Log4j
-@Path('/widgets/images/')
+@Path('/widgets/videos/')
 @Produces(MediaType.APPLICATION_JSON)
-class ImageWidgetResource {
+class VideoWidgetResource {
     @GET
     @Timed
-    @Path("{imageId}")
-    List getImage(@PathParam('imageId') Long imageId) {
-        return ["http://kaleidos.net/files/images/linux318x260_1.png"]
+    @Path("{videoId}")
+    String getVideo(@PathParam('imageId') Long imageId) {
+        return "http://www.youtube.com/watch?v=syxGGxT7_2Y"
     }
 
     @POST
     @Timed
-    Map insertImage(Map input) {
+    Map insertVideo(Map input) {
         println input
         return input
     }

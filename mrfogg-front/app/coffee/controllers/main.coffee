@@ -157,7 +157,8 @@ TooltipController = ($scope, $document)->
 
 
 CardsController = ($scope, $rootScope, resource, $routeParams)->
-    $scope.widgetHost = "http://localhost:8080"
+    #$scope.widgetHost = "http://localhost:8080"
+    $scope.widgetHost = ""
 
     onSuccess = (data) ->
         $scope.loadedCards = data._attrs
@@ -204,11 +205,15 @@ NewCardController = ($scope)->
     $scope.publishCard = ()->
         if $scope.card.title and $scope.card.description
             $scope.$emit("new-card", $scope.card)
-            $scope.card = {}
+            $scope.card = {
+                widget: "/assets/client/mrfogg-widget-images.html"
+            }
         else
             $scope.$emit("flash", { "type": "error", "message": "Error de validación"})
 
-    $scope.card = {}
+    $scope.card = {
+        widget: "/assets/client/mrfogg-widget-images.html"
+    }
     return
 
 NewTripController = ($scope, resource, $location)->

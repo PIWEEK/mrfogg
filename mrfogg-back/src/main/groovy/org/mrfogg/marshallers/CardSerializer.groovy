@@ -18,6 +18,14 @@ class CardSerializer<Card> extends JsonSerializer {
             writeStringField('email', card.owner.email)
             writeStringField('avatar', card.owner.avatarURL)
             writeEndObject()
+
+            writeObjectFieldStart('widget')
+            //writeStringField('template', "/assets/client/mrfogg-widget-images.html")
+            //writeStringField('model', "widgets/images/2")
+            writeStringField('template', "/assets/client/mrfogg-widget-videos.html")
+            writeStringField('model', "widgets/videos/2")
+            writeEndObject()
+
             writeEndObject()
         }
     }

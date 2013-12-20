@@ -9,6 +9,7 @@ import org.mrfogg.MrFoggConfiguration
 import org.mrfogg.widget.WidgetProvider
 import org.mrfogg.widget.WidgetData
 import org.mrfogg.widget.image.resources.ImageWidgetResource
+import org.mrfogg.widget.image.resources.VideoWidgetResource
 
 public class MrFoggWidgetImageService extends Service<MrFoggConfiguration> implements WidgetProvider{
     public static void main(String[] args) throws Exception {
@@ -24,6 +25,7 @@ public class MrFoggWidgetImageService extends Service<MrFoggConfiguration> imple
     @Override
     public void run(MrFoggConfiguration configuration,Environment environment) {
         environment.addResource(new ImageWidgetResource())
+        environment.addResource(new VideoWidgetResource())
     }
 
     @Override
