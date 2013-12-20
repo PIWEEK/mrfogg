@@ -230,6 +230,7 @@ p {
             z-index: 100;
             max-width: 300px;
             width: 100%;
+
             img {
                 max-width: 280px;
                 padding-right: 20px;
@@ -265,19 +266,15 @@ p {
                     padding: 0 15px 10px;
                     display: block;
                     font-size: 0.7em;
-                    height: 13px;
                     text-transform: uppercase;
                     list-style: none;
                     text-align: left;
-                    max-width:190%;
-                    height: 34px;
+                    max-width:100%;
+                    height: 42px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     position: relative;
                     white-space: nowrap;
-                    &:last-child {
-                        padding-bottom: 0;
-                    }
                     &:first-child {
                         padding-top: 10px;
                     }
@@ -291,6 +288,9 @@ p {
             }
             &:hover {
                 .rounded-corners(6px 6px 0 0);
+                &.unique {
+                    .rounded-corners(6px);
+                }
                 .trip-list {
                     display: block;
 
@@ -380,7 +380,7 @@ p {
             -moz-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
             box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.04);
             margin-bottom: 15px;
-            padding-bottom: 10px;
+            padding-bottom: 10;
             .ico {
                 display: block;
                 width: 20px;
