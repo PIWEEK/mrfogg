@@ -232,6 +232,15 @@ ResourceProvider = ($http, $q, $gmStorage, $gmUrls, $model, config) ->
             data: JSON.stringify(data)
         )
 
+    service.putTripUsers = (data)->
+        return $http(
+            method:'PUT'
+            headers: headers(false),
+            url: "#{$gmUrls.api("trips")}/#{tripId}/addUsers"
+            data: JSON.stringify(data)
+        )
+
+
     service.postTask = (tripId, data)->
         return $http(
             method:'POST'

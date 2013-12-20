@@ -55,6 +55,17 @@ MainController = ($scope, resource, $timeout, $routeParams, $location) ->
     )
     return
 
+UserListController = ($scope, $rootScope, resource) ->
+    $scope.addUser = ()->
+        cb = resource.putTripUsers($rootScope.mytrip.id, $scope.email)
+        cb.then (response)->
+            $rootScope.userList = response.data
+        $scope.email = {}
+        return
+
+    return
+
+
 TaskListController = ($scope, $rootScope, resource) ->
     $scope.taskToggleStatus = (task) ->
         if task.status == "done"
@@ -80,18 +91,6 @@ ContainerController = ($scope) ->
     $scope.tripName = "London Trip"
     return
 
-UserListController = ($scope, $rootScope, resource) ->
-    onSuccess = (data) ->
-        $scope.userlist = data
-
-    onError = (data) ->
-        $scope.error = true
-        $scope.errorMessage = data.detail
-
-    promise = resource.getUsers()
-    promise = promise.then(onSuccess, onError)
-
-    return
 
 TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
     $rootScope.pageTitle = 'Trips'
@@ -111,6 +110,8 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
             return trip.id == $rootScope.tripId
         )
         $rootScope.mytrip = $scope.mytrips[0]
+        resource.getTripDetails($rootScope.mytrip.id).then (result) ->
+            $rootScope.userList = result.data.users
         resource.getTasks($rootScope.tripId).then (result) ->
             $rootScope.tasklist = result._attrs
 
