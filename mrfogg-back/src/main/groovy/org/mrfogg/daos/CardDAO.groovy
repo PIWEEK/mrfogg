@@ -2,6 +2,7 @@ package org.mrfogg.daos
 
 import org.mrfogg.domains.Card
 import org.hibernate.criterion.Restrictions
+import org.hibernate.criterion.Order
 
 import groovy.transform.InheritConstructors
 
@@ -9,9 +10,10 @@ import groovy.transform.InheritConstructors
 class CardDAO extends BaseDAO<Card> {
 
     List<Card> findAllByTaskId(Long id) {
-        return criteria().createCriteria('task')
-                         .add( Restrictions.eq('id', id) )
-                         .list()
+        return criteria()
+                  .add( Restrictions.eq('task.id', id) )
+                  .addOrder(Order.desc('id'))
+                  .list()
     }
 
 }
