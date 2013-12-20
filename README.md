@@ -3,6 +3,10 @@
 # MR FOGG
 Collaborative travel planning
 
+## Public API
+
+http://docs.mrfogg.apiary.io/
+
 ## Test commands
 
 The test commands use `curl`
