@@ -1,0 +1,316 @@
+FORMAT: 1A
+HOST: http://mrfo.gg
+
+# MR. FOGG
+Descripcion de MR. FOGG (TODO)
+
+# Group Authentication
+## Login [/login]
+### Login into the application [POST]
++ Request (application/json)
+
+        {
+            "email": "alotor@gmail.com",
+            "password": "secret"
+        }
+
++ Response 200 (application/json)
+
+        { "token": "9ae355fb-c3ff-4f36-9b8a-b64cdd513d68" }
+
+## Logout [/logout]
+### Login into the application [POST]
++ Response 204
+
+## Register [/register]
++ Request (application/json)
+        {
+            "email": "alotor@gmail.com",
+            "password": "secret"
+        }
+
++ Response 204
+
+# Group Users API
+## Users [/users]
+### List all users [GET]
++ Response 200 (application/json)
+
+        [{ "id": 1, "email": "mgdelacroix@gmail.com", "avatar": "http://www.gravatar.com/avatar/3f98f26534b1ef1012596da615661867" },
+         { "id": 2, "email": "mario.ggar@gmail.com", "avatar": "http://www.gravatar.com/avatar/59d33ac8915ede62376b0986224d17bd" },
+         { "id": 3, "email": "alotor@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+         { "id": 4, "email": "gnufede@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+         { "id": 5, "email": "delacruzgarciajuan@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+         { "id": 6, "email": "rhbalo1988@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" }]
+
+## Current user detail [/users/me]
+### Retrieve the user details [GET]
+
++ Response 200 (application/json)
+
+        { "id": 3, "email": "alotor@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" }
+
+## User detail [/users/{userId}]
+### Retrieve the user details [GET]
+
++ Parameters
+    + userId (required, number, `1`) ... User id
+
++ Response 200 (application/json)
+
+        { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }
+
+# Group Trip API
+## Trips [/trips]
+### Retrieve trips for the current user [GET]
+
++ Response 200 (application/json)
+
+        [
+            { "id": 1, "name": "Viaje a Londres" },
+            { "id": 2, "name": "Verano 2014" },
+            { "id": 3, "name": "Fin de semana en la playa" }
+        ]
+
+### Creates a new trip [POST]
+
++ Request (application/json)
+
+        {
+            "name": "Viaje a Londres",
+            "description": "Nos vamos de viaje con motivo del GGX lo vamos a pasar mu bien!!"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Viaje a Londres",
+            "description": "Nos vamos de viaje con motivo del GGX lo vamos a pasar mu bien!!",
+            "members": [
+                { "id": 1, "email": "mgdelacroix@gmail.com", "avatar": "http://www.gravatar.com/avatar/3f98f26534b1ef1012596da615661867" }
+            ]
+        }
+
+## Trips Detail [/trips/{tripId}]
+### Retrieve the trip details [GET]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Viaje a Londres",
+            "description": "Nos vamos de viaje con motivo del GGX lo vamos a pasar mu bien!!",
+            "members": [
+                { "id": 1, "email": "mgdelacroix@gmail.com", "avatar": "http://www.gravatar.com/avatar/3f98f26534b1ef1012596da615661867" },
+                { "id": 2, "email": "mario.ggar@gmail.com", "avatar": "http://www.gravatar.com/avatar/59d33ac8915ede62376b0986224d17bd" },
+                { "id": 3, "email": "alotor@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+                { "id": 4, "email": "gnufede@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+                { "id": 5, "email": "delacruzgarciajuan@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+                { "id": 6, "email": "rhbalo1988@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" }
+            ]
+        }
+
+### Modify the trip details [PUT]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+
++ Response 200 (application/json)
+
+        {
+            "name": "Viaje a Londres (2013/12/11)",
+            "description": "Nueva descripción"
+        }
+
++ Response 204
+
+## Add user to trip [/trips/{tripId}/addUser/{userId}]
+### Add user to a trip [POST]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+    + userId (required, number, `1`) ... User id to add
+
++ Response 204
+
+## Add list of users to trip [/trips/{tripId}/addUsers]
+### Add a list of users to a trip [PUT]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+    
++ Request (application/json)
+
+        ["alotor@gmail.com", "mgdelacroix@gmail.com", "gnufede@gmail.com"]
+
++ Response 200 (application/json)
+
+        [
+            { "id": 1, "email": "mgdelacroix@gmail.com", "avatar": "http://www.gravatar.com/avatar/3f98f26534b1ef1012596da615661867" },
+            { "id": 2, "email": "mario.ggar@gmail.com", "avatar": "http://www.gravatar.com/avatar/59d33ac8915ede62376b0986224d17bd" },
+            { "id": 3, "email": "alotor@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" },
+            { "id": 4, "email": "gnufede@gmail.com", "avatar": "http://www.gravatar.com/avatar/c84bc865eabadfa8fcf29dbc4a11af30" }
+        ]
+
+## Tasks [/trips/{tripId}/tasks]
+### Retrieve the tasks for a trip [GET]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+
++ Response 200 (application/json)
+
+        [
+            { "id": 1, "name": "Comprar billetes", "status": "pending" },
+            { "id": 2, "name": "Escoger hotel", "status": "done" }
+        ]
+
+### Creates a new task inside a trip [POST]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+
++ Request (application/json)
+
+        {
+            "name": "Comprar billentes"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Comprar billentes",
+            "status": "pending"
+        }
+
+
+# Group Tasks API
+## Task detail [/trips/{tripId}/tasks/{taskId}]
+### Update task information [PUT]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+    + taskId (required, number, `1`) ... Task id
+
++ Request (application/json)
+
+        { "name": "Comprar los billetes de avión", "status": "done" }
+
++ Response 204
+
+# Group Cards API
+## Cards [/trips/{tripId}/tasks/{taskId}/cards]
+### Retrieve the cards for a defined task [GET]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+    + taskId (required, number, `1`) ... Task id
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "title": "Encuesta de bares",
+                "dateCreated": "2013-12-18T15:55:00.245Z",
+                "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
+                "owner": {
+                    "id": 1, 
+                    "email": "alotor@gmail.com", 
+                    "avatar": "http://gravatar.com/alotor" 
+                },
+                "widget": {
+                    "model": "/widget/images/10001",
+                    "template": "/assets/client/mrfogg-widget-images.html"
+                },
+                "comments": [
+                    { "user": { "id": 1, "email": "alotor@gmail.com", "avatar": "http://gravatar.com/alotor" }, "text": "Lorem ipsum", "dateCreated": "2013-12-18T15:55:00.245Z" },
+                    { "user": { "id": 2, "email": "ramiro@gmail.com", "avatar": "http://gravatar.com/ramiro" }, "text": "Lorem ipsum", "dateCreated": "2013-12-18T15:55:00.245Z" }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Mapa de la zona centro",
+                "dateCreated": "2013-12-18T15:55:00.245Z",
+                "description": "Mapa de la zona centro",
+                "owner": {
+                    "id": 1, 
+                    "email": "alotor@gmail.com", 
+                    "avatar": "http://gravatar.com/alotor" 
+                },
+                "widget": {
+                    "model": "/widget/images/10001",
+                    "template": "http://localhost:8080/assets/client/mrfogg-widget-images.html"
+                },
+                "comments": []
+            }
+        ]
+
+### Create a new card inside the task [POST]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+    + taskId (required, number, `1`) ... Task id
+
++ Request (application/json)
+
+        {
+            "title": "Encuesta de bares",
+            "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
+            "widget": {
+                "model": "/widget/images/10001",
+                "template": "/assets/client/mrfogg-widget-images.html"
+            }
+        }
+
++ Response 200 (application/json)
+
+
+        {
+            "id": 1,
+            "title": "Encuesta de bares",
+            "dateCreated": "2013-12-18T15:55:00.245Z",
+            "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
+            "owner": {
+                "id": 1, 
+                "email": "alotor@gmail.com", 
+                "avatar": "http://gravatar.com/alotor" 
+            },
+            "widget": {
+                "id": "1001",
+                "type": "/widget/poll"
+            },
+            "comments": []
+        }
+
+
+## Card detail [/trips/{tripId}/tasks/{taskId}/cards/{cardId}]
+### Create a new card inside the task [GET]
+
++ Parameters
+    + tripId (required, number, `1`) ... Trip id
+    + taskId (required, number, `1`) ... Task id
+    + cardId (required, number, `1`) ... Card id
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "title": "Encuesta de bares",
+            "description": "LoremBacon ipsum dolor sit amet ground round filet mignon pig pork chop, short loin frankfurter venison.",
+            "owner": {
+                "id": 1, 
+                "email": "alotor@gmail.com", 
+                "avatar": "http://gravatar.com/alotor" 
+            },
+            "widget": {
+                "id": "1001",
+                "type": "/widget/poll"
+            },
+            "comments": []
+        }
