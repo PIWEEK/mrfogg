@@ -12,7 +12,14 @@ class TaskService {
     TripDAO tripDao
 
     List<Task> listAllByTripId(Long id) {
-        return this.taskDao.findAllByTripId(id)
+        def trip = this.tripDao.get(id)
+        def result = null
+
+        if (trip) {
+            result = trip.tasks
+            println result*.id
+        }
+        return result
     }
 
     Task get(Long id) {

@@ -9,9 +9,11 @@ import groovy.transform.InheritConstructors
 class TaskDAO extends BaseDAO<Task> {
 
     List<Task> findAllByTripId(Long tripId) {
-        return criteria().createCriteria('trip')
+        def list = criteria().createCriteria('trip')
                   .add( Restrictions.eq('id', tripId) )
                   .list()
+
+        return list
     }
 
 }

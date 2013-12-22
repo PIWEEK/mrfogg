@@ -76,7 +76,7 @@ TaskListController = ($scope, $rootScope, resource) ->
 
     $scope.getTaskClasses = (task) ->
         classes = task.status
-        if task.current 
+        if task.current
             classes = classes+" current"
         return classes
 
@@ -126,11 +126,16 @@ TripListController = ($scope, $rootScope, $routeParams, $gmStorage, resource) ->
         $rootScope.mytrip = $scope.mytrips[0]
         resource.getTrip($rootScope.tripId).then (result) ->
             $rootScope.userList = result._attrs.members
+
         resource.getTasks($rootScope.tripId).then (result) ->
-            $rootScope.tasklist = result._attrs
-            for task in $rootScope.tasklist
+            console.log(result._attrs)
+            $rootScope.tasklist = []
+            for task in result._attrs
                 if task.id == taskIdFromUrl
                     task.current = "current"
+                $rootScope.tasklist.push(task)
+
+            console.log($rootScope.tasklist)
 
     return
 
