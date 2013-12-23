@@ -64,15 +64,19 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
 
     return
 
-init = ($rootScope, $gmStorage, $gmAuth, $gmUrls, config)->
+init = ($rootScope, $gmStorage, $gmAuth, $gmUrls, $location, config)->
     $rootScope.auth = $gmAuth.getUser()
     $gmUrls.setHost("api", config.host,config.scheme)
+
+    $rootScope.logout = () ->
+        $gmStorage.clear()
+        $location.url("/login")
 
     return
 
 module = angular.module('mrfogg', modules)
 module.config(['$routeProvider', '$locationProvider', '$httpProvider', '$provide', '$compileProvider', '$gmUrlsProvider', '$sceDelegateProvider', configCallback])
-module.run(["$rootScope","$gmStorage", "$gmAuth", "$gmUrls", 'config', init])
+module.run(["$rootScope","$gmStorage", "$gmAuth", "$gmUrls", "$location", 'config', init])
 
 angular.module('mrfogg.config', []).value('config', {
     host: "144.76.249.158:8080"
