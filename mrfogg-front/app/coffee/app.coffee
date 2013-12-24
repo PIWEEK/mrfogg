@@ -36,13 +36,13 @@ configCallback = ($routeProvider, $locationProvider, $httpProvider, $provide, $c
     # $locationProvider.html5Mode(true)
 
     $routeProvider.when('/',
-        {templateUrl: '/views/container.html', controller: "ContainerController"})
+        {templateUrl: '/views/container.html', controller: "MainController"})
 
     $routeProvider.when('/trips/:tripId',
-        {templateUrl: '/views/container.html', controller: "ContainerController"})
+        {templateUrl: '/views/container.html', controller: "MainController"})
 
     $routeProvider.when('/trips/:tripId/tasks/:taskId',
-        {templateUrl: '/views/container.html', controller: "ContainerController"})
+        {templateUrl: '/views/container.html', controller: "MainController"})
 
     $routeProvider.when('/login',
         {templateUrl: '/views/login.html', controller:"MrLoginController"})
@@ -80,8 +80,8 @@ module.run(["$rootScope","$gmStorage", "$gmAuth", "$gmUrls", "$location", 'confi
 
 angular.module('mrfogg.config', []).value('config', {
     host: "144.76.249.158:8080"
-    #    host: "mrfogg.apiary.io"
-    #    host: "localhost:8080"
+    # host: "mrfogg.apiary.io"
+    # host: "localhost:8080"
     scheme: "http"
     defaultLanguage: "en"
     debug: false
